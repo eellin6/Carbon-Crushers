@@ -13,7 +13,7 @@ const dotenv = require('dotenv');
 dotenv.config({
   path: path.resolve(__dirname, '../.env')
 });
-port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 
