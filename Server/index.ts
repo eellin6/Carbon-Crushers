@@ -2,7 +2,7 @@
 const path = require('path');
 
 const mysql = require('mysql2');
-const Sequelize = require('sequelize');
+const Seq = require('sequelize');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
@@ -17,7 +17,7 @@ const port = process.env.PORT || 8080;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 
-const db = require('./db/database.js');
+const database = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

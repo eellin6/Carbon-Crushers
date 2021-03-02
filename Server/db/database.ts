@@ -4,9 +4,12 @@ const db = new Sequelize('crushers', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'
 });
+
+
 db.authenticate()
   .then(() => console.log('CONNECTED TO DATABASE'))
-  .catch((err) => console.warn('DB ERROR', err));
+  .catch((err: string = "err") => console.warn('DB ERROR', err));
+
 const Users = db.define('Users', {
   id: {
     type: Sequelize.INTEGER,
@@ -63,11 +66,18 @@ const Updates = db.define('Updates', {
   badge: Sequelize.STRING
 });
 
-db.sync({ force: true })
-  .then(() => {
-    console.log('Database & tables created!');
-  }).catch((err) => { console.log(err); });
+// db.sync({ force: true })
+//   .then(() => {
+//     console.log('Database & tables created!');
+//   }).catch((err) => { console.log(err); });
+
+
 module.exports = {
   db,
-
+  Users,
+  Stats,
+  Showers,
+  Badges,
+  MonthlyLeaderBoard,
+  Updates,
 };
