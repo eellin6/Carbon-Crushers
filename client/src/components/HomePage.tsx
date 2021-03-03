@@ -6,22 +6,30 @@ const homePage = () => {
   const [ name, setName ] = useState('');
 
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
+        text: "Your Stats",
         label: "First dataset",
-        data: [33, 53, 85, 41, 44, 65],
+        data: [33, 53, 85, 41, 44],
         fill: true,
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)"
-      },
-      {
-        label: "Second dataset",
-        data: [33, 25, 35, 51, 54, 76],
-        fill: false,
-        borderColor: "#742774"
+        backgroundColor: [
+          "#55BFBF",
+          "#3EA4E8",
+          "#FA6685",
+          "#FC9E4B",
+          "#FDCB60"
+        ],
+        borderColor: [
+          "#FFF"
+          // "#55BFBF",
+          // "#3EA4E8",
+          // "#FA6685",
+          // "#FC9E4B",
+          // "#FDCB60"
+        ],
       }
-    ]
+    ],
+    labels: ["Recycling", "Water Consumption", "Meat & Dining Out", "Mileage", "Energy"]
   };
 
   return (
