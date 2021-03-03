@@ -104,9 +104,19 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /*!***************************************!*\
   !*** ./client/src/components/App.tsx ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar App = function () {\n    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null,\n        react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"Hello World\")));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n\n//# sourceURL=webpack://crushers/./client/src/components/App.tsx?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n// import * as GoogleButton from 'react-google-button';\n// import * as GoogleLogin from 'react-google-login';\nvar GoogleLogin_1 = __webpack_require__(/*! ./GoogleLogin */ \"./client/src/components/GoogleLogin.tsx\");\n// import * as css from './style.css';\nvar App = function () {\n    return (React.createElement(\"div\", { id: 'login-container' },\n        React.createElement(\"img\", { id: 'logo-welcome', alt: 'Carbon Crushers Logo', src: 'https://i.ibb.co/5RDm28b/carbon-crushers-logo.png' }),\n        React.createElement(GoogleLogin_1.Login, null)));\n};\nexports.default = App;\n\n\n//# sourceURL=webpack://crushers/./client/src/components/App.tsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/GoogleLogin.tsx":
+/*!***********************************************!*\
+  !*** ./client/src/components/GoogleLogin.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+eval("\nvar __extends = (this && this.__extends) || (function () {\n    var extendStatics = function (d, b) {\n        extendStatics = Object.setPrototypeOf ||\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };\n        return extendStatics(d, b);\n    };\n    return function (d, b) {\n        if (typeof b !== \"function\" && b !== null)\n            throw new TypeError(\"Class extends value \" + String(b) + \" is not a constructor or null\");\n        extendStatics(d, b);\n        function __() { this.constructor = d; }\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n    };\n})();\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Login = void 0;\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nvar ts_react_google_login_component_1 = __webpack_require__(/*! ts-react-google-login-component */ \"./node_modules/ts-react-google-login-component/lib/index.js\");\nvar Login = /** @class */ (function (_super) {\n    __extends(Login, _super);\n    function Login() {\n        return _super !== null && _super.apply(this, arguments) || this;\n    }\n    Login.prototype.preLoginTracking = function () {\n        console.log('Attempt to login with google');\n    };\n    Login.prototype.errorHandler = function (error) {\n        // handle error if login got failed...\n        console.error(error);\n    };\n    Login.prototype.responseGoogle = function (googleUser) {\n        var id_token = googleUser.getAuthResponse(true).id_token;\n        var googleId = googleUser.getId();\n        console.log({ googleId: googleId });\n        console.log({ accessToken: id_token });\n        // Make user login in your system\n        // login success tracking...\n    };\n    Login.prototype.render = function () {\n        var clientConfig = { client_id: 'youappid' };\n        return (React.createElement(\"div\", null,\n            React.createElement(ts_react_google_login_component_1.GoogleLoginButton, { responseHandler: this.responseGoogle, clientConfig: clientConfig, preLogin: this.preLoginTracking, failureHandler: this.errorHandler })));\n    };\n    return Login;\n}(React.Component));\nexports.Login = Login;\n\n\n//# sourceURL=webpack://crushers/./client/src/components/GoogleLogin.tsx?");
 
 /***/ }),
 
@@ -114,9 +124,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!******************************!*\
   !*** ./client/src/index.tsx ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App */ \"./client/src/components/App.tsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_App__WEBPACK_IMPORTED_MODULE_2__.default, null), document.getElementById('app'));\n\n\n//# sourceURL=webpack://crushers/./client/src/index.tsx?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nvar ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\nvar App_1 = __webpack_require__(/*! ./components/App */ \"./client/src/components/App.tsx\");\nReactDOM.render(React.createElement(App_1.default, null), document.getElementById('app'));\n\n\n//# sourceURL=webpack://crushers/./client/src/index.tsx?");
+
+/***/ }),
+
+/***/ "./node_modules/ts-react-google-login-component/lib/components/GoogleLogin/GoogleLogin.js":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/ts-react-google-login-component/lib/components/GoogleLogin/GoogleLogin.js ***!
+  \************************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+eval("\nvar __extends = (this && this.__extends) || (function () {\n    var extendStatics = function (d, b) {\n        extendStatics = Object.setPrototypeOf ||\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n        return extendStatics(d, b);\n    };\n    return function (d, b) {\n        extendStatics(d, b);\n        function __() { this.constructor = d; }\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n    };\n})();\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];\n    result[\"default\"] = mod;\n    return result;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importStar(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar Util_1 = __webpack_require__(/*! ../../util/Util */ \"./node_modules/ts-react-google-login-component/lib/util/Util.js\");\nvar GoogleLoginButton = /** @class */ (function (_super) {\n    __extends(GoogleLoginButton, _super);\n    function GoogleLoginButton(props) {\n        var _this = _super.call(this, props) || this;\n        _this.clickHandler = function () {\n            var _a = _this.props, preLogin = _a.preLogin, responseHandler = _a.responseHandler, singInOptions = _a.singInOptions, failureHandler = _a.failureHandler;\n            // if there is pre login task\n            preLogin && preLogin();\n            var googleAuth = gapi.auth2.getAuthInstance();\n            if (googleAuth) {\n                googleAuth.signIn(singInOptions)\n                    .then(function (googleUser) {\n                    responseHandler(googleUser);\n                })\n                    .catch(function (reason) {\n                    failureHandler && failureHandler(reason.error);\n                });\n            }\n        };\n        return _this;\n    }\n    GoogleLoginButton.prototype.componentDidMount = function () {\n        var _this = this;\n        var _a = this.props, classNames = _a.classNames, children = _a.children;\n        // Loading google plateform api, if it's not loaded\n        if (typeof gapi === 'undefined') {\n            this.setState({ disabled: true });\n            Util_1.getScript('https://apis.google.com/js/platform.js', function () {\n                gapi.load('auth2', function () {\n                    gapi.auth2.init(_this.props.clientConfig);\n                    if (!classNames && !children) {\n                        gapi.signin2.render('ts-google-react-login', __assign({}, _this.props.renderOptions));\n                    }\n                });\n            });\n        }\n        else if (!classNames && !children) {\n            gapi.signin2.render('ts-google-react-login', __assign({}, this.props.renderOptions));\n        }\n    };\n    GoogleLoginButton.prototype.render = function () {\n        var _a = this.props, classNames = _a.classNames, children = _a.children;\n        return (react_1.default.createElement(\"div\", { id: 'ts-google-react-login', className: \"\" + (classNames ? classNames : ''), onClick: this.clickHandler }, children ? children : null));\n    };\n    return GoogleLoginButton;\n}(react_1.Component));\nexports.GoogleLoginButton = GoogleLoginButton;\n\n\n//# sourceURL=webpack://crushers/./node_modules/ts-react-google-login-component/lib/components/GoogleLogin/GoogleLogin.js?");
+
+/***/ }),
+
+/***/ "./node_modules/ts-react-google-login-component/lib/index.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/ts-react-google-login-component/lib/index.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar GoogleLogin_1 = __webpack_require__(/*! ./components/GoogleLogin/GoogleLogin */ \"./node_modules/ts-react-google-login-component/lib/components/GoogleLogin/GoogleLogin.js\");\nexports.GoogleLoginButton = GoogleLogin_1.GoogleLoginButton;\n\n\n//# sourceURL=webpack://crushers/./node_modules/ts-react-google-login-component/lib/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/ts-react-google-login-component/lib/util/Util.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/ts-react-google-login-component/lib/util/Util.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n/**\n * load a script into the browser and call callback when loading done.\n * @param source full path of the the js script.\n * @param callback callback to be called when loading done.\n */\nfunction getScript(source, callback) {\n    var el = document.createElement('script');\n    el.addEventListener('load', callback);\n    el.setAttribute('src', source);\n    document.body.appendChild(el);\n}\nexports.getScript = getScript;\n\n\n//# sourceURL=webpack://crushers/./node_modules/ts-react-google-login-component/lib/util/Util.js?");
 
 /***/ })
 
@@ -139,40 +179,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
 /******/ 	
 /************************************************************************/
 /******/ 	

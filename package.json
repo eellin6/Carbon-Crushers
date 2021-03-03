@@ -22,6 +22,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@types/gapi.auth2": "0.0.53",
     "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "css-loader": "^5.0.1",
@@ -41,6 +42,7 @@
     "sequelize": "^6.5.0",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.17",
+    "ts-react-google-login-component": "^1.1.8",
     "typescript": "^4.2.2"
   },
   "devDependencies": {
@@ -48,6 +50,7 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "babel-loader": "^8.2.2",
     "eslint": "^7.20.0",
@@ -59,6 +62,7 @@
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
     "ts-node": "^9.1.1",
+    "typings-for-css-modules-loader": "^1.7.0",
     "webpack": "^5.19.0",
     "webpack-cli": "^4.4.0"
   },

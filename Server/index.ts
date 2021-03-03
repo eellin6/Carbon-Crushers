@@ -25,7 +25,7 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-// line 34 - 61 all used for google login
+// line 28 -  all used for google login
 app.use(session({
   secret: process.env.clientSecret,
   saveUninitialized: false,
