@@ -32,10 +32,10 @@ app.use(session({
   resave: true
 }));
 
-passport.serializeUser((user: string, done: any) => {
+passport.serializeUser((user: any, done: any) => {
   done(null, user);
 });
-passport.deserializeUser((user: string, done: any) => {
+passport.deserializeUser((user: any, done: any) => {
   done(null, user);
 });
 

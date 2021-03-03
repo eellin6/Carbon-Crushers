@@ -1,6 +1,4 @@
-**/node_modules
+node_modules
 .env
-
 client/dist/bundle.js
-
 config.ts
