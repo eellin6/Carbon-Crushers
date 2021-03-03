@@ -5,6 +5,7 @@ const path = require('path');
 const mysql = require('mysql2');
 const Seq = require('sequelize');
 const express = require('express');
+// const { Request, Response, NextFunction } = require('express');
 const passport = require('passport');
 const { GoogleStrategy } = require('../passport.config');
 const session = require('express-session');
@@ -39,19 +40,19 @@ passport.deserializeUser((user: any, done: any) => {
   done(null, user);
 });
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
-  ((req: Request, res: Response) => console.info('should display name', req.user.displayName)));
+// app.get('/auth/google',
+//   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
+//   ((req: Request, res: Response) => console.info('should display name', req.user.displayName)));
 
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }), (req: Request, res: Response) => {
-    const { displayName } = req.user;
-    res.cookie('crushers', displayName)
-    // this is where we will add the user
-      .then(() => res.redirect('/'))
-      .catch((err: string) => console.warn(err));
-  }
-);
+// app.get('/auth/google/callback',
+//   passport.authenticate('google', { failureRedirect: '/login' }), (req: Request, res: Response) => {
+//     const { displayName } = req.user;
+//     res.cookie('crushers', displayName)
+//     // this is where we will add the user
+//       .then(() => res.redirect('/'))
+//       .catch((err: string) => console.warn(err));
+//   }
+// );
 
 // check if a user is logged in
 app.get('/isLoggedin', (req: Request, res: Response) => {
@@ -64,6 +65,4 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.json(false);
 });
 
-app.listen(port, function () {
-  console.log('Server is listening on http://127.0.0.1:' + port);
-});
+app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));

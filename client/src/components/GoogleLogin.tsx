@@ -1,39 +1,90 @@
 import * as React from 'react';
+// import { FC, ReactElement, useState, useEffect } from 'react';
 import { GoogleLoginButton } from 'ts-react-google-login-component';
-import { clientID, clientSecret } from '../../../config';
+// @ts-ignore
+import { clientID } from '../../../config';
 
-export class Login extends React.Component {
+const Login = () => {
 
-  preLoginTracking(): void {
-      console.log('Attempt to login with google');
+  const preLoginTracking = () => {
+    console.log('Attempt to login with google');
   }
 
-  errorHandler(error: string): void{
-      // handle error if login got failed
-      console.error(error)
+  const errorHandler = (error: string) => {
+    // handle error if login got failed
+    console.error(error)
   }
 
-  responseGoogle(googleUser: gapi.auth2.GoogleUser): void {
-      const id_token = googleUser.getAuthResponse(true).id_token
-      const googleId = googleUser.getId()
-
-      // console.log({ googleId })
-      // console.log({ accessToken: id_token })
+  const responseGoogle = (googleUser: gapi.auth2.GoogleUser) => {
+    const id_token = googleUser.getAuthResponse(true).id_token
+    const googleId = googleUser.getId()
   }
 
-  render(): JSX.Element {
-      const clientConfig = { client_id: clientID }
-
-      return (
+    return (
       <div>
-              <GoogleLoginButton
-                  responseHandler={this.responseGoogle}
-                  clientConfig={clientConfig}
-                  preLogin={this.preLoginTracking}
-                  failureHandler={this.errorHandler}
-              />
+          <GoogleLoginButton
+            responseHandler={() => responseGoogle}
+            clientConfig={clientID}
+            preLogin={() => preLoginTracking}
+            failureHandler={() => errorHandler}
+          />
       </div>
-      )
-  }
+    )
 
 }
+
+export default Login;
+
+// export class Login extends Component {
+//   constructor(props: any) {
+//     super(props);
+
+//     this.state: any = {
+
+//     };
+//   }
+
+//   preLoginTracking(): void {
+//     console.log('Attempt to login with google');
+//   }
+
+//   errorHandler(error: string): void {
+//     // handle error if login got failed
+//     console.error(error)
+//   }
+
+//   responseGoogle(googleUser: gapi.auth2.GoogleUser): void {
+//     const id_token = googleUser.getAuthResponse(true).id_token
+//     const googleId = googleUser.getId()
+
+//     // console.log({ googleId })
+//     // console.log({ accessToken: id_token })
+//   }
+
+//   logout(bool: boolean): void {
+//     const [logoutStatus, setLogoutStatus] = useState(bool);
+//     setLogoutStatus(bool => !bool);
+//   }
+
+//   render(): JSX.Element {
+//     // const clientConfig = { client_id: clientID }
+
+//     return (
+//     <div>
+//         <GoogleLoginButton
+//           responseHandler={this.responseGoogle}
+//           clientConfig={clientID}
+//           preLogin={this.preLoginTracking}
+//           failureHandler={this.errorHandler}
+//         />
+//         {/* <GoogleLoginButton
+//             responseHandler={this.responseGoogle}
+//             clientConfig={clientID}
+//             preLogin={this.preLoginTracking}
+//             failureHandler={this.errorHandler}
+//         /> */}
+//     </div>
+//     )
+//   }
+
+// }
