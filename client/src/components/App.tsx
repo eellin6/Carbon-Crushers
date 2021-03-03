@@ -1,16 +1,23 @@
 import * as React from 'react';
-// import * as GoogleButton from 'react-google-button';
-// import * as GoogleLogin from 'react-google-login';
 import { Login } from './GoogleLogin';
-// import * as css from './style.css';
+// @ts-ignore
+import * as style from './style.css';
 
+// declare module '*.css' {
+//   const content: Record<string, string>;
+//   export default content;
+// }
 
 const App = () => {
+  const loginWrapper: string = "login-wrapper";
+  const logoWelcome: string = "logo-welcome";
+
 
 return (
-  <div id='login-container'>
-    <img id='logo-welcome' alt='Carbon Crushers Logo' src='https://i.ibb.co/5RDm28b/carbon-crushers-logo.png'/>
+  <div id={loginWrapper}>
+    <img id={logoWelcome} alt='Carbon Crushers Logo' src='https://i.ibb.co/5RDm28b/carbon-crushers-logo.png'/>
     <Login />
+    <h1>Hello World</h1>
   </div>
 )
 };

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { GoogleLoginButton } from 'ts-react-google-login-component';
+import { clientID, clientSecret } from '../../../config';
 
 export class Login extends React.Component {
 
@@ -8,7 +9,7 @@ export class Login extends React.Component {
   }
 
   errorHandler(error: string): void{
-      // handle error if login got failed...
+      // handle error if login got failed
       console.error(error)
   }
 
@@ -16,14 +17,12 @@ export class Login extends React.Component {
       const id_token = googleUser.getAuthResponse(true).id_token
       const googleId = googleUser.getId()
 
-      console.log({ googleId })
-      console.log({accessToken: id_token})
-      // Make user login in your system
-      // login success tracking...
+      // console.log({ googleId })
+      // console.log({ accessToken: id_token })
   }
 
   render(): JSX.Element {
-      const clientConfig = { client_id: 'youappid' }
+      const clientConfig = { client_id: clientID }
 
       return (
       <div>
