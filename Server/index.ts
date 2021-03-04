@@ -52,9 +52,10 @@ app.get('/auth/error', (req: Request, res: Response) => res.send('Unknown Error'
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/error' }), (req: any, res: any) => {
-    const { displayName } = req.user;
+    const { displayName, photos } = req.user;
+    const { value } = photos[0];
     res.cookie('crushers', displayName);
-    return addUser(displayName)
+    return addUser(displayName, value)
       .then(() => res.redirect('/'))
       .catch((err: string) => console.warn(err));
   }
@@ -71,11 +72,10 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.json(false);
 });
 
-app.get('/:username', (req: Request, res: Response) => {
-  const { user } = req.body;
-  return findUser(user)
-  .then((data: any) => res.send(data))
-  .catch((err: string) => console.warn(err));
-})
+app.get('/user', (req: Request, res: Response) => {
+  findUser(req.cookies.Headstrong)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+});
 
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));

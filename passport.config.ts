@@ -8,7 +8,7 @@ passport.use(new PassportGoogleStrategy({
   callbackURL: '/auth/google/callback'
 },
 function(_accessToken: string, _refreshToken: string, profile: any, done: any) {
-  // console.log(profile);
+  console.log(profile);
   done(null, profile);
 }
 ));
