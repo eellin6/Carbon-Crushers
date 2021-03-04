@@ -1,47 +1,33 @@
 import * as React from 'react';
 import { FC, ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
-import Login from './GoogleLogin';
+// import {Login} from './GoogleLogin';
+import GoogleButton from 'react-google-button';
 // @ts-ignore
 import * as style from './style.css';
 import HomePage from './HomePage';
 
-// declare module '*.css' {
-//   const content: Record<string, string>;
-//   export default content;
-// }
-
 const App = () => {
+  const [currentStatus, setCurrentStatus] = useState(false);
+  // const [logoutStatus, setLogoutStatus] = useState();
 
-  // useEffect(() => {
-  //   const [currentStatus, setCurrentStatus] = useState();
-  //   const isLoggedIn: any = axios.get('/isLoggedin')
-  //     .then(({ data }: any) => {
-  //       console.log(data);
-  //       setCurrentStatus(data);
-  //     })
-  //     .catch((err: string) => console.warn(err));
-  // }, []);
+  // check if user is logged in
+  const getLoginStatus = () => {
+    axios.get('/isLoggedin')
+      .then(({ data }: any) => setCurrentStatus(data))
+      .catch((err: string) => console.warn(err));
+  };
+  getLoginStatus();
 
-  // const getLoginStatus = () => {
-  //   const [currentStatus, setCurrentStatus] = useState(false);
-  //   axios.get('/isLoggedin')
-  //     .catch(({ data }: any) => setCurrentStatus(data));
+  // const logout = () => {
+  //   setLogoutStatus((bool) => !bool);
   // };
 
-  const logout = (bool: boolean) => {
-    const [logoutStatus, setLogoutStatus] = useState(bool);
-    setLogoutStatus((bool) => !bool);
-  };
-
-  const loginWrapper: string = "login-wrapper";
-  const logoWelcome: string = "logo-welcome";
-
   return (
-    <div id={loginWrapper}>
-      <img id={logoWelcome} alt='Carbon Crushers Logo' src='https://i.ibb.co/5RDm28b/carbon-crushers-logo.png'/>
-      <Login />
-      <h1>Hello World</h1>
+    <div id="wrapper">
+      <img id="logo-welcome" alt='Carbon Crushers Logo' src='https://i.ibb.co/5RDm28b/carbon-crushers-logo.png'/>
+      {/* <div id="login-button"><Login /></div> */}
+      <a href="/auth/google"><GoogleButton type="light" /></a>
       <HomePage />
     </div>
   )

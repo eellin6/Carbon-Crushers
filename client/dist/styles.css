@@ -1,14 +1,26 @@
-#login-wrapper {
+* {
+	font-family: 'Fira Sans', sans-serif;
+}
+
+#wrapper {
 	width: 200px;
 	max-height: auto;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 }
 
 #logo-welcome {
 	margin: 0 auto;
 	max-width: 50vw;
 	height: auto;
+	align-items: center;
+}
+
+#login-button {
+	margin: 0 auto;
+	max-width: 50vw;
+	height: auto;
+	align-items: center;
 }
 
 h1 {

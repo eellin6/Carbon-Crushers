@@ -7,7 +7,7 @@ const Seq = require('sequelize');
 const express = require('express');
 // const { Request, Response, NextFunction } = require('express');
 const passport = require('passport');
-const { GoogleStrategy } = require('../passport.config');
+const { PassportGoogleStrategy } = require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
@@ -19,6 +19,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 
 const database = require('./db/database.ts');
+const { addUser } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +27,7 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-// line 28 - 68 all used for google login
+// line 30 - 68 all used for google login
 app.use(session({
   secret: process.env.clientSecret,
   saveUninitialized: false,
@@ -40,19 +41,20 @@ passport.deserializeUser((user: any, done: any) => {
   done(null, user);
 });
 
-// app.get('/auth/google',
-//   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
-//   ((req: Request, res: Response) => console.info('should display name', req.user.displayName)));
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }), (req: Request, res: Response) => console.info('FIRST RES', res));
 
-// app.get('/auth/google/callback',
-//   passport.authenticate('google', { failureRedirect: '/login' }), (req: Request, res: Response) => {
-//     const { displayName } = req.user;
-//     res.cookie('crushers', displayName)
-//     // this is where we will add the user
-//       .then(() => res.redirect('/'))
-//       .catch((err: string) => console.warn(err));
-//   }
-// );
+  app.get('/auth/error', (req: Request, res: Response) => res.send('Unknown Error'));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/auth/error' }), (req: any, res: any) => {
+    const { displayName } = req.user;
+    res.cookie('crushers', displayName);
+    return addUser(displayName)
+      .then(() => res.redirect('/'))
+      .catch((err: string) => console.warn(err));
+  }
+);
 
 // check if a user is logged in
 app.get('/isLoggedin', (req: Request, res: Response) => {
