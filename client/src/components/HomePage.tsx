@@ -36,7 +36,7 @@ const homePage = () => {
   return (
     <div>
       <h1>Welcome to the HomePage</h1>
-      <h2>YOUR STATS</h2>
+      <h2><i>Your Stats</i></h2>
       <div className="doughnut-chart-container">
         <Doughnut data={data} />
       </div>
