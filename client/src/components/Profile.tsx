@@ -15,7 +15,6 @@ export default function Profile (){
       let { name, picture } = data;
       setName(name);
       setPicture(picture)
-    console.log('HERE IS DATA', data);
     })
     .catch((err) => console.warn(err));
   },[]);
@@ -31,13 +30,13 @@ export default function Profile (){
 
   }
   const updatePic = (image: string) => {
-    console.log('clicked')
+
    const data = {
       picture: image
     }
     axios.post('/profilePic', data)
-    .then((info) => console.log(info))
-    .catch((err) => console.log(err))
+    .then((info) => console.info(info))
+    .catch((err) => console.warn(err))
 
   }
 
