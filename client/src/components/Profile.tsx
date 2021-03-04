@@ -2,10 +2,23 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { render } from 'react-dom';
+import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { WidgetLoader, Widget }  from 'react-cloudinary-upload-widget';
 export default function Profile (){
+  const [ name, setName ] = useState('');
+  const [ picture, setPicture ] = useState('');
 
+  useEffect(() => {
+    axios.get('/user')
+    .then(({ data }) => {
+      let { name, picture } = data;
+      setName(name);
+      setPicture(picture)
+    console.log('HERE IS DATA', data);
+    })
+    .catch((err) => console.warn(err));
+  },[]);
   const config :Object = {
     bucketName: 'thesis-picture-bucket-2',
     region: 'US East (Ohio) us-east-2',
@@ -34,8 +47,9 @@ export default function Profile (){
     return (
       <div>
         <h1>My Profile</h1>
-        <img></img>
-        <h3>Name:</h3>
+        <div className='profileDiv'><img className='profilePic' src={picture}></img></div>
+
+        <h3>Name: {name}</h3>
         <WidgetLoader />
 
                     <Widget
