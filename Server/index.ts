@@ -17,7 +17,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const port = process.env.PORT || 8080;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
-
+const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
 const { addUser, findUser } = require('./db/database.ts');
 
@@ -33,7 +33,11 @@ app.use(session({
   saveUninitialized: false,
   resave: true
 }));
-
+cloudinary.config({
+  cloud_name: process.env.cloudName,
+  api_key: process.env.cloudinaryAPI,
+  api_secret: process.env.cloudinarySecret
+});
 passport.serializeUser((user: any, done: any) => {
   done(null, user);
 });
