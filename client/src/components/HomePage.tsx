@@ -6,6 +6,16 @@ import { Doughnut } from 'react-chartjs-2';
 const homePage = () => {
   const [ name, setName ] = useState('');
 
+  useEffect(() => {
+    axios.get('/user')
+    .then(({ data }) => {
+      let { name } = data;
+      setName(name.split(' ')[0]);
+    console.log('HERE IS DATA', data);
+    })
+    .catch((err) => console.warn(err));
+  },[]);
+
   const data = {
     datasets: [
       {
@@ -35,7 +45,7 @@ const homePage = () => {
 
   return (
     <div>
-      <h1>Welcome to the HomePage</h1>
+      <h1>Welcome, {name}</h1>
       <h2><i>Your Stats</i></h2>
       <div className="doughnut-chart-container">
         <Doughnut data={data} />
