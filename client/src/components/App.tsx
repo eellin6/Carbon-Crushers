@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import HomePage from './HomePage';
+import Profile from './Profile';
 
 const App = () => {
   const [currentStatus, setCurrentStatus] = useState(false);
@@ -34,6 +35,7 @@ const App = () => {
               .then(({ data }) => setLogoutStatus(data))
               .catch((err) => console.warn(err))} ><i>logout</i>
           </button>
+          <Profile/>
         </div>
       }
     </div>

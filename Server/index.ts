@@ -17,9 +17,9 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const port = process.env.PORT || 8080;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
-
+const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser } = require('./db/database.ts');
+const { addUser, findUser, Users } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +33,11 @@ app.use(session({
   saveUninitialized: false,
   resave: true
 }));
-
+cloudinary.config({
+  cloud_name: process.env.cloudName,
+  api_key: process.env.cloudinaryAPI,
+  api_secret: process.env.cloudinarySecret
+});
 passport.serializeUser((user: any, done: any) => {
   done(null, user);
 });
@@ -73,5 +77,14 @@ app.get('/user', (req: Request, res: Response) => {
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
+app.post('/profilePic', (req: Request, res: Response) => {
 
+ Users.update(
+  {picture: req.body.picture},
+  {where: { name: req.cookies.Headstrong}}
+)
+.then((data: any) => console.info(data))
+.catch((err: string) => console.warn(err))
+
+});
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));
