@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './components/App';
+import Profile from './components/Profile'
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<Profile />, document.getElementById('app'));

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "skipLibCheck": true,
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",

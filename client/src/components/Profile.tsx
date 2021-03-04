@@ -2,24 +2,29 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { render } from 'react-dom';
-import S3FileUpload from 'react-s3';
+import  S3FileUpload  from 'react-s3';
+import * as Buffer from 'Buffer';
 export default function Profile (){
 
-  const upload = (e) => {
-   console.log(e.target.files)
+  const config :Object = {
+    bucketName: 'thesis-picture-bucket-2',
+    region: 'US East (Ohio) us-east-2',
+    accessKeyId: 'AKIAJVKMITSRCZLSTZTQ',
+    secretAccessKey: '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',
+}
+  const upload = (e: any ) => {
+   console.log(e.target.files[0])
+   S3FileUpload.uploadFile(e.target.files[0], config )
+   .then((data) => console.log(data))
+   .catch((err) => console.log(err))
+
+
   }
   const editInfo = () => {
     console.log('clicked')
-  }
-  const config = {
-    bucketName: 'myBucket',
-    dirName: 'photos', /* optional */
-    region: 'eu-west-1',
-    accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
-    secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
-}
 
-/*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
+  }
+
 
 
 
@@ -27,6 +32,7 @@ export default function Profile (){
       <div>
         <h1>Welcome User</h1>
         <input type='file' onChange={upload}/>
+
         <button onClick={editInfo}>Edit Profile</button>
       </div>
     );
