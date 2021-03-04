@@ -68,11 +68,10 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.json(false);
 });
 
-app.get('/:username', (req: Request, res: Response) => {
-  const { user } = req.body;
-  return findUser(user)
-  .then((data: any) => res.send(data))
-  .catch((err: string) => console.warn(err));
-})
+app.get('/user', (req: Request, res: Response) => {
+  findUser(req.cookies.Headstrong)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+});
 
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));

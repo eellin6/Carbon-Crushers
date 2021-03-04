@@ -76,7 +76,9 @@ const addUser = (name: string, picture: string) => {
 };
 
 const findUser = (name: string) => {
-  return Users.findOne({ where: { name } });
+  if (name) {
+    return Users.findOne({ where: { name } });
+  }
 };
 
 
