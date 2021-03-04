@@ -1,0 +1,49 @@
+* {
+	font-family: 'Fira Sans', sans-serif;
+	color: #525252;
+	text-align: center;
+}
+
+#app {
+	max-width: 100vw;
+	max-height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#wrapper {
+	width: 80vw;
+	margin: 0 auto;
+	max-height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#logo-welcome {
+	margin: 0 auto;
+	max-width: 100vw;
+	align-items: center;
+}
+
+.google-button {
+	margin: 0 auto;
+	padding-top: 15px;
+	max-width: 55vw;
+	height: auto;
+	display: flex;
+}
+
+.btn {
+	margin: 0 auto;
+	margin-top: 50px;
+	padding: 3px 15px;
+	display: flex;
+	/* flex-direction: column;
+	align-items: center; */
+	background-color: #fdcb60;
+	border-color: #ffc955;
+	border-style: solid;
+	border-radius: 5px;
+}

@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { render } from 'react-dom';
-import  S3FileUpload  from 'react-s3';
-import * as Buffer from 'Buffer';
+import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
 export default function Profile (){
 
   const config :Object = {
@@ -14,9 +13,6 @@ export default function Profile (){
 }
   const upload = (e: any ) => {
    console.log(e.target.files[0])
-   S3FileUpload.uploadFile(e.target.files[0], config )
-   .then((data) => console.log(data))
-   .catch((err) => console.log(err))
 
 
   }
@@ -30,10 +26,41 @@ export default function Profile (){
 
     return (
       <div>
-        <h1>Welcome User</h1>
-        <input type='file' onChange={upload}/>
+        <h1>My Profile</h1>
+        <img></img>
+        <h3>Name:</h3>
+        <WidgetLoader />
 
-        <button onClick={editInfo}>Edit Profile</button>
+                    <Widget
+            sources={ [ 'local', 'camera', 'dropbox' ] } // set the sources available for uploading -> by default
+            // all sources are available. More information on their use can be found at
+            // https://cloudinary.com/documentation/upload_widget#the_sources_parameter
+            resourceType={ 'image' } // optionally set with 'auto', 'image', 'video' or 'raw' -> default = 'auto'
+            cloudName={ 'geonovember' } // your cloudinary account cloud name.
+            // Located on https://cloudinary.com/console/
+            uploadPreset={ 'smiuh98k' } // check that an upload preset exists and check mode is signed or unisgned
+            buttonText={ 'Upload Profile Pic' } // default 'Upload Files'
+            style={ {
+              color: 'white',
+              border: 'none',
+              width: '120px',
+              backgroundColor: 'green',
+              borderRadius: '4px',
+              height: '25px'
+            } } // inline styling only or style id='cloudinary_upload_button'
+            folder={ 'demo' } // set cloudinary folder name to send file
+            cropping={ false } // set ability to crop images -> default = true
+            onSuccess={ (result) => this.setState({ journalImage: result.info.url }) } // add success callback -> returns result
+            onFailure={ console.log('failure!!!') } // add failure callback -> returns 'response.error' + 'response.result'
+            logging={ false } // logs will be provided for success and failure messages,
+            // set to false for production -> default = true
+            customPublicId={ 'sample' } // set a specific custom public_id.
+            // To use the file name as the public_id use 'use_filename={true}' parameter
+            eager={ 'w_400,h_300,c_pad|w_260,h_200,c_crop' } // add eager transformations -> deafult = null
+            use_filename={ false } // tell Cloudinary to use the original name of the uploaded
+            // file as its public ID -> default = true,
+          />
+
       </div>
     );
 

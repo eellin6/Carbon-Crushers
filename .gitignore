@@ -1,3 +1,7 @@
 node_modules
 .env
 client/dist/bundle.js
+<<<<<<< HEAD
+=======
+config.ts
+>>>>>>> 2a1b3576327b46228a66e2ca6efa3b410462e799

@@ -71,6 +71,14 @@ const Updates = db.define('Updates', {
 //     console.log('Database & tables created!');
 //   }).catch((err) => { console.log(err); });
 
+const addUser = (name: string) => {
+  return Users.findOrCreate({ name, where: { name } });
+};
+
+const findUser = (name: string) => {
+  return Users.findOne({ where: { name } });
+};
+
 
 module.exports = {
   db,
@@ -80,4 +88,6 @@ module.exports = {
   Badges,
   MonthlyLeaderBoard,
   Updates,
+  addUser,
+  findUser
 };
