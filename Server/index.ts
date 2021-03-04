@@ -48,9 +48,10 @@ app.get('/auth/error', (req: Request, res: Response) => res.send('Unknown Error'
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/error' }), (req: any, res: any) => {
-    const { displayName } = req.user;
+    const { displayName, photos } = req.user;
+    const { value } = photos[0];
     res.cookie('crushers', displayName);
-    return addUser(displayName)
+    return addUser(displayName, value)
       .then(() => res.redirect('/'))
       .catch((err: string) => console.warn(err));
   }
