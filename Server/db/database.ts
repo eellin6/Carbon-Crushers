@@ -69,10 +69,10 @@ const Updates = db.define('Updates', {
 // db.sync({ force: true })
 //   .then(() => {
 //     console.log('Database & tables created!');
-//   }).catch((err) => { console.log(err); });
+//   }).catch((err: string) => { console.log(err); });
 
-const addUser = (name: string) => {
-  return Users.findOrCreate({ name, where: { name } });
+const addUser = (name: string, picture: string) => {
+  return Users.findOrCreate({ name, picture, where: { name, picture } });
 };
 
 const findUser = (name: string) => {
