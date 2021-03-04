@@ -72,8 +72,11 @@ const Updates = db.define('Updates', {
 //   }).catch((err) => { console.log(err); });
 
 const addUser = (name: string) => {
-  console.info(name);
   return Users.findOrCreate({ name, where: { name } });
+};
+
+const findUser = (name: string) => {
+  return Users.findOne({ where: { name } });
 };
 
 
@@ -85,5 +88,6 @@ module.exports = {
   Badges,
   MonthlyLeaderBoard,
   Updates,
-  addUser
+  addUser,
+  findUser
 };

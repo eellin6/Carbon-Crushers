@@ -19,7 +19,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 
 const database = require('./db/database.ts');
-const { addUser } = require('./db/database.ts');
+const { addUser, findUser } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,7 +44,7 @@ passport.deserializeUser((user: any, done: any) => {
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }), (req: Request, res: Response) => console.info('FIRST RES', res));
 
-  app.get('/auth/error', (req: Request, res: Response) => res.send('Unknown Error'));
+app.get('/auth/error', (req: Request, res: Response) => res.send('Unknown Error'));
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/error' }), (req: any, res: any) => {
@@ -66,5 +66,12 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.clearCookie('crushers');
   res.json(false);
 });
+
+app.get('/:username', (req: Request, res: Response) => {
+  const { user } = req.body;
+  return findUser(user)
+  .then((data: any) => res.send(data))
+  .catch((err: string) => console.warn(err));
+})
 
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));
