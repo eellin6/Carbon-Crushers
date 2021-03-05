@@ -4,6 +4,7 @@ import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import HomePage from './HomePage';
 import Profile from './Profile';
+import Stats from './Stats'
 
 const App = () => {
   const [currentStatus, setCurrentStatus] = useState(false);
