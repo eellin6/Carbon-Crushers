@@ -73,7 +73,7 @@ app.delete('/logout', (req: Request, res: Response) => {
 });
 
 app.get('/user', (req: Request, res: Response) => {
-  findUser(req.cookies.Headstrong)
+  findUser(req.cookies.crushers)
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
@@ -81,7 +81,7 @@ app.post('/profilePic', (req: Request, res: Response) => {
 
  Users.update(
   {picture: req.body.picture},
-  {where: { name: req.cookies.Headstrong}}
+  {where: { name: req.cookies.crushers}}
 )
 .then((data: any) => console.info(data))
 .catch((err: string) => console.warn(err))
