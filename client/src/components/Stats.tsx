@@ -86,6 +86,8 @@ export default function Stats (){
           <Meat_Dine/>
         </AccordionDetails>
       </Accordion>
+      <h1></h1>
+      <button>Submit</button>
 
 
     </div>

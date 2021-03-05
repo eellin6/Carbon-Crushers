@@ -7,18 +7,48 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 export default function Meat_Dine (){
-  const [count, setCount] = useState(1);
+  const [meatCount, setMeatCount] = useState(0);
+  const [dineCount, setDineCount] = useState(0);
+  const displayMeatCounter = meatCount >= 0;
+  const displayDineCounter = dineCount >= 0;
+  const handleMeatIncrement = () => {
+setMeatCount(meatCount + 1)
+  };
 
-  const displayCounter = this.state.counter > 0;
+  const handleMeatDecrement = () => {
+    setMeatCount(meatCount - 1)
+  };
+  const handleDineIncrement = () => {
+    setDineCount(dineCount + 1)
+      };
+
+      const handleDineDecrement = () => {
+        setDineCount(dineCount - 1)
+      };
+      const submit = () => {
+
+        setMeatCount(0)
+        setDineCount(0)
+          }
   return (
 
     <div>
-      <h1>Log your meat consumption and Dining out for the week</h1>
+      <h2>Log your meat consumption for the week</h2>
+      <h3>{meatCount}</h3>
       <ButtonGroup size="small" aria-label="small outlined button group">
-        <Button onClick={this.handleIncrement}>+</Button>
-        {displayCounter && <Button disabled>{count}</Button>}
-        {displayCounter && <Button onClick={this.handleDecrement}>-</Button>}
+        {displayMeatCounter && <Button onClick={handleMeatDecrement}>-</Button>}
+        <Button disabled></Button>
+        <Button onClick={handleMeatIncrement}>+</Button>
       </ButtonGroup>
+      <h2>Log your dining out for the week</h2>
+      <h3>{dineCount}</h3>
+      <ButtonGroup size="small" aria-label="small outlined button group">
+        {displayDineCounter && <Button onClick={handleDineDecrement}>-</Button>}
+         <Button disabled></Button>
+        <Button onClick={handleDineIncrement}>+</Button>
+      </ButtonGroup>
+      <h1></h1>
+      <button onClick={submit}>submit</button>
 
     </div>
   )
