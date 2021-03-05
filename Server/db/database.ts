@@ -22,34 +22,67 @@ const Users = db.define('Users', {
   picture: Sequelize.STRING
 });
 const Stats = db.define('Stats', {
-  meat: Sequelize.INTEGER,
+  meat_dine: Sequelize.INTEGER,
   electricity: Sequelize.INTEGER,
   water: Sequelize.INTEGER,
   recycling: Sequelize.INTEGER,
-  screenTime: Sequelize.INTEGER,
-  dineOut: Sequelize.INTEGER,
   mileage: Sequelize.INTEGER,
   total: Sequelize.INTEGER,
-  id_user: Sequelize.INTEGER
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+
+    }
+
+  }
 });
 const Showers = db.define('Showers', {
-  id_user: Sequelize.INTEGER,
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+
+    }
+
+  },
   time: Sequelize.INTEGER,
   showerCount: Sequelize.INTEGER
 });
 const Friends = db.define('Friends', {
-  id_user: Sequelize.INTEGER,
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+
+    }
+
+  },
   friendsName: Sequelize.STRING,
   status: Sequelize.STRING
 });
 const Badges = db.define('Badges', {
-  id_user: Sequelize.INTEGER,
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+
+    }
+
+  },
   badgeName: Sequelize.STRING,
   imgUrl: Sequelize.STRING,
   badgeStatus: Sequelize.STRING
 });
 const MonthlyLeaderBoard = db.define('MonthlyLeaderBoard', {
-  id_user: Sequelize.INTEGER,
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+
+    }
+
+  },
   monthly_score: Sequelize.INTEGER,
   monthly_meat: Sequelize.INTEGER,
   monthly_electricity: Sequelize.INTEGER,
@@ -62,7 +95,14 @@ const MonthlyLeaderBoard = db.define('MonthlyLeaderBoard', {
 });
 const Updates = db.define('Updates', {
   requests: Sequelize.STRING,
-  id_user: Sequelize.INTEGER,
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+
+    }
+
+  },
   badge: Sequelize.STRING
 });
 

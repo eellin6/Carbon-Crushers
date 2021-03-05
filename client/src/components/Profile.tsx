@@ -18,17 +18,8 @@ export default function Profile (){
     })
     .catch((err) => console.warn(err));
   },[]);
-  const config :Object = {
-    bucketName: 'thesis-picture-bucket-2',
-    region: 'US East (Ohio) us-east-2',
-    accessKeyId: 'AKIAJVKMITSRCZLSTZTQ',
-    secretAccessKey: '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',
-}
-  const upload = (e: any ) => {
-   console.log(e.target.files[0])
 
 
-  }
   const updatePic = (image: string) => {
 
    const data = {
@@ -70,10 +61,10 @@ export default function Profile (){
             } } // inline styling only or style id='cloudinary_upload_button'
             folder={ 'samples' } // set cloudinary folder name to send file
             cropping={ false } // set ability to crop images -> default = true
-            onSuccess={ (result: any) => {console.log(result.info.url)
+            onSuccess={ (result: any) => {
             updatePic(result.info.url)}
             } // add success callback -> returns result
-            onFailure={ console.log('failure!!!') } // add failure callback -> returns 'response.error' + 'response.result'
+            //onFailure={ console.warn('failure!!!') } // add failure callback -> returns 'response.error' + 'response.result'
             logging={ false } // logs will be provided for success and failure messages,
             // set to false for production -> default = true
             customPublicId={ 'sample' } // set a specific custom public_id.
