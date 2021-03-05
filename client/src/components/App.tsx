@@ -20,26 +20,9 @@ const App = () => {
   };
   getLoginStatus();
 
-  // const animateBurger = () => {
-  //   const burgerBtn = document.querySelector('.menu-btn');
-  //   let menuOpen = false;
-  //   burgerBtn.addEventListener('click', () => {
-  //     if (!menuOpen) {
-  //       burgerBtn.classList.add('open');
-  //       menuOpen = true;
-  //     } else {
-  //       burgerBtn.classList.remove('open');
-  //       menuOpen = false;
-  //     }
-  //   });
-  // }
-
-
   return (
+    <div>
       <div id="wrapper">
-        {/* <div className='menu-btn' onClick={() => animateBurger()}>
-          <div className='menu-btn-burger'></div>
-        </div> */}
         {
           !currentStatus
           ? <div>
@@ -49,9 +32,10 @@ const App = () => {
               </a>
             </div>
           :
-          <div id='nav'>
+          <div>
             <Router>
-              <Nav />
+              <div id='nav'><Nav /></div>
+
               <Switch>
                 <Route path='/profile'><Profile /></Route>
                 <Route path='/logout' ></Route>
@@ -65,6 +49,7 @@ const App = () => {
             </button>
           </div>
         }
+    </div>
     </div>
   )
 };

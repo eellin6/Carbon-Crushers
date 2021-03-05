@@ -2,23 +2,22 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
-import HomePage from './HomePage';
-import Profile from './Profile';
-import axios from 'axios';
 
 const Nav = () => {
-  const [logoutStatus, setLogoutStatus] = useState();
+  const [menu, setMenu] = useState(false);
+  // let menuOpen = false;
 
   const animateBurger = () => {
     const burgerBtn = document.querySelector('.menu-btn');
-    let menuOpen = false;
     burgerBtn.addEventListener('click', () => {
-      if (!menuOpen) {
+      if (!menu) {
         burgerBtn.classList.add('open');
-        menuOpen = true;
+        setMenu(prev => prev = !menu)
+        // menuOpen = true;
       } else {
         burgerBtn.classList.remove('open');
-        menuOpen = false;
+        setMenu(prev => prev = !menu)
+        // menuOpen = false;
       }
     });
   }
