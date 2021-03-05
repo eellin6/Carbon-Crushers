@@ -2,6 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import dataTest from '../sample_data';
 
 const homePage = () => {
   const [ name, setName ] = useState('');
@@ -16,12 +17,14 @@ const homePage = () => {
     .catch((err) => console.warn(err));
   },[]);
 
+  const score = dataTest[0].Recycling + dataTest[0].WaterConsumption + dataTest[0].MeatAndDiningOut + dataTest[0].Mileage + dataTest[0].Energy;
+
   const data = {
     datasets: [
       {
         text: "Your Stats",
         label: "First dataset",
-        data: [33, 53, 85, 41, 44],
+        data: [dataTest[0].Recycling, dataTest[0].WaterConsumption, dataTest[0].MeatAndDiningOut, dataTest[0].Mileage, dataTest[0].Energy],
         fill: true,
         backgroundColor: [
           "#55BFBF",
@@ -45,10 +48,11 @@ const homePage = () => {
 
   return (
     <div>
-      <h1>Welcome, {name}</h1>
-      <h2><i>Your Stats</i></h2>
+      <h1>Welcome, {name}!</h1>
+      <h2><i>Here's Your Stats</i></h2>
       <div className="doughnut-chart-container">
         <Doughnut data={data} />
+        <div>{ score }</div>
       </div>
     </div>
   );
