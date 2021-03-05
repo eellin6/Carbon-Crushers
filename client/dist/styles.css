@@ -149,3 +149,17 @@ ul {
 li {
 	text-decoration: none;
 }
+.footerBtn {
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	left: 14%;
+	bottom: 10%;
+	width: 70%;
+}
+
+.testy {
+	/* justify-content: space-between; */
+	width: 2em;
+	max-height: 2em;
+}
