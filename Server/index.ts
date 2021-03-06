@@ -21,7 +21,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -92,4 +92,12 @@ app.post('/profilePic', (req: Request, res: Response) => {
 .catch((err: string) => console.warn(err))
 
 });
+app.post('/statsData', (req: Request, res: Response) => {
+//console.log('req body', req.body)
+const {meat_dine, energy, water, recycling, mileage, total} = req.body
+const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total})
+ newStats.save()
+ .then((stuff) => console.info('stats saved', stuff))
+ .catch((err:string) => console.warn(err))
+})
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));
