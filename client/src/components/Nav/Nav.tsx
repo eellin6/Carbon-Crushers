@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+// import Burger from './NavBurger';
 
-const Sidebar = () => {
-  const [menu, setMenu] = useState(false);
+const Nav = () => {
+  // const [menu, setMenu] = useState(false);
 
   return (
-    <div className='nav'>
+    <div>
         <ul>
           <li>
             <Link to='/'>Home</Link>
@@ -25,4 +26,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Nav;

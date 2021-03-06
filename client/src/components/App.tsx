@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { Navigate, useRoutes, Link } from 'react-router-dom'
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
-import Nav from './Nav/Nav';
-import Burger from './Nav/NavBurger';
+import Sidebar from './Nav/Sidebar';
+// import Burger from './Nav/NavBurger';
 import HomePage from './HomePage';
 import Profile from './Profile';
 import Login from './Login';
@@ -23,9 +23,13 @@ const App: React.FC = () => {
   };
   getLoginStatus();
 
+  const isLoggedIn = (currentStatus: boolean) => {
+    return !currentStatus ? <Login /> : <HomePage />;
+  }
+
   const homeRoute = {
     path: '/',
-    element: <HomePage />
+    element: isLoggedIn(currentStatus)
   };
 
   const profileRoute = {
@@ -38,29 +42,19 @@ const App: React.FC = () => {
     element: <Stats />
   };
 
-  const loginRoute = {
-    path: '/login',
-    element: <Login />
-  };
-
   const logoutRoute = {
     path: '/logout',
     element: <Profile />
   };
 
-
-  const routing = useRoutes([homeRoute, profileRoute, statsRoute, loginRoute, logoutRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, logoutRoute]);
 
   return (
     <div>
-      <Burger />
+      <Sidebar />
+      { routing }
       <div id="wrapper">
-        { routing }
-
         {
-          !currentStatus
-          ? <div><Login /></div>
-          :
           <div>
               <button className='btn'
                 onClick={() => axios.delete('/logout')
