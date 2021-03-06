@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Doughnut, Line, Polar } from 'react-chartjs-2';
 import  recycling from '../sample_recycling';
 import  waterYearToDate from '../sample_water';
-import meatData from '../sample_Meat';
+import meatData from '../sample_meat';
 import mileage from '../sample_mileage';
 import energy from '../sample_energy';
 
