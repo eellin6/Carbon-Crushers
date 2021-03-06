@@ -93,9 +93,10 @@ app.post('/profilePic', (req: Request, res: Response) => {
 
 });
 app.post('/statsData', (req: Request, res: Response) => {
-//console.log('req body', req.body)
+//console.log('req cookies', req.cookies)
+let name = req.cookies.crushers;
 const {meat_dine, energy, water, recycling, mileage, total} = req.body
-const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total})
+const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name})
  newStats.save()
  .then((stuff) => console.info('stats saved', stuff))
  .catch((err:string) => console.warn(err))

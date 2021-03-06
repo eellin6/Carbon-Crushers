@@ -28,6 +28,7 @@ const Stats = db.define('Stats', {
   recycling: Sequelize.INTEGER,
   mileage: Sequelize.INTEGER,
   total: Sequelize.INTEGER,
+  name: Sequelize.STRING,
   id_user: { type: Sequelize.INTEGER,
     references: {
       model: Users,
