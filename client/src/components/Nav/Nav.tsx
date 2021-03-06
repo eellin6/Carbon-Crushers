@@ -15,6 +15,9 @@ const Sidebar = () => {
             <Link to='/profile'>Edit Profile</Link>
           </li>
           <li>
+            <Link to='/stats'>Enter New Stats</Link>
+          </li>
+          <li>
             <Link to='/logout'>Log out</Link>
           </li>
         </ul>

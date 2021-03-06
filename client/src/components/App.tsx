@@ -4,11 +4,12 @@ import { Navigate, useRoutes, Link } from 'react-router-dom'
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import Nav from './Nav/Nav';
+import Burger from './Nav/NavBurger';
 import HomePage from './HomePage';
 import Profile from './Profile';
 import Login from './Login';
-import Burger from './Nav/NavBurger';
-import { slide as Menu } from 'react-burger-menu';
+import Stats from './Stats'
+// import { slide as Menu } from 'react-burger-menu';
 
 const App: React.FC = () => {
   const [currentStatus, setCurrentStatus] = useState(false);
@@ -32,6 +33,11 @@ const App: React.FC = () => {
     element: <Profile />
   };
 
+  const statsRoute = {
+    path: '/stats',
+    element: <Stats />
+  };
+
   const loginRoute = {
     path: '/login',
     element: <Login />
@@ -43,14 +49,13 @@ const App: React.FC = () => {
   };
 
 
-  const routing = useRoutes([homeRoute, profileRoute, loginRoute, logoutRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, loginRoute, logoutRoute]);
 
   return (
     <div>
       <Burger />
       <div id="wrapper">
         { routing }
-        {/* <div id='nav'><Nav /></div> */}
 
         {
           !currentStatus
