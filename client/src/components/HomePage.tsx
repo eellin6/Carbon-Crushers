@@ -2,7 +2,8 @@ import * as React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import dataTest from '../sample_data';
+import dataTest from '../sample_dataTest';
+// import recycling from '../sample_recycling';
 
 const homePage = () => {
   const [ name, setName ] = useState('');
@@ -12,7 +13,7 @@ const homePage = () => {
     .then(({ data }) => {
       let { name } = data;
       setName(name.split(' ')[0]);
-
+    console.log('HERE IS DATA', data);
     })
     .catch((err) => console.warn(err));
   },[]);
@@ -48,8 +49,8 @@ const homePage = () => {
 
   return (
     <div>
-      <h1>Welcome, {name}!</h1>
-      <h2><i>Here's Your Stats</i></h2>
+      <h1>Welcome, {name}</h1>
+      <h2><i>Here's your Stats</i></h2>
       <div className="doughnut-chart-container">
         <Doughnut data={data} />
         <div>{ score }</div>

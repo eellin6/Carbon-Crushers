@@ -33,6 +33,7 @@ In challenger mode users can search for friends that are also on the app. The fr
 10. Express - Server
 11. Husky - pre-commit git hooks
 12. eslint - Linter
+13. Webpack - Module Bundler
 
 Dev Setup:
 ## Environment Variables Needed
@@ -47,7 +48,7 @@ Google Oauth requires a google cloud account. First create your account and then
 
 ## Installation/Start-up
 1. First fork the repo and clone it to your local machine.
-2. Get all env keys
+2. Collect all env keys
 3. Run npm install to install all dependencies
 4. Run npm run dev to start Webpack
 5. Run npm start to run the server
