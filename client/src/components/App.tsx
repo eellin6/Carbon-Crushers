@@ -43,7 +43,7 @@ const App: React.FC = () => {
   };
 
   const logoutRoute = {
-    path: '/logout',
+    path: '/',
     element: <Profile />
   };
 
@@ -52,8 +52,8 @@ const App: React.FC = () => {
   return (
     <div>
       <Sidebar />
-      { routing }
       <div id="wrapper">
+      { routing }
         {
           <div>
               <button className='btn'

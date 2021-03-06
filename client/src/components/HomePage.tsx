@@ -13,7 +13,7 @@ const homePage = () => {
     .then(({ data }) => {
       let { name } = data;
       setName(name.split(' ')[0]);
-    console.log('HERE IS DATA', data);
+    // console.log('HERE IS DATA', data);
     })
     .catch((err) => console.warn(err));
   },[]);
