@@ -6,30 +6,16 @@ import axios from 'axios'
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
-export default function Water (){
-  const [dishCount, setDishCount] = useState(0);
-  const [washCount, setWashCount] = useState(0);
+export default function Water ({wash, dish, func}){
+ const dishCount = dish;
+ const washCount = wash
   const displayDishCounter = dishCount >= 0;
   const displayDineCounter = washCount >= 0;
-  const handleDishIncrement = () => {
-    setDishCount(dishCount + 1)
-      };
+   const handleDishIncrement = func[1]
+  const handleDishDecrement = func[0]
+  const handleWashIncrement = func[2]
+ const handleWashDecrement = func[3]
 
-      const handleDishDecrement = () => {
-        setDishCount(dishCount - 1)
-      };
-      const handleWashIncrement = () => {
-        setWashCount(washCount + 1)
-          };
-
-          const handleWashDecrement = () => {
-            setWashCount(washCount - 1)
-          };
-          const submit = () => {
-
-            setDishCount(0)
-            setWashCount(0)
-              }
   return (
     <div>
       <h2>How many times did you run your dishwasher this week?</h2>
@@ -46,8 +32,8 @@ export default function Water (){
          <Button disabled></Button>
         <Button onClick={handleWashIncrement}>+</Button>
       </ButtonGroup>
-      <h1></h1>
-      <button onClick={submit}>submit</button>
+
+
 
     </div>
   )

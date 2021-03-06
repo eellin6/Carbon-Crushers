@@ -6,30 +6,17 @@ import axios from 'axios'
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
-export default function Meat_Dine (){
-  const [meatCount, setMeatCount] = useState(0);
-  const [dineCount, setDineCount] = useState(0);
+export default function Meat_Dine ({meat, dine, func}){
+
+  const meatCount = meat;
+  const dineCount = dine;
   const displayMeatCounter = meatCount >= 0;
   const displayDineCounter = dineCount >= 0;
-  const handleMeatIncrement = () => {
-setMeatCount(meatCount + 1)
-  };
+  const handleMeatIncrement = func[1];
+  const handleMeatDecrement = func[0]
+  const handleDineDecrement = func[3]
+  const handleDineIncrement = func[2]
 
-  const handleMeatDecrement = () => {
-    setMeatCount(meatCount - 1)
-  };
-  const handleDineIncrement = () => {
-    setDineCount(dineCount + 1)
-      };
-
-      const handleDineDecrement = () => {
-        setDineCount(dineCount - 1)
-      };
-      const submit = () => {
-
-        setMeatCount(0)
-        setDineCount(0)
-          }
   return (
 
     <div>
@@ -47,8 +34,8 @@ setMeatCount(meatCount + 1)
          <Button disabled></Button>
         <Button onClick={handleDineIncrement}>+</Button>
       </ButtonGroup>
-      <h1></h1>
-      <button onClick={submit}>submit</button>
+
+
 
     </div>
   )
