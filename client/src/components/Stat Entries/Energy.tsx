@@ -54,7 +54,7 @@ export default function Energy ({ac, wash, dish, screen, func}){
          <Button disabled></Button>
         <Button onClick={handleACIncrement}>+</Button>
       </ButtonGroup>
-      <h2>How many hours of screen time this week?</h2>
+      <h2>How many hours of non work related screen time this week?</h2>
       <h3>{screenCount}</h3>
       <ButtonGroup size="small" aria-label="small outlined button group">
         {displayScreenCounter && <Button onClick={handleScreenDecrement}>-</Button>}

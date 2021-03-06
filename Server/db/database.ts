@@ -23,7 +23,7 @@ const Users = db.define('Users', {
 });
 const Stats = db.define('Stats', {
   meat_dine: Sequelize.INTEGER,
-  electricity: Sequelize.INTEGER,
+  energy: Sequelize.INTEGER,
   water: Sequelize.INTEGER,
   recycling: Sequelize.INTEGER,
   mileage: Sequelize.INTEGER,

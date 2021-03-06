@@ -102,11 +102,86 @@ export default function Stats (props: AppState){
                       const handleWashEDecrement = () => {
                         setWashECount(washECount - 1)
                       };
+    const mileageAlg = (mile) => {
+      let num = 200 - mile;
+      let total = 0;
+      if(num < 0){
+        total = (num / 10) * 1
+      }
+      if(num > 0){
+        total = (num / 10) * 1
+      }
+      return total;
+    }
+    const meat_dineAlg = (dine, meat) => {
+let dineTotal = 0;
+let meatTotal = 0;
+let dineNum = 4 - dine;
+let meatNum = 4 - meat;
+dineTotal = dineNum * 2
+meatTotal = meatNum * 2
+
+return dineTotal + meatTotal;
+
+    }
+    const waterAlg = (dishes, washing) => {
+let dishTotal = 0;
+let washTotal = 0;
+let dishNum = 3 - dishes;
+let washNum = 4 - washing;
+dishTotal = dishNum * 5;
+washTotal = washNum * 5;
+
+return dishTotal + washTotal;
+    }
+    const energyAlg = (dishes, washing, acHeat, screenTime) => {
+      let dishTotal = 0;
+      let washTotal = 0;
+      let screenTotal = 0;
+      let acTotal = 0;
+      let dishNum = 3 - dishes;
+      let washNum = 4 - washing;
+      let screenNum = 20 - screenTime;
+      let acNum = 40 - acHeat;
+      dishTotal = dishNum * 5;
+      washTotal = washNum * 5;
+      screenTotal = screenNum * 2
+      acTotal = acNum * 4
+
+      return dishTotal + washTotal + acTotal + screenTotal
+
+    }
     const submit = () => {
 
-
-console.info('dish', dishECount, 'wash', washECount, 'screen', screenCount, 'ac', acHeatCount)
-//setMiles(0)
+const mileTotal = mileageAlg(miles)
+const meatDineTotal = meat_dineAlg(dineCount, meatCount)
+const waterTotal = waterAlg(dishCount, washCount)
+const energyTotal = energyAlg(dishECount, washECount, acHeatCount, screenCount)
+const final = (mileTotal + meatDineTotal + waterTotal + bottles + energyTotal) * 2
+//console.info(final)
+const data = {
+  meat_dine: meatDineTotal,
+  energy: energyTotal,
+  water: waterTotal,
+  recycling: bottles,
+  mileage: mileTotal,
+  total: final,
+}
+axios.post('/statsData', data)
+.then((stuff) => {
+console.info(stuff)
+})
+.catch((err: string) => {console.warn(err)})
+setMiles(0);
+setBottles(0);
+setAcHeatCount(0);
+setDineCount(0);
+setDishCount(0);
+setDishECount(0);
+setMeatCount(0);
+setScreenCount(0);
+setWashCount(0);
+setWashECount(0)
   }
   return (
     <div>
