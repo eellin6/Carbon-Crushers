@@ -9,7 +9,7 @@ import HomePage from './HomePage';
 import Profile from './Profile';
 import Login from './Login';
 import Stats from './Stats'
-// import { slide as Menu } from 'react-burger-menu';
+import Graphs from './Graph';
 
 const App: React.FC = () => {
   const [currentStatus, setCurrentStatus] = useState(false);
