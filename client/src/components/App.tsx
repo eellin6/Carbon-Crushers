@@ -36,6 +36,7 @@ const App = () => {
               .then(({ data }) => setLogoutStatus(data))
               .catch((err) => console.warn(err))} ><i>logout</i>
           </button>
+          <Stats/>
           {/* <Profile/> */}
         </div>
       }
