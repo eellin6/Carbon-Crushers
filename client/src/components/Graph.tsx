@@ -23,7 +23,7 @@ const Graphs = () => {
   },[]);
 
 
-  //Score Functions
+  //Score New Functions
   const RecycleScoreFunc = () => {
     let result = 0;
     let avg = 0;
