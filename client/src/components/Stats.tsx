@@ -158,7 +158,7 @@ const meatDineTotal = meat_dineAlg(dineCount, meatCount)
 const waterTotal = waterAlg(dishCount, washCount)
 const energyTotal = energyAlg(dishECount, washECount, acHeatCount, screenCount)
 const final = (mileTotal + meatDineTotal + waterTotal + bottles + energyTotal) * 2
-//console.info(final)
+console.info(final)
 const data = {
   meat_dine: meatDineTotal,
   energy: energyTotal,
@@ -183,6 +183,19 @@ setScreenCount(0);
 setWashCount(0);
 setWashECount(0)
   }
+  const checkDate = () => {
+    const date = new Date();
+
+    if(date.getDay() === 7 && date.getHours() === 24) {
+        submit();
+    }
+}
+
+const dateLoop = setInterval(function() {
+    checkDate();
+
+
+},60000);
   return (
     <div>
       <h1>Log your weekly stats</h1>
