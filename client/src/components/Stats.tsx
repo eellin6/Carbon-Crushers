@@ -199,7 +199,7 @@ const dateLoop = setInterval(function() {
   return (
     <div>
       <h1>Log your weekly stats</h1>
-      <Accordion>
+      <Accordion className='stats'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -212,7 +212,7 @@ const dateLoop = setInterval(function() {
 
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion className='stats'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -225,7 +225,7 @@ const dateLoop = setInterval(function() {
           <Recycling miles={bottles} func={bottleChange}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion >
+      <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
@@ -238,7 +238,7 @@ const dateLoop = setInterval(function() {
           <Energy ac={acHeatCount} screen={screenCount} wash={washECount} dish={dishECount} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement, handleACIncrement, handleACDecrement]}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion >
+      <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
@@ -251,7 +251,7 @@ const dateLoop = setInterval(function() {
           <Water wash={washCount} dish={dishCount} func={[handleDishDecrement, handleDishIncrement, handleWashIncrement, handleWashDecrement]}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion >
+      <Accordion className='stats' style={{color: '#55BFBF'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
