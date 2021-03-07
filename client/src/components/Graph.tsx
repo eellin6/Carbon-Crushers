@@ -214,23 +214,23 @@ const Graphs = () => {
 
 
   return (
-    <div>
+    <div className='page-wrap'>
       <h1> Individual Stats Breakdown</h1>
       <h2><i>{name}'s Accumulated Stats</i></h2>
       <div className="chart-container">
-        <div>Average Weekly Bottles Recycled: { RecycleScoreFunc() }</div>
+        <div className='score'>Average Weekly Bottles Recycled: { RecycleScoreFunc() }</div>
         <Line data={dataRec} />
-        <h2><i>Water Consumption</i></h2>
-        <div>Average Weekly Score: { WaterScoreFunc() }</div>
+        <h2>Water Consumption</h2>
+        <div className='score'>Average Weekly Score: { WaterScoreFunc() }</div>
         <Line data={dataWater} />
-        <h2><i>Dining Out and Meat Consumption</i></h2>
-        <div>Average Weekly Score: { MeatScoreFunc() }</div>
+        <h2>Dining Out and Meat Consumption</h2>
+        <div className='score'>Average Weekly Score: { MeatScoreFunc() }</div>
         <Line data={dataMeat} />
-        <h2><i>Mileage Stats</i></h2>
-        <div>Average Weekly Score: { mileageFunc() }</div>
+        <h2>Mileage Stats</h2>
+        <div className='score'>Average Weekly Score: { mileageFunc() }</div>
         <Line data={dataMileage} />
-        <h2><i>Energy Stats</i></h2>
-        <div>Average Weekly Score: { energyFunc() }</div>
+        <h2>Energy Stats</h2>
+        <div className='score'>Average Weekly Score: { energyFunc() }</div>
         <Line data={dataEnergy} />
       </div>
     </div>

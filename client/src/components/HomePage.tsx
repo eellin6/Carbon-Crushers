@@ -70,11 +70,11 @@ const homePage = () => {
   };
 
   return (
-    <div>
+    <div className='page-wrap'>
       <h1>Welcome, {name}</h1>
       <h2><i>Here's your Stats</i></h2>
       <div className="doughnut-chart-container">
-        <div><i>Weekly Score: { score }</i></div>
+        <div className='score'>Weekly Score: { score }</div>
         <Doughnut data={data} />
       </div>
     </div>

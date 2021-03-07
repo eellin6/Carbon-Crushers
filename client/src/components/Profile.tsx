@@ -35,7 +35,7 @@ export default function Profile (){
 
 
     return (
-      <div>
+      <div className='page-wrap'>
         <h1>My Profile</h1>
         <div className='profileDiv'><img className='profilePic' src={picture}></img></div>
 
