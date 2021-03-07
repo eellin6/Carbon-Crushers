@@ -21,7 +21,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats, getAllStats } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats, addShower } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -82,6 +82,7 @@ app.get('/user', (req: Request, res: Response) => {
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
+
 app.post('/profilePic', (req: Request, res: Response) => {
 
  Users.update(
@@ -102,12 +103,21 @@ app.get('/statsData', (req: Request, res: Response) => {
 
 
 app.post('/statsData', (req: Request, res: Response) => {
-//console.log('req cookies', req.cookies)
-let name = req.cookies.crushers;
-const {meat_dine, energy, water, recycling, mileage, total} = req.body
-const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name})
- newStats.save()
- .then((stuff) => console.info('stats saved', stuff))
- .catch((err:string) => console.warn(err))
-})
+  //console.log('req cookies', req.cookies)
+  let name = req.cookies.crushers;
+  const {meat_dine, energy, water, recycling, mileage, total} = req.body
+  const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name})
+  newStats.save()
+    .then((stuff) => console.info('stats saved', stuff))
+    .catch((err:string) => console.warn(err))
+});
+
+app.post('/shower', (req: Request, res: Response) => {
+  const name: string = req.cookies.crushers;
+  const { time } = req.body
+  addShower(name, time)
+    .then((data) => res.send(data))
+    .catch((err: string) => console.warn(err))
+});
+
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));

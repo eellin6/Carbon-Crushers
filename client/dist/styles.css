@@ -148,3 +148,9 @@ a:hover {
 	font-size: 6rem;
 	margin-top: -15%;
 }
+
+.buttons {
+	display: flex;
+	flex-direction: rows;
+	margin-top: -25%;
+}
