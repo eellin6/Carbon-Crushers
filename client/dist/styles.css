@@ -1,20 +1,29 @@
-* {
+body {
 	font-family: 'Fira Sans', sans-serif;
 	color: #525252;
-	text-align: center;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	min-height: 100vh;
 }
 
 #app {
 	max-width: 100vw;
+	max-height: auto;
+	flex-direction: column;
+}
+
+#wrapper {
+	width: 100%;
 	max-height: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-#wrapper {
-	width: 80vw;
-	margin: 0 auto;
+.page-wrap {
+	/* width: 90%; */
+	padding: 0 5%;
 	max-height: auto;
 	display: flex;
 	flex-direction: column;
@@ -23,7 +32,7 @@
 
 #logo-welcome {
 	margin: 0 auto;
-	max-width: 100vw;
+	max-width: 80vw;
 	align-items: center;
 }
 
@@ -35,13 +44,24 @@
 	display: flex;
 }
 
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+	font-style: italic;
+}
+
+.score {
+	text-align: center;
+}
+
 .btn {
 	margin: 0 auto;
 	margin-top: 50px;
 	padding: 3px 15px;
 	display: flex;
-	/* flex-direction: column;
-	align-items: center; */
 	background-color: #fdcb60;
 	border-color: #ffc955;
 	border-style: solid;
@@ -52,6 +72,7 @@
 	height: 100px;
 	display: flex;
 	align-items: center;
+	margin: 0 auto;
 }
 .profilePic {
 	max-width: 100px;
@@ -60,21 +81,66 @@
 	margin: 0 auto;
 }
 
+ul {
+	list-style-type: none;
+	margin-top: 15%;
+	margin-left: 15%;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+	margin-bottom: 15%;
+	font-size: 1.2rem;
+	display: block;
+}
+
+a:hover {
+	color: #fdcb60;
+}
+
+#footer-wrap {
+	width: 100%;
+	margin: 0 auto;
+	position: fixed;
+	left: 0;
+	bottom: -35px;
+}
+
 .footerBtn {
+	background: #fff;
+	padding: 4% 10% 0 10%;
 	display: flex;
 	justify-content: space-between;
-	position: fixed;
-  left: 14%;
-  bottom: 10%;
-	width: 70%;
 }
 
 .testy {
-	/* justify-content: space-between; */
-	width: 2em;
-	height: 2em;
-
+	width: 1.75em;
+	max-height: 1.5em;
+	overflow: visible;
+	object-fit: contain;
 }
+
+.menu-icon {
+	margin: 40% 0 0 65%;
+	cursor: pointer;
+}
+
+.menu-icon-close {
+	margin: -5%;
+	padding-bottom: 10%;
+	cursor: pointer;
+}
+
+
 .stats {
 	border-color: #55BFBF;
+}
+#widget {
+	align-items: center;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	font-style: italic;
 }

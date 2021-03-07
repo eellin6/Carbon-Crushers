@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 import { Request, Response, NextFunction } from 'express';
+import HomePage from '../client/src/components/HomePage';
+import Profile from '../client/src/components/Profile';
 const path = require('path');
 
 const mysql = require('mysql2');
@@ -19,7 +21,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,6 +46,9 @@ passport.serializeUser((user: any, done: any) => {
 passport.deserializeUser((user: any, done: any) => {
   done(null, user);
 });
+
+// app.use('/profile', Profile);
+// app.use('/', HomePage);
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }), (req: Request, res: Response) => console.info('FIRST RES', res));
@@ -87,6 +92,15 @@ app.post('/profilePic', (req: Request, res: Response) => {
 .catch((err: string) => console.warn(err))
 
 });
+
+
+app.get('/statsData', (req: Request, res: Response) => {
+  return getAllStats(req.cookies.crushers)
+    .then((data: any) => res.json(data))
+    .catch((err: string) => console.warn(err));
+});
+
+
 app.post('/statsData', (req: Request, res: Response) => {
 //console.log('req cookies', req.cookies)
 let name = req.cookies.crushers;

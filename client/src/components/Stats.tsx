@@ -197,7 +197,7 @@ const dateLoop = setInterval(function() {
 
 },60000);
   return (
-    <div>
+    <div className='page-wrap'>
       <h1>Log your weekly stats</h1>
       <Accordion className='stats'>
         <AccordionSummary
@@ -251,7 +251,7 @@ const dateLoop = setInterval(function() {
           <Water wash={washCount} dish={dishCount} func={[handleDishDecrement, handleDishIncrement, handleWashIncrement, handleWashDecrement]}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion className='stats' style={{color: '#55BFBF'}}>
+      <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
@@ -265,7 +265,7 @@ const dateLoop = setInterval(function() {
         </AccordionDetails>
       </Accordion>
       <h1></h1>
-      <button onClick={submit}>Submit</button>
+      < button className='btn' onClick={submit}>Submit</button>
 
 
     </div>

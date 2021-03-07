@@ -35,11 +35,12 @@ export default function Profile (){
 
 
     return (
-      <div>
+      <div className='page-wrap'>
         <h1>My Profile</h1>
         <div className='profileDiv'><img className='profilePic' src={picture}></img></div>
 
         <h3>Name: {name}</h3>
+        <div id='widget'>
         <WidgetLoader />
 
                     <Widget
@@ -52,12 +53,13 @@ export default function Profile (){
             uploadPreset={ 'w5e5bjen' } // check that an upload preset exists and check mode is signed or unisgned
             buttonText={ 'Upload Profile Pic' } // default 'Upload Files'
             style={ {
-              color: 'white',
+              color: '#525252',
               border: 'none',
               width: '120px',
-              backgroundColor: 'green',
+              backgroundColor: '#FDCB60',
               borderRadius: '4px',
-              height: '25px'
+              height: '25px',
+              alignItems: 'center',
             } } // inline styling only or style id='cloudinary_upload_button'
             folder={ 'samples' } // set cloudinary folder name to send file
             cropping={ false } // set ability to crop images -> default = true
@@ -73,6 +75,7 @@ export default function Profile (){
             use_filename={ false } // tell Cloudinary to use the original name of the uploaded
             // file as its public ID -> default = true,
           />
+          </div>
 
       </div>
     );

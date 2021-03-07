@@ -122,6 +122,18 @@ const findUser = (name: string) => {
   }
 };
 
+const getAllStats = (user: string) => {
+  if (user) {
+    return Stats.findAll({
+      where: {
+        name: user
+      }
+    });
+  } else {
+    return Stats.findAll();
+  }
+}
+
 
 module.exports = {
   db,
@@ -132,5 +144,6 @@ module.exports = {
   MonthlyLeaderBoard,
   Updates,
   addUser,
-  findUser
+  findUser,
+  getAllStats,
 };
