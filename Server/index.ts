@@ -21,7 +21,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -92,6 +92,15 @@ app.post('/profilePic', (req: Request, res: Response) => {
 .catch((err: string) => console.warn(err))
 
 });
+
+
+app.get('/statsData', (req: Request, res: Response) => {
+  return getAllStats(req.cookies.crushers)
+    .then((data: any) => res.json(data))
+    .catch((err: string) => console.warn(err));
+});
+
+
 app.post('/statsData', (req: Request, res: Response) => {
 //console.log('req cookies', req.cookies)
 let name = req.cookies.crushers;
