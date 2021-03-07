@@ -158,7 +158,7 @@ const meatDineTotal = meat_dineAlg(dineCount, meatCount)
 const waterTotal = waterAlg(dishCount, washCount)
 const energyTotal = energyAlg(dishECount, washECount, acHeatCount, screenCount)
 const final = (mileTotal + meatDineTotal + waterTotal + bottles + energyTotal) * 2
-//console.info(final)
+console.info(final)
 const data = {
   meat_dine: meatDineTotal,
   energy: energyTotal,
@@ -183,10 +183,23 @@ setScreenCount(0);
 setWashCount(0);
 setWashECount(0)
   }
+  const checkDate = () => {
+    const date = new Date();
+
+    if(date.getDay() === 7 && date.getHours() === 24) {
+        submit();
+    }
+}
+
+const dateLoop = setInterval(function() {
+    checkDate();
+
+
+},60000);
   return (
     <div className='page-wrap'>
       <h1>Log your weekly stats</h1>
-      <Accordion>
+      <Accordion className='stats'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -199,7 +212,7 @@ setWashECount(0)
 
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion className='stats'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -212,7 +225,7 @@ setWashECount(0)
           <Recycling miles={bottles} func={bottleChange}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion >
+      <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
@@ -225,7 +238,7 @@ setWashECount(0)
           <Energy ac={acHeatCount} screen={screenCount} wash={washECount} dish={dishECount} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement, handleACIncrement, handleACDecrement]}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion >
+      <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
@@ -238,7 +251,7 @@ setWashECount(0)
           <Water wash={washCount} dish={dishCount} func={[handleDishDecrement, handleDishIncrement, handleWashIncrement, handleWashDecrement]}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion >
+      <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
@@ -252,7 +265,7 @@ setWashECount(0)
         </AccordionDetails>
       </Accordion>
       <h1></h1>
-      <button onClick={submit}>Submit</button>
+      < button className='btn' onClick={submit}>Submit</button>
 
 
     </div>

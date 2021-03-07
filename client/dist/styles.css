@@ -133,6 +133,10 @@ a:hover {
 	cursor: pointer;
 }
 
+
+.stats {
+	border-color: #55BFBF;
+}
 #widget {
 	align-items: center;
 	margin: 0 auto;
