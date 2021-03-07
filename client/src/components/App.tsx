@@ -9,6 +9,7 @@ import Profile from './Profile';
 import Login from './Login';
 import Stats from './Stats'
 import Graphs from './Graph';
+import Shower from './Stat Entries/Shower';
 import Footer from './Footer';
 
 const App: React.FC = () => {
@@ -47,12 +48,17 @@ const App: React.FC = () => {
     element: <Graphs />
   };
 
+  const showerRoute = {
+    path: '/shower',
+    element: <Shower />
+  };
+
   const logoutRoute = {
     path: '/',
     element: <Profile />
   };
 
-  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, logoutRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, logoutRoute]);
 
   return (
     <div>

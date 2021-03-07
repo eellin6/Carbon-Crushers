@@ -133,9 +133,8 @@ a:hover {
 	cursor: pointer;
 }
 
-
 .stats {
-	border-color: #55BFBF;
+	border-color: #55bfbf;
 }
 #widget {
 	align-items: center;
@@ -143,4 +142,9 @@ a:hover {
 	display: flex;
 	justify-content: center;
 	font-style: italic;
+}
+
+.timer {
+	font-size: 6rem;
+	margin-top: -15%;
 }
