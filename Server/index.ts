@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 import { Request, Response, NextFunction } from 'express';
+import HomePage from '../client/src/components/HomePage';
+import Profile from '../client/src/components/Profile';
 const path = require('path');
 
 const mysql = require('mysql2');
@@ -44,6 +46,9 @@ passport.serializeUser((user: any, done: any) => {
 passport.deserializeUser((user: any, done: any) => {
   done(null, user);
 });
+
+// app.use('/profile', Profile);
+// app.use('/', HomePage);
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }), (req: Request, res: Response) => console.info('FIRST RES', res));

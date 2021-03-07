@@ -1,8 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './components/App';
-import Graphs from './components/Graph';
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import Stats from './components/Stats'
+const element = (
+  <Router>
+    <App />
+  </Router>
+);
 
-ReactDOM.render(<App />, document.getElementById('app'));
+
+ReactDOM.render(element, document.getElementById('app'));

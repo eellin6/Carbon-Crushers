@@ -27,6 +27,7 @@ module.exports = {
     'keyword-spacing': [1, { 'before': true, 'after': true }],
     'space-infix-ops': 1,
     'comma-style': [2, 'last'],
-    'quotes': [1, 'single']
+    'quotes': [1, 'single'],
+    'no-console': [2, { allow: ['info', 'warn', 'error'] }]
   }
 };
