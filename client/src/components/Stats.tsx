@@ -184,7 +184,7 @@ setWashCount(0);
 setWashECount(0)
   }
   return (
-    <div>
+    <div className='page-wrap'>
       <h1>Log your weekly stats</h1>
       <Accordion>
         <AccordionSummary
