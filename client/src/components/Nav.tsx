@@ -53,8 +53,9 @@ export default function TemporaryDrawer() {
         </div></li>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/profile'>Edit Profile</Link></li>
-        <li><Link to='/stats'>Enter New Stats</Link></li>
+        <li><Link to='/stats'>Enter Stats</Link></li>
         <li><Link to='/graphs'>View Individual Stats</Link></li>
+        <li><Link to='/shower'>Shower Timer</Link></li>
         <li><Link to='/'>Log out</Link></li>
       </ul>
 

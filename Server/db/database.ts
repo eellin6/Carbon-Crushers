@@ -21,6 +21,7 @@ const Users = db.define('Users', {
   username: Sequelize.STRING,
   picture: Sequelize.STRING
 });
+
 const Stats = db.define('Stats', {
   meat_dine: Sequelize.INTEGER,
   energy: Sequelize.INTEGER,
@@ -33,56 +34,50 @@ const Stats = db.define('Stats', {
     references: {
       model: Users,
       key: 'id'
-
     }
-
   }
 });
+
 const Showers = db.define('Showers', {
   id_user: { type: Sequelize.INTEGER,
     references: {
       model: Users,
       key: 'id'
-
     }
-
   },
   time: Sequelize.INTEGER,
-  showerCount: Sequelize.INTEGER
+  name: Sequelize.STRING
 });
+
 const Friends = db.define('Friends', {
   id_user: { type: Sequelize.INTEGER,
     references: {
       model: Users,
       key: 'id'
-
     }
-
   },
   friendsName: Sequelize.STRING,
   status: Sequelize.STRING
 });
+
 const Badges = db.define('Badges', {
   id_user: { type: Sequelize.INTEGER,
     references: {
       model: Users,
       key: 'id'
-
     }
-
   },
   badgeName: Sequelize.STRING,
   imgUrl: Sequelize.STRING,
   badgeStatus: Sequelize.STRING
 });
+
 const MonthlyLeaderBoard = db.define('MonthlyLeaderBoard', {
   id_user: { type: Sequelize.INTEGER,
     references: {
       model: Users,
       key: 'id'
-
     }
-
   },
   monthly_score: Sequelize.INTEGER,
   monthly_meat: Sequelize.INTEGER,
@@ -94,15 +89,14 @@ const MonthlyLeaderBoard = db.define('MonthlyLeaderBoard', {
   monthly_mileage: Sequelize.INTEGER,
   month_name: Sequelize.STRING
 });
+
 const Updates = db.define('Updates', {
   requests: Sequelize.STRING,
   id_user: { type: Sequelize.INTEGER,
     references: {
       model: Users,
       key: 'id'
-
     }
-
   },
   badge: Sequelize.STRING
 });
@@ -134,6 +128,14 @@ const getAllStats = (user: string) => {
   }
 }
 
+const addShower = async (name: string, time: number ) => {
+  const newShower = await Showers.create({
+    name: name,
+    time: time,
+  });
+  return newShower.save();
+};
+
 
 module.exports = {
   db,
@@ -146,4 +148,5 @@ module.exports = {
   addUser,
   findUser,
   getAllStats,
+  addShower,
 };
