@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { Navigate, useRoutes, Link } from 'react-router-dom'
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
-import Sidebar from './Nav/Sidebar';
+// import Sidebar from './Nav/Sidebar';
 // import Burger from './Nav/NavBurger';
+import Nav from './Nav/Nav';
 import HomePage from './HomePage';
 import Profile from './Profile';
 import Login from './Login';
@@ -42,16 +43,21 @@ const App: React.FC = () => {
     element: <Stats />
   };
 
+  const graphsRoute = {
+    path: '/graphs',
+    element: <Graphs />
+  };
+
   const logoutRoute = {
     path: '/',
     element: <Profile />
   };
 
-  const routing = useRoutes([homeRoute, profileRoute, statsRoute, logoutRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, logoutRoute]);
 
   return (
     <div>
-      <Sidebar />
+      <Nav />
       <div id="wrapper">
       { routing }
         {
@@ -64,7 +70,7 @@ const App: React.FC = () => {
 
             <div className='footerBtn'>
               <Link to='/'><img src="https://i.ibb.co/d4qH65N/crushers-icon-1-doughnut.png" alt="crushers-icon-1-doughnut" className="testy" /></Link>
-              <img src="https://i.ibb.co/3Cf1jPf/crushers-icon-2-graph.png" alt="crushers-icon-2-graph" className="testy"/>
+              <Link to='/graphs'><img src="https://i.ibb.co/3Cf1jPf/crushers-icon-2-graph.png" alt="crushers-icon-2-graph" className="testy"/></Link>
               <img src="https://i.ibb.co/k1Y2RT8/crushers-icon-3-timer.png" alt="crushers-icon-3-timer" className="testy"/>
               <img src="https://i.ibb.co/pwBVWnC/crushers-icon-4-leaderboard.png" alt="crushers-icon-4-leaderboard" className="testy"/>
               {/* <img src="https://i.ibb.co/34H6YW5/crushers-icon-5-updates-ALERT.png" alt="crushers-icon-5-updates-ALERT" className="testy"/> */}
