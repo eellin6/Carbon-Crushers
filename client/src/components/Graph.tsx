@@ -23,7 +23,7 @@ const Graphs = () => {
   },[]);
 
 
-  //Score New Functions
+  //Score Functions
   const RecycleScoreFunc = () => {
     let result = 0;
     let avg = 0;
@@ -85,14 +85,6 @@ const Graphs = () => {
   };
 
 
-  // let num = 0;
-  // let test = () => {
-  //   for( let i = 0; i < recycleLength; i++) {
-  //     num = i;
-  //   }
-  // };
-
-  // test();
 
 
   // Recycling Graph Data
@@ -109,9 +101,7 @@ const Graphs = () => {
           "#55BFBF",
         ],
         borderColor: [
-
-          "#3EA4E8"
-
+          "#55BFBF"
         ],
       }
     ],
