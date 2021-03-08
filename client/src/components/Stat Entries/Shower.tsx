@@ -80,7 +80,7 @@ const Shower = () => {
             <div className='submit-status'>
           {
             !isSubmitted ?
-              <h4></h4>
+              <h4>The average shower lasts 8 minutes and uses 17.2 gallons of water. Can you beat it?</h4>
               : (
                   <h4><i>Time of {formatTime(showerTime)} submitted to your water score</i></h4>
               )
