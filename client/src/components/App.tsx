@@ -64,12 +64,7 @@ const App: React.FC = () => {
     <div>
       <Nav />
       <div id='wrapper'>
-      { routing }
-              <button className='btn'
-                onClick={() => axios.delete('/logout')
-                  .then(({ data }) => setLogoutStatus(data))
-                  .catch((err) => console.warn(err))} ><i>logout</i>
-              </button>
+        { routing }
         <Footer />
       </div>
     </div>

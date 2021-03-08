@@ -1,13 +1,13 @@
-import e = require('express');
 import * as React from 'react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
 
 const Shower = () => {
   const [timer, setTimer] = useState(0);
-  const [showerCount, setShowerCount] = useState(0);
+  const [showerTime, setShowerTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const countRef = useRef(null);
 
   const formatTime = (timer) => {
@@ -50,27 +50,43 @@ const Shower = () => {
     axios.post('/shower', { time: totalTime })
       .then(data => data)
       .catch(err =>  console.warn(err));
+    setShowerTime(totalTime);
     setTimer(0);
+    setIsSubmitted(true);
   }
 
   return (
     <div className='page-wrap'>
       <h1>Shower Timer</h1>
-        <div className='timer'>
-          <p>{formatTime(timer)}</p>
-          <div className='buttons'>
-            {
-              !isActive && !isPaused ?
-                <button className='btn' onClick={handleStart}>Start</button>
-                : (
-                  isPaused ? <button className='btn' onClick={handlePause}>Pause</button> :
-                    <button className='btn' onClick={handleResume}>Resume</button>
-                )
-            }
-            <button className='btn' onClick={handleReset} disabled={!isActive}>Reset</button>
-            <button className='btn' onClick={handleSubmit}>Submit</button>
+          <div className='timer'>
+            {formatTime(timer)}
           </div>
-        </div>
+          <div className='timer-wrap'>
+            <div className='buttons'>
+              {
+                !isActive && !isPaused ?
+                  <button className='btn timer-btn' onClick={handleStart}>Start</button>
+                  : (
+                    isPaused ? <button className='btn timer-btn' onClick={handlePause}>Pause</button> :
+                      <button className='btn timer-btn' onClick={handleResume}>Resume</button>
+                  )
+              }
+              <button className='btn timer-btn' onClick={handleReset} disabled={!isActive}>Reset</button>
+            </div>
+          </div>
+          <button className='btn' onClick={handleSubmit}>Submit</button>
+
+          <div>
+            <div className='submit-status'>
+          {
+            !isSubmitted ?
+              <h4></h4>
+              : (
+                  <h4><i>Time of {formatTime(showerTime)} submitted to your water score</i></h4>
+              )
+          }
+            </div>
+          </div>
     </div>
   );
 }
