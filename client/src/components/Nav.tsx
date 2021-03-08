@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import { KeyboardEvent, MouseEvent, Fragment, useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -23,6 +24,8 @@ type Anchor = 'left';
 export default function TemporaryDrawer() {
   const classes = useStyles();
   const [state, setState] = React.useState({ left: false });
+  const [currentStatus, setCurrentStatus] = useState(true);
+  const [logoutStatus, setLogoutStatus] = useState();
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: KeyboardEvent | MouseEvent,
@@ -56,7 +59,14 @@ export default function TemporaryDrawer() {
         <li><Link to='/stats'>Enter Stats</Link></li>
         <li><Link to='/graphs'>View Individual Stats</Link></li>
         <li><Link to='/shower'>Shower Timer</Link></li>
-        <li><Link to='/'>Log out</Link></li>
+        <li onClick={() => axios.delete('/logout')
+                  .then(({ data }) => {
+                    setLogoutStatus(data);
+                    setCurrentStatus(false);
+                  })
+                  .catch((err) => console.warn(err))}>
+                    <Link to='/'>Log out</Link>
+        </li>
       </ul>
 
     </div>

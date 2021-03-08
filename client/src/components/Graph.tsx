@@ -217,7 +217,7 @@ const Graphs = () => {
     <div className='page-wrap'>
       <h1> Individual Stats Breakdown</h1>
       <h2><i>{name}'s Accumulated Stats</i></h2>
-      <div className="chart-container">
+      <div className='chart-container'>
         <div className='score'>Average Weekly Bottles Recycled: { RecycleScoreFunc() }</div>
         <Line data={dataRec} />
         <h2>Water Consumption</h2>
