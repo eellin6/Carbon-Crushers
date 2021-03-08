@@ -17,11 +17,12 @@ const homePage = () => {
   const statistics = () => {
     axios.get('/statsData')
     .then(({ data }) => {
-      setRecyclingStats(data[0].recycling);
-      setWaterStats(data[0].water);
-      setMeatStats(data[0].meat_dine);
-      setMileageStats(data[0].mileage);
-      setEnergyStats(data[0].energy);
+      const recent = data[data.length - 1];
+      setRecyclingStats(recent.recycling);
+      setWaterStats(recent.water);
+      setMeatStats(recent.meat_dine);
+      setMileageStats(recent.mileage);
+      setEnergyStats(recent.energy);
     })
     .catch((err) => console.warn('Stat Error', err));
   };
