@@ -14,7 +14,6 @@ const Mileage = ({miles, func}): React.ReactElement => {
         valueLabelDisplay="auto"
       /></div>
       <h4>10,484 pounds of C02 is produced per vehicle per year. The average American drives 216 miles per week, can you beat this? </h4>
-      <h4>You're given an allowance of 200 miles per week. Earn 2 points for every mile under that allowance and lose 2 point for every mile over.</h4>
     </div>
   );
 };

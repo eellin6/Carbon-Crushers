@@ -62,8 +62,8 @@ export default function Energy ({ac, wash, dish, screen, func}) {
         <Button onClick={handleScreenIncrement}>+</Button>
       </ButtonGroup>
       <h4> You will recieve an AC/Heater allowance of 10 hours per week, earn 3 points for each hour under and lose 3 ponts for each hour over </h4>
-      <h4>Dishwashers use and average of 1800 watts per hour while washing machines use an average of 5000. You will recieve an allowance of 3 dishwasher uses per week and 4 washing machine uses per week. Earn 5 point for each use under this allowance and lose 5 points for each use over. </h4>
-      <h4>Between tv's computers and phones, screens average 106 watts per hour, you have 20 non-work hours of screen time per week earn 2 point for every hour under and lose 2 points for every hour over.</h4>
+      <h4>Dishwashers use and average of 1800 watts per hour while washing machines use an average of 5000.  </h4>
+      <h4>Between tv's computers and phones, screens average 106 watts per hour.</h4>
 
 
 

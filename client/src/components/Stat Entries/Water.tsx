@@ -33,10 +33,6 @@ export default function Water ({wash, dish, func}) {
         <Button onClick={handleWashIncrement}>+</Button>
       </ButtonGroup>
       <h4>Dishwashers use and average of 6 gallons of water per cycle while washing machines use an average of 25 gallons. </h4>
-      <h4>You will recieve an allowance of 3 dishwasher uses per week and 4 washing machine uses per week. Earn 5 point for each use inder this allowance and lose 5 points for each use over</h4>
-
-
-
     </div>
   );
 }

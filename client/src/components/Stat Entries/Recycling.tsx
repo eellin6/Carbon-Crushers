@@ -15,7 +15,7 @@ const Recycling = ({miles, func}): React.ReactElement => {
         valueLabelDisplay="auto"
       /></div>
       <h4> 330 lbs. of CO2
- offset per 1 ton of glass recycled. Earn 2 points per glass bottle recycled</h4>
+ offset per 1 ton of glass recycled. </h4>
 
     </div>
   );
