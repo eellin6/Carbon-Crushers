@@ -1,15 +1,16 @@
 /* eslint-disable camelcase */
-import { Request, Response, NextFunction } from 'express';
-import HomePage from '../client/src/components/HomePage';
-import Profile from '../client/src/components/Profile';
+/*eslint global-require: "error"*/
+/* eslint-disable @typescript-eslint/no-var-requires */
+import { Request, Response } from 'express';
+// import HomePage from '../client/src/components/HomePage';
+// import Profile from '../client/src/components/Profile';
 const path = require('path');
 
-const mysql = require('mysql2');
-const Seq = require('sequelize');
+
 const express = require('express');
 // const { Request, Response, NextFunction } = require('express');
 const passport = require('passport');
-const { PassportGoogleStrategy } = require('../passport.config.ts');
+//const { PassportGoogleStrategy } = require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
@@ -22,7 +23,7 @@ const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
 const { addUser, findUser, Users, Stats, getAllStats, addShower } = require('./db/database.ts');
-
+console.info(database);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(dist));
@@ -85,12 +86,12 @@ app.get('/user', (req: Request, res: Response) => {
 
 app.post('/profilePic', (req: Request, res: Response) => {
 
- Users.update(
-  {picture: req.body.picture},
-  {where: { name: req.cookies.crushers}}
-)
-.then((data: any) => console.info(data))
-.catch((err: string) => console.warn(err))
+  Users.update(
+    {picture: req.body.picture},
+    {where: { name: req.cookies.crushers}}
+  )
+    .then((data: any) => console.info(data))
+    .catch((err: string) => console.warn(err));
 
 });
 
@@ -104,20 +105,20 @@ app.get('/statsData', (req: Request, res: Response) => {
 
 app.post('/statsData', (req: Request, res: Response) => {
   //console.log('req cookies', req.cookies)
-  let name = req.cookies.crushers;
-  const {meat_dine, energy, water, recycling, mileage, total} = req.body
-  const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name})
+  const name = req.cookies.crushers;
+  const {meat_dine, energy, water, recycling, mileage, total} = req.body;
+  const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name});
   newStats.save()
     .then((stuff) => console.info('stats saved', stuff))
-    .catch((err:string) => console.warn(err))
+    .catch((err:string) => console.warn(err));
 });
 
 app.post('/shower', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
-  const { time } = req.body
+  const { time } = req.body;
   addShower(name, time)
     .then((data) => res.send(data))
-    .catch((err: string) => console.warn(err))
+    .catch((err: string) => console.warn(err));
 });
 
-app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));
+app.listen(port, () => console.info('Server is listening on http://127.0.0.1:' + port));

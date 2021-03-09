@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/*eslint global-require: "error"*/
 const passport = require('passport');
 const PassportGoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 require('dotenv').config();

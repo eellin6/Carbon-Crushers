@@ -1,14 +1,14 @@
 import * as React from 'react';
 import axios from 'axios';
 import { KeyboardEvent, MouseEvent, Fragment, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
-import { IoClose, IoMenu } from "react-icons/io5";
-import { IconContext } from "react-icons";
+import { IoClose, IoMenu } from 'react-icons/io5';
+import { IconContext } from 'react-icons';
 
 const useStyles = makeStyles({
   list: {
@@ -60,12 +60,12 @@ export default function TemporaryDrawer() {
         <li><Link to='/graphs'>View Individual Stats</Link></li>
         <li><Link to='/shower'>Shower Timer</Link></li>
         <li onClick={() => axios.delete('/logout')
-                  .then(({ data }) => {
-                    setLogoutStatus(data);
-                    setCurrentStatus(false);
-                  })
-                  .catch((err) => console.warn(err))}>
-                    <Link to='/'>Log out</Link>
+          .then(({ data }) => {
+            setLogoutStatus(data);
+            setCurrentStatus(false);
+          })
+          .catch((err) => console.warn(err))}>
+          <Link to='/'>Log out</Link>
         </li>
       </ul>
 
@@ -76,18 +76,18 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-        <Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
-            <div className='menu-icon'>
-              <IconContext.Provider value={{ size: '3em', color: '#525252'}}>
-                <IoMenu />
-              </IconContext.Provider>
-            </div>
-          </Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
-          </Drawer>
-        </Fragment>
+      <Fragment key={anchor}>
+        <Button onClick={toggleDrawer(anchor, true)}>
+          <div className='menu-icon'>
+            <IconContext.Provider value={{ size: '3em', color: '#525252'}}>
+              <IoMenu />
+            </IconContext.Provider>
+          </div>
+        </Button>
+        <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+          {list(anchor)}
+        </Drawer>
+      </Fragment>
     </div>
   );
 }

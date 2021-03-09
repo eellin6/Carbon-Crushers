@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+/*eslint global-require: "error"*/
+/* eslint-disable @typescript-eslint/no-var-requires */
 const {Sequelize} = require('sequelize');
 const db = new Sequelize('crushers', 'root', '', {
   host: 'localhost',
@@ -7,8 +9,8 @@ const db = new Sequelize('crushers', 'root', '', {
 
 
 db.authenticate()
-  .then(() => console.log('CONNECTED TO DATABASE'))
-  .catch((err: string = "err") => console.warn('DB ERROR', err));
+  .then(() => console.info('CONNECTED TO DATABASE'))
+  .catch((err = 'err') => console.warn('DB ERROR', err));
 
 const Users = db.define('Users', {
   id: {
@@ -37,7 +39,21 @@ const Stats = db.define('Stats', {
     }
   }
 });
-
+const CurrentStats = db.define('CurrentStats', {
+  meat_dine: Sequelize.INTEGER,
+  energy: Sequelize.INTEGER,
+  water: Sequelize.INTEGER,
+  recycling: Sequelize.INTEGER,
+  mileage: Sequelize.INTEGER,
+  total: Sequelize.INTEGER,
+  name: Sequelize.STRING,
+  id_user: { type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  }
+});
 const Showers = db.define('Showers', {
   id_user: { type: Sequelize.INTEGER,
     references: {
@@ -126,7 +142,7 @@ const getAllStats = (user: string) => {
   } else {
     return Stats.findAll();
   }
-}
+};
 
 const addShower = async (name: string, time: number ) => {
   const newShower = await Showers.create({
@@ -143,6 +159,7 @@ module.exports = {
   Stats,
   Showers,
   Badges,
+  CurrentStats,
   MonthlyLeaderBoard,
   Updates,
   addUser,
