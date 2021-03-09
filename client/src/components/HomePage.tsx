@@ -16,29 +16,29 @@ const homePage = () => {
 
   const statistics = () => {
     axios.get('/statsData')
-    .then(({ data }) => {
-      const recent = data[data.length - 1];
-      setRecyclingStats(recent.recycling);
-      setWaterStats(recent.water);
-      setMeatStats(recent.meat_dine);
-      setMileageStats(recent.mileage);
-      setEnergyStats(recent.energy);
-    })
-    .catch((err) => console.warn('Stat Error', err));
+      .then(({ data }) => {
+        const recent = data[data.length - 1];
+        setRecyclingStats(recent.recycling);
+        setWaterStats(recent.water);
+        setMeatStats(recent.meat_dine);
+        setMileageStats(recent.mileage);
+        setEnergyStats(recent.energy);
+      })
+      .catch((err) => console.warn('Stat Error', err));
   };
 
 
   useEffect(() => {
     axios.get('/user')
-    .then(({ data }) => {
-      let { name } = data;
-      setName(name.split(' ')[0]);
-    // console.log('HERE IS USER DATA ON HOMEPAGE', data);
-    })
-    .catch((err) => console.warn(err));
+      .then(({ data }) => {
+        const { name } = data;
+        setName(name.split(' ')[0]);
+        // console.log('HERE IS USER DATA ON HOMEPAGE', data);
+      })
+      .catch((err) => console.warn(err));
 
     statistics();
-  },[]);
+  }, []);
 
 
   const score = recyclingStats + waterStats + meatStats + mileageStats + energyStats;
@@ -46,19 +46,19 @@ const homePage = () => {
   const data = {
     datasets: [
       {
-        text: "Your Stats",
-        label: "First dataset",
+        text: 'Your Stats',
+        label: 'First dataset',
         data: [recyclingStats, waterStats, meatStats, mileageStats, energyStats],
         fill: true,
         backgroundColor: [
-          "#55BFBF",
-          "#3EA4E8",
-          "#FA6685",
-          "#FC9E4B",
-          "#FDCB60"
+          '#55BFBF',
+          '#3EA4E8',
+          '#FA6685',
+          '#FC9E4B',
+          '#FDCB60'
         ],
         borderColor: [
-          "#FFF"
+          '#FFF'
           // "#55BFBF",
           // "#3EA4E8",
           // "#FA6685",
@@ -67,7 +67,7 @@ const homePage = () => {
         ],
       }
     ],
-    labels: ["Recycling", "Water Consumption", "Meat & Dining Out", "Mileage", "Energy"]
+    labels: ['Recycling', 'Water Consumption', 'Meat & Dining Out', 'Mileage', 'Energy']
   };
 
   return (

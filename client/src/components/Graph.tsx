@@ -2,8 +2,8 @@ import * as React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Doughnut, Line, Polar } from 'react-chartjs-2';
-import  recycling from '../sample_recycling';
-import  waterYearToDate from '../sample_water';
+import recycling from '../sample_recycling';
+import waterYearToDate from '../sample_water';
 import meatData from '../sample_meat';
 import mileage from '../sample_mileage';
 import energy from '../sample_energy';
@@ -15,12 +15,12 @@ const Graphs = () => {
   const [ name, setName ] = useState('');
   useEffect(() => {
     axios.get('/user')
-    .then(({ data }) => {
-      let { name } = data;
-      setName(name.split(' ')[0]);
-    })
-    .catch((err) => console.warn(err));
-  },[]);
+      .then(({ data }) => {
+        const { name } = data;
+        setName(name.split(' ')[0]);
+      })
+      .catch((err) => console.warn(err));
+  }, []);
 
 
   //Score Functions
@@ -30,8 +30,8 @@ const Graphs = () => {
     const stats = Object.values(recycling);
     stats.forEach((score) => {
       result += score;
-      avg = result / stats.length
-    })
+      avg = result / stats.length;
+    });
     return Math.floor(avg);
 
   };
@@ -42,8 +42,8 @@ const Graphs = () => {
     const stats = Object.values(waterYearToDate);
     stats.forEach((score) => {
       result += score;
-      avg = result / stats.length
-    })
+      avg = result / stats.length;
+    });
     return Math.floor(avg);
 
   };
@@ -54,8 +54,8 @@ const Graphs = () => {
     const stats = Object.values(meatData);
     stats.forEach((score) => {
       result += score;
-      avg = result / stats.length
-    })
+      avg = result / stats.length;
+    });
     return Math.floor(avg);
 
   };
@@ -66,8 +66,8 @@ const Graphs = () => {
     const stats = Object.values(mileage);
     stats.forEach((score) => {
       result += score;
-      avg = result / stats.length
-    })
+      avg = result / stats.length;
+    });
     return Math.floor(avg);
 
   };
@@ -78,8 +78,8 @@ const Graphs = () => {
     const stats = Object.values(energy);
     stats.forEach((score) => {
       result += score;
-      avg = result / stats.length
-    })
+      avg = result / stats.length;
+    });
     return Math.floor(avg);
 
   };
@@ -93,20 +93,20 @@ const Graphs = () => {
   const dataRec = {
     datasets: [
       {
-        text: "Your Stats",
-        label: "Recycling - Number Of Bottles Saved",
+        text: 'Your Stats',
+        label: 'Recycling - Number Of Bottles Saved',
         data: Object.values(recycling),
         fill: true,
         backgroundColor: [
-          "#55BFBF",
+          '#55BFBF',
         ],
         borderColor: [
-          "#55BFBF"
+          '#55BFBF'
         ],
       }
     ],
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
-    };
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
+  };
 
 
 
@@ -115,85 +115,85 @@ const Graphs = () => {
   const dataWater = {
     datasets: [
       {
-        text: "Your Stats",
-        label: "Water Consumption",
+        text: 'Your Stats',
+        label: 'Water Consumption',
         data: Object.values(waterYearToDate),
         fill: true,
         backgroundColor: [
-          "#3EA4E8",
+          '#3EA4E8',
         ],
         borderColor: [
 
-          "#3EA4E8"
+          '#3EA4E8'
 
         ],
       }
     ],
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
-    };
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
+  };
 
-// Meat Dine Out Graph Data
+  // Meat Dine Out Graph Data
 
   const dataMeat = {
     datasets: [
       {
-        text: "Your Stats",
-        label: "Meat Consumption and Dining Out",
+        text: 'Your Stats',
+        label: 'Meat Consumption and Dining Out',
         data: Object.values(meatData),
         fill: true,
         backgroundColor: [
-          "#FA6685",
+          '#FA6685',
         ],
         borderColor: [
-          "#FA6685",
+          '#FA6685',
         ],
       }
     ],
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
-    };
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
+  };
 
-// Mileage Graph Data
+  // Mileage Graph Data
 
 
   const dataMileage = {
     datasets: [
       {
-        text: "Your Stats",
-        label: "Mileage Stats",
+        text: 'Your Stats',
+        label: 'Mileage Stats',
         data: Object.values(mileage),
         fill: true,
         backgroundColor: [
-          "#FC9E4B",
+          '#FC9E4B',
         ],
         borderColor: [
-          "#FC9E4B"
+          '#FC9E4B'
         ],
       }
     ],
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
-    };
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
+  };
 
-    // Energy Graph Data
+  // Energy Graph Data
 
 
 
   const dataEnergy = {
     datasets: [
       {
-        text: "Your Stats",
-        label: "Energy Stats",
+        text: 'Your Stats',
+        label: 'Energy Stats',
         data: Object.values(energy),
         fill: true,
         backgroundColor: [
-          "#FDCB60"
+          '#FDCB60'
         ],
         borderColor: [
-          "#FDCB60"
+          '#FDCB60'
         ],
       }
     ],
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
-    };
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
+  };
 
 
 

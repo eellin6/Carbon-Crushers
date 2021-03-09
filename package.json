@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon Server/index.ts",
     "dev": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js",
+    "lint:fix": "eslint --fix . --ext .ts --ext .tsx --ext .js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,8 @@
     "@types/history": "^4.7.8",
     "@types/react-router": "^5.1.12",
     "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
     "Buffer": "0.0.0",
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
@@ -88,7 +92,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint && npm run lint:fix",
+      "pre-push": "npm run lint && npm run lint:fix"
     }
   },
   "lint-staged": {

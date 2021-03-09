@@ -1,16 +1,29 @@
 module.exports = {
-  'env': { 'es6': true },
+  'env': { 'es6': true,
+    'amd': true,
+    'node': true,
+    'browser': true },
+
+  'parser': '@typescript-eslint/parser',
+  'extends': [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended'
+  ],
+  'globals': {
+    'window': true,
+    'module': true,
+  },
   'parserOptions': {
     'sourceType': 'module',
     'ecmaVersion': 9,
-    'ecmaFeatures': { 'jsx': true }
+    'ecmaFeatures': { 'jsx': true },
   },
-  'overrides': [{ 'files': ['*.jsx', '*.js'] }],
+  'overrides': [{ 'files': ['*.tsx', '*.ts', '*.js'] }],
   'rules': {
     'eol-last': 'error',
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
-    'camelcase': 2,
     'curly': 2,
     'eqeqeq': [2, 'smart'],
     'func-style': [2, 'expression'],
@@ -28,6 +41,6 @@ module.exports = {
     'space-infix-ops': 1,
     'comma-style': [2, 'last'],
     'quotes': [1, 'single'],
-    'no-console': [2, { allow: ['info', 'warn', 'error'] }]
+    'no-console': [2, { allow: ['info', 'warn'] }],
   }
 };

@@ -2,19 +2,19 @@ import * as React from 'react';
 import { Component } from 'react';
 import { render } from 'react-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-export default function Water ({wash, dish, func}){
- const dishCount = dish;
- const washCount = wash
+export default function Water ({wash, dish, func}) {
+  const dishCount = dish;
+  const washCount = wash;
   const displayDishCounter = dishCount >= 0;
   const displayDineCounter = washCount >= 0;
-   const handleDishIncrement = func[1]
-  const handleDishDecrement = func[0]
-  const handleWashIncrement = func[2]
- const handleWashDecrement = func[3]
+  const handleDishIncrement = func[1];
+  const handleDishDecrement = func[0];
+  const handleWashIncrement = func[2];
+  const handleWashDecrement = func[3];
 
   return (
     <div>
@@ -29,12 +29,14 @@ export default function Water ({wash, dish, func}){
       <h3>{washCount}</h3>
       <ButtonGroup size="small" aria-label="small outlined button group">
         {displayDineCounter && <Button onClick={handleWashDecrement}>-</Button>}
-         <Button disabled></Button>
+        <Button disabled></Button>
         <Button onClick={handleWashIncrement}>+</Button>
       </ButtonGroup>
+      <h4>Dishwashers use and average of 6 gallons of water per cycle while washing machines use an average of 25 gallons. </h4>
+      <h4>You will recieve an allowance of 3 dishwasher uses per week and 4 washing machine uses per week. Earn 5 point for each use inder this allowance and lose 5 points for each use over</h4>
 
 
 
     </div>
-  )
+  );
 }
