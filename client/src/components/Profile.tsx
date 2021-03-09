@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Component } from 'react';
 import { render } from 'react-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
-import { WidgetLoader, Widget }  from 'react-cloudinary-upload-widget';
-export default function Profile (){
+import axios from 'axios';
+import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
+export default function Profile () {
   const [ name, setName ] = useState('');
   const [ picture, setPicture ] = useState('');
   const [ colorVision, setColorVision ] = useState('none');
@@ -122,4 +122,4 @@ export default function Profile (){
   );
 
 
-}
+};

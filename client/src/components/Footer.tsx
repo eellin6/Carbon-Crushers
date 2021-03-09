@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
 
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         </Link>
       </div>
     </div>
-  )
+  );
 };
 
 export default Footer;

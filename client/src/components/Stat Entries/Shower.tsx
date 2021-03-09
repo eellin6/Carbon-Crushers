@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
 
-const Shower = () => {
+const Shower = (): React.ReactElement => {
   const [timer, setTimer] = useState(0);
   const [showerTime, setShowerTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -10,49 +10,49 @@ const Shower = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const countRef = useRef(null);
 
-  const formatTime = (timer) => {
+  const formatTime = (timer): string => {
     const getSeconds: string = `0${(timer % 60)}`.slice(-2);
     const minutes: number = Math.floor(timer / 60);
     const getMinutes: string = `0${minutes % 60}`.slice(-2);
     return `${getMinutes} : ${getSeconds}`
   }
 
-  const handleStart = () => {
+  const handleStart = (): void => {
     setIsActive(true);
     setIsPaused(true);
     countRef.current = setInterval(() => {
-      setTimer((timer) => timer + 1)
+      setTimer((timer) => timer + 1);
     }, 1000);
-  }
+  };
 
-  const handlePause = () => {
+  const handlePause = (): void => {
     clearInterval(countRef.current);
     setIsPaused(false);
-  }
+  };
 
-  const handleResume = () => {
+  const handleResume = (): void => {
     setIsPaused(true);
     countRef.current = setInterval(() => {
-      setTimer((timer) => timer + 1)
+      setTimer((timer) => timer + 1);
     }, 1000);
-  }
+  };
 
-  const handleReset = () => {
+  const handleReset = (): void => {
     clearInterval(countRef.current);
     setIsActive(false);
     setIsPaused(false);
     setTimer(0);
-  }
+  };
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     const totalTime = timer;
     axios.post('/shower', { time: totalTime })
       .then(data => data)
-      .catch(err =>  console.warn(err));
+      .catch(err => console.warn(err));
     setShowerTime(totalTime);
     setTimer(0);
     setIsSubmitted(true);
-  }
+  };
 
   return (
     <div className='page-wrap'>
@@ -85,6 +85,6 @@ const Shower = () => {
         </div>
     </div>
   );
-}
+};
 
 export default Shower;

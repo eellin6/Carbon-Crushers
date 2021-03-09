@@ -9,7 +9,7 @@ const Login = () => {
         <GoogleButton type='light' />
       </a>
     </div>
-  )
+  );
 };
 
 export default Login;
