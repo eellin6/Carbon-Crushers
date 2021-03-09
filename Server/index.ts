@@ -21,7 +21,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats, getAllStats, addShower } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -116,7 +116,15 @@ app.post('/shower', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
   const { time } = req.body
   addShower(name, time)
-    .then((data) => res.send(data))
+    .then((data: number) => res.send(data))
+    .catch((err: string) => console.warn(err))
+});
+
+app.put('/vision', (req: Request, res: Response) => {
+  const name: string = req.cookies.crushers;
+  const { visionType } = req.body
+  updateVision(name, visionType)
+    .then((data: string) => res.send(data))
     .catch((err: string) => console.warn(err))
 });
 

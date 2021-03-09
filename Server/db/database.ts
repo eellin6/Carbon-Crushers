@@ -19,7 +19,11 @@ const Users = db.define('Users', {
   },
   name: Sequelize.STRING,
   username: Sequelize.STRING,
-  picture: Sequelize.STRING
+  picture: Sequelize.STRING,
+  vision: {
+    type: Sequelize.STRING,
+    defaultValue: 'none',
+  }
 });
 
 const Stats = db.define('Stats', {
@@ -118,11 +122,7 @@ const findUser = (name: string) => {
 
 const getAllStats = (user: string) => {
   if (user) {
-    return Stats.findAll({
-      where: {
-        name: user
-      }
-    });
+    return Stats.findAll({ where: { name: user } });
   } else {
     return Stats.findAll();
   }
@@ -134,6 +134,11 @@ const addShower = async (name: string, time: number ) => {
     time: time,
   });
   return newShower.save();
+};
+
+const updateVision = (name: string, vision: string) => {
+  return Users.update({
+    vision, where: { name } });
 };
 
 
