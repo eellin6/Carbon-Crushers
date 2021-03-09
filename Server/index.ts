@@ -114,18 +114,18 @@ app.post('/statsData', (req: Request, res: Response) => {
 
 app.post('/shower', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
-  const { time } = req.body
+  const { time } = req.body;
   addShower(name, time)
     .then((data: number) => res.send(data))
     .catch((err: string) => console.warn(err))
 });
 
-app.put('/vision', (req: Request, res: Response) => {
+app.post('/vision', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
-  const { visionType } = req.body
+  const { visionType } = req.body;
   updateVision(name, visionType)
     .then((data: string) => res.send(data))
-    .catch((err: string) => console.warn(err))
+    .catch((err: string) => console.warn('flaggity flag-------', err))
 });
 
 app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));

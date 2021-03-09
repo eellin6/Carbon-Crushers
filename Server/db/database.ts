@@ -138,7 +138,7 @@ const addShower = async (name: string, time: number ) => {
 
 const updateVision = (name: string, vision: string) => {
   return Users.update({
-    vision, where: { name } });
+    vision: vision, where: { name: name } });
 };
 
 
@@ -154,4 +154,5 @@ module.exports = {
   findUser,
   getAllStats,
   addShower,
+  updateVision
 };

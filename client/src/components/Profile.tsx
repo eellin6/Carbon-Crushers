@@ -9,13 +9,15 @@ export default function Profile (){
   const [ name, setName ] = useState('');
   const [ picture, setPicture ] = useState('');
   const [ colorVision, setColorVision ] = useState('none');
+  const [ showOrHideSettings, setShowOrHideSettings ] = useState(false);
 
   useEffect(() => {
     axios.get('/user')
     .then(({ data }) => {
-      let { name, picture } = data;
+      let { name, picture, vision } = data;
       setName(name);
-      setPicture(picture)
+      setPicture(picture);
+      setColorVision(vision);
     })
     .catch((err) => console.warn(err));
   },[]);
@@ -32,11 +34,16 @@ export default function Profile (){
     setColorVision(vision);
   };
 
-  const handleSubmit = (colorVision) => {
-    axios.put('/vision', { visionType: colorVision })
-      .then((data) => console.info(data))
-      .catch((err) => console.error(err));
+  const handleSubmit = () => {
+    setShowOrHideSettings(false);
+    // axios.post('/vision', { visionType: colorVision })
+    //   .then((data) => console.info(data))
+    //   .catch((err) => console.error(err));
   };
+
+  const openColorSettings = () => {
+    setShowOrHideSettings(true);
+  }
 
   return (
     <div className='page-wrap'>
@@ -48,21 +55,31 @@ export default function Profile (){
 
       {
         colorVision === 'none'
-          ? <h3></h3>
+          ? <h3>Color Setting: Actual</h3>
           : <h3>Color Setting: {colorVision}</h3>
       }
 
-      <div className='visionCheck'>
-        <form>
-          <div className='vision-status-container' onChange={handleChange}>
-            <label><h4>Color vision deficiency:</h4></label>
-            <div className='radio-btn'><input type='radio' name='vision' value='none' /> None </div>
-            <div className='radio-btn'><input type='radio' name='vision' value='redgreen' /> Red-Green </div>
-            <div className='radio-btn'><input type='radio' name='vision' value='blueyellow' /> Blue-Yellow </div>
-          </div>
-        <button className='btn' type='submit' onClick={handleSubmit}>Update</button>
-      </form>
-      </div>
+      {
+        !showOrHideSettings
+          ? <button className='btn' onClick={openColorSettings}>Update Color Settings</button>
+          : (
+              <div className='visionCheck'>
+                <form action='/vision' method='POST'>
+                  <div className='vision-status-container' onChange={handleChange}>
+                    <label><h4>Color vision deficiency:</h4></label>
+                    <div className='radio-btn'>
+                      <input type='radio' name='vision' value='none' /> None </div>
+                    <div className='radio-btn'><input type='radio' name='vision' value='Red-Green' /> Red-Green </div>
+                    <div className='radio-btn'><input type='radio' name='vision' value='Blue-Yellow' /> Blue-Yellow </div>
+                  </div>
+                <button className='btn' type='submit' onClick={() => setShowOrHideSettings(false)}>Update Color Settings</button>
+                {/* <button className='btn' type='submit' onClick={handleSubmit}>Update Color Settings</button> */}
+              </form>
+              </div>
+            )
+
+      }
+
 
       <div id='widget'>
       <WidgetLoader />
