@@ -12,6 +12,8 @@ import Shower from './Stat Entries/Shower';
 import Footer from './Footer';
 import Route from '../models/Route';
 import LoginData from '../models/LoginData';
+import StatsBreakdown from './StatsBreakdown';
+import Friends from './Friends';
 
 const App: React.FC = (): React.ReactElement => {
   const [currentStatus, setCurrentStatus] = useState(false);
@@ -53,13 +55,21 @@ const App: React.FC = (): React.ReactElement => {
     path: '/shower',
     element: <Shower />
   };
+  const statsBreakdownRoute: Route = {
+    path: '/statsBreakdown',
+    element: <StatsBreakdown/>
+  };
+  const friendsRoute: Route = {
+    path: '/friends',
+    element: <Friends/>
+  };
 
   const logoutRoute: Route = {
     path: '/',
     element: <Profile />
   };
 
-  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, logoutRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, statsBreakdownRoute, friendsRoute, logoutRoute]);
 
   return (
     <div>

@@ -7,13 +7,11 @@ const Friends = (): React.ReactElement => {
   const [textVal, setTextVal] = useState('');
   const handleChange = (e) => {
     setTextVal(e.target.value);
+
   };
   const submit = () => {
-    axios.get('/friends')
-      .then((data) => {
-        console.info(data);
-      })
-      .catch((err) => console.warn(err));
+    console.info(textVal);
+    setTextVal('');
 
   };
   return (
@@ -23,7 +21,7 @@ const Friends = (): React.ReactElement => {
       <h2>Search by their username</h2>
       <form>
         <input value={textVal} onChange={handleChange} type='text'></input>
-        <button onClick={submit} type='submit'>Search</button>
+        <button onClick={submit} type='button'>Search</button>
       </form>
 
     </div>

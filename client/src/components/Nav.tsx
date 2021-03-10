@@ -57,8 +57,11 @@ export default function TemporaryDrawer() {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/profile'>Edit Profile</Link></li>
         <li><Link to='/stats'>Enter Stats</Link></li>
+        <li><Link to='/statsBreakdown'>View Stats Breakdown</Link></li>
         <li><Link to='/graphs'>View Individual Stats</Link></li>
+        <li><Link to='/friends'>Add Friends</Link></li>
         <li><Link to='/shower'>Shower Timer</Link></li>
+
         <li onClick={() => axios.delete('/logout')
           .then(({ data }) => {
             setLogoutStatus(data);
