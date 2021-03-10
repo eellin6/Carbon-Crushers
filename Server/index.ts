@@ -22,8 +22,8 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats, getAllStats, addShower } = require('./db/database.ts');
-console.info(database);
+const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision } = require('./db/database.ts');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(dist));
@@ -64,8 +64,7 @@ app.get('/auth/google/callback',
     return addUser(displayName, value)
       .then(() => res.redirect('/'))
       .catch((err: string) => console.warn(err));
-  }
-);
+  });
 
 // check if a user is logged in
 app.get('/isLoggedin', (req: Request, res: Response) => {
@@ -85,16 +84,13 @@ app.get('/user', (req: Request, res: Response) => {
 });
 
 app.post('/profilePic', (req: Request, res: Response) => {
-
   Users.update(
     {picture: req.body.picture},
     {where: { name: req.cookies.crushers}}
   )
     .then((data: any) => console.info(data))
     .catch((err: string) => console.warn(err));
-
 });
-
 
 app.get('/statsData', (req: Request, res: Response) => {
   return getAllStats(req.cookies.crushers)
@@ -102,9 +98,7 @@ app.get('/statsData', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
-
 app.post('/statsData', (req: Request, res: Response) => {
-  //console.log('req cookies', req.cookies)
   const name = req.cookies.crushers;
   const {meat_dine, energy, water, recycling, mileage, total} = req.body;
   const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name});
@@ -117,7 +111,15 @@ app.post('/shower', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
   const { time } = req.body;
   addShower(name, time)
-    .then((data) => res.send(data))
+    .then((data: number) => res.send(data))
+    .catch((err: string) => console.warn(err));
+});
+
+app.put('/vision', (req: Request, res: Response) => {
+  const name: string = req.cookies.crushers;
+  const { visionType } = req.body;
+  updateVision(name, visionType)
+    .then((data: string) => res.send(data))
     .catch((err: string) => console.warn(err));
 });
 
