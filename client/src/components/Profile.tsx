@@ -13,21 +13,21 @@ export default function Profile () {
 
   useEffect(() => {
     axios.get('/user')
-    .then(({ data }) => {
-      let { name, picture, vision } = data;
-      setName(name);
-      setPicture(picture);
-      setColorVision(vision);
-    })
-    .catch((err) => console.warn(err));
-  },[]);
+      .then(({ data }) => {
+        const { name, picture, vision } = data;
+        setName(name);
+        setPicture(picture);
+        setColorVision(vision);
+      })
+      .catch((err) => console.warn(err));
+  }, []);
 
   const updatePic = (image: string) => {
-    const data = { picture: image }
+    const data = { picture: image };
     axios.post('/profilePic', data)
       .then((info) => console.info(info))
-      .catch((err) => console.warn(err))
-  }
+      .catch((err) => console.warn(err));
+  };
 
   const handleChange = (e) => {
     const vision: string = e.target.value;
@@ -36,14 +36,14 @@ export default function Profile () {
 
   const handleSubmit = () => {
     setShowOrHideSettings(false);
-    // axios.post('/vision', { visionType: colorVision })
-    //   .then((data) => console.info(data))
-    //   .catch((err) => console.error(err));
+    axios.post('/vision', { visionType: colorVision })
+      .then((data) => console.info(data))
+      .catch((err) => console.warn(err));
   };
 
   const openColorSettings = () => {
     setShowOrHideSettings(true);
-  }
+  };
 
   return (
     <div className='page-wrap'>
@@ -63,26 +63,28 @@ export default function Profile () {
         !showOrHideSettings
           ? <button className='btn' onClick={openColorSettings}>Update Color Settings</button>
           : (
-              <div className='visionCheck'>
-                <form action='/vision' method='POST'>
-                  <div className='vision-status-container' onChange={handleChange}>
-                    <label><h4>Color vision deficiency:</h4></label>
-                    <div className='radio-btn'>
-                      <input type='radio' name='vision' value='none' /> None </div>
-                    <div className='radio-btn'><input type='radio' name='vision' value='Red-Green' /> Red-Green </div>
-                    <div className='radio-btn'><input type='radio' name='vision' value='Blue-Yellow' /> Blue-Yellow </div>
-                  </div>
-                <button className='btn' type='submit' onClick={() => setShowOrHideSettings(false)}>Update Color Settings</button>
+            <div className='visionCheck'>
+              <form action='/vision' method='POST'>
+                <div className='vision-status-container' onChange={handleChange}>
+                  <label><h4>Color vision deficiency:</h4></label>
+                  <div className='radio-btn'>
+                    <input type='radio' name='vision' value='none' /> None </div>
+                  <div className='radio-btn'>
+                    <input type='radio' name='vision' value='Red-Green' /> Red-Green </div>
+                  <div className='radio-btn'>
+                    <input type='radio' name='vision' value='Blue-Yellow' /> Blue-Yellow </div>
+                </div>
+                <button className='btn' type='button' onClick={handleSubmit}>Update Color Settings</button>
                 {/* <button className='btn' type='submit' onClick={handleSubmit}>Update Color Settings</button> */}
               </form>
-              </div>
-            )
+            </div>
+          )
 
       }
 
 
       <div id='widget'>
-      <WidgetLoader />
+        <WidgetLoader />
 
         <Widget
           sources={ [ 'local', 'camera', 'dropbox' ] } // set the sources available for uploading -> by default
@@ -105,7 +107,8 @@ export default function Profile () {
           folder={ 'samples' } // set cloudinary folder name to send file
           cropping={ false } // set ability to crop images -> default = true
           onSuccess={ (result: any) => {
-          updatePic(result.info.url)}
+            updatePic(result.info.url);
+          }
           } // add success callback -> returns result
           //onFailure={ console.warn('failure!!!') } // add failure callback -> returns 'response.error' + 'response.result'
           logging={ false } // logs will be provided for success and failure messages,
@@ -116,10 +119,10 @@ export default function Profile () {
           use_filename={ false } // tell Cloudinary to use the original name of the uploaded
           // file as its public ID -> default = true,
         />
-        </div>
+      </div>
 
     </div>
   );
 
 
-};
+}

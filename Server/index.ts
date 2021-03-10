@@ -10,7 +10,7 @@ const path = require('path');
 const express = require('express');
 // const { Request, Response, NextFunction } = require('express');
 const passport = require('passport');
-//const { PassportGoogleStrategy } = require('../passport.config.ts');
+const { PassportGoogleStrategy } = require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
@@ -118,7 +118,7 @@ app.post('/shower', (req: Request, res: Response) => {
   const { time } = req.body;
   addShower(name, time)
     .then((data: number) => res.send(data))
-    .catch((err: string) => console.warn(err))
+    .catch((err: string) => console.warn(err));
 });
 
 app.post('/vision', (req: Request, res: Response) => {
@@ -126,7 +126,7 @@ app.post('/vision', (req: Request, res: Response) => {
   const { visionType } = req.body;
   updateVision(name, visionType)
     .then((data: string) => res.send(data))
-    .catch((err: string) => console.warn('flaggity flag-------', err))
+    .catch((err: string) => console.warn('flaggity flag-------', err));
 });
 
-app.listen(port, () => console.log('Server is listening on http://127.0.0.1:' + port));
+app.listen(port, () => console.info('Server is listening on http://127.0.0.1:' + port));
