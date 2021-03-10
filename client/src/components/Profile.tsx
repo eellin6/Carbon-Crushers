@@ -1,20 +1,20 @@
 
 import * as React from 'react';
-import { Component } from 'react';
-import { render } from 'react-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
-export default function Profile () {
+import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
+
+const Profile = (): React.ReactElement => {
   const [ name, setName ] = useState('');
   const [ picture, setPicture ] = useState('');
   const [ colorVision, setColorVision ] = useState('none');
   const [ showOrHideSettings, setShowOrHideSettings ] = useState(false);
 
-  useEffect(() => {
-    axios.get('/user')
-      .then(({ data }) => {
-        const { name, picture, vision } = data;
+  useEffect((): void => {
+    axios.get<AxiosResponse>('/user')
+      .then(({ data }: AxiosResponse) => {
+        const { name, picture, vision }: { name: string, picture: string, vision: string } = data;
         setName(name);
         setPicture(picture);
         setColorVision(vision);
@@ -22,26 +22,26 @@ export default function Profile () {
       .catch((err) => console.warn(err));
   }, []);
 
-  const updatePic = (image: string) => {
+  const updatePic = (image: string): void => {
     const data = { picture: image };
-    axios.post('/profilePic', data)
+    axios.post<AxiosResponse>('/profilePic', data)
       .then((info) => console.info(info))
       .catch((err) => console.warn(err));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e): void => {
     const vision: string = e.target.value;
     setColorVision(vision);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     setShowOrHideSettings(false);
-    axios.post('/vision', { visionType: colorVision })
+    axios.put<AxiosResponse>('/vision', { visionType: colorVision })
       .then((data) => console.info(data))
       .catch((err) => console.warn(err));
   };
 
-  const openColorSettings = () => {
+  const openColorSettings = (): void => {
     setShowOrHideSettings(true);
   };
 
@@ -64,28 +64,28 @@ export default function Profile () {
           ? <button className='btn' onClick={openColorSettings}>Update Color Settings</button>
           : (
             <div className='visionCheck'>
-              <form action='/vision' method='POST'>
+              <form action='/vision' method='PUT'>
                 <div className='vision-status-container' onChange={handleChange}>
                   <label><h4>Color vision deficiency:</h4></label>
                   <div className='radio-btn'>
-                    <input type='radio' name='vision' value='none' /> None </div>
+                    <input type='radio' name='vision' value='none' /> None
+                  </div>
                   <div className='radio-btn'>
-                    <input type='radio' name='vision' value='Red-Green' /> Red-Green </div>
+                    <input type='radio' name='vision' value='Red-Green' /> Red-Green
+                  </div>
                   <div className='radio-btn'>
-                    <input type='radio' name='vision' value='Blue-Yellow' /> Blue-Yellow </div>
+                    <input type='radio' name='vision' value='Blue-Yellow' /> Blue-Yellow
+                  </div>
                 </div>
-                <button className='btn' type='button' onClick={handleSubmit}>Update Color Settings</button>
-                {/* <button className='btn' type='submit' onClick={handleSubmit}>Update Color Settings</button> */}
+                <button className='btn' type='button'
+                  onClick={handleSubmit}>Update Color Settings</button>
               </form>
             </div>
           )
-
       }
-
 
       <div id='widget'>
         <WidgetLoader />
-
         <Widget
           sources={ [ 'local', 'camera', 'dropbox' ] } // set the sources available for uploading -> by default
           // all sources are available. More information on their use can be found at
@@ -95,7 +95,7 @@ export default function Profile () {
           // Located on https://cloudinary.com/console/
           uploadPreset={ 'w5e5bjen' } // check that an upload preset exists and check mode is signed or unisgned
           buttonText={ 'Upload Profile Pic' } // default 'Upload Files'
-          style={ {
+          style={{
             color: '#525252',
             border: 'none',
             width: '120px',
@@ -103,26 +103,24 @@ export default function Profile () {
             borderRadius: '4px',
             height: '25px',
             alignItems: 'center',
-          } } // inline styling only or style id='cloudinary_upload_button'
-          folder={ 'samples' } // set cloudinary folder name to send file
-          cropping={ false } // set ability to crop images -> default = true
-          onSuccess={ (result: any) => {
+          }} // inline styling only or style id='cloudinary_upload_button'
+          folder={'samples'} // set cloudinary folder name to send file
+          cropping={false} // set ability to crop images -> default = true
+          onSuccess={(result: UploadApiResponse): void => {
             updatePic(result.info.url);
-          }
-          } // add success callback -> returns result
-          //onFailure={ console.warn('failure!!!') } // add failure callback -> returns 'response.error' + 'response.result'
-          logging={ false } // logs will be provided for success and failure messages,
+          }} // add success callback -> returns result
+          onFailure={(err: UploadApiErrorResponse): void => console.warn('failure!!!', err)} // add failure callback -> returns 'response.error' + 'response.result'
+          logging={false} // logs will be provided for success and failure messages,
           // set to false for production -> default = true
-          customPublicId={ 'sample' } // set a specific custom public_id.
+          customPublicId={'sample'} // set a specific custom public_id.
           // To use the file name as the public_id use 'use_filename={true}' parameter
-          eager={ 'w_400,h_300,c_pad|w_260,h_200,c_crop' } // add eager transformations -> deafult = null
-          use_filename={ false } // tell Cloudinary to use the original name of the uploaded
+          eager={'w_400,h_300,c_pad|w_260,h_200,c_crop'} // add eager transformations -> deafult = null
+          use_filename={false} // tell Cloudinary to use the original name of the uploaded
           // file as its public ID -> default = true,
         />
       </div>
-
     </div>
   );
+};
 
-
-}
+export default Profile;

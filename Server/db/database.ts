@@ -4,7 +4,8 @@
 const {Sequelize} = require('sequelize');
 const db = new Sequelize('crushers', 'root', '', {
   host: 'localhost',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging: false
 });
 
 
@@ -153,8 +154,10 @@ const addShower = async (name: string, time: number ) => {
 };
 
 const updateVision = (name: string, vision: string) => {
-  return Users.update({
-    vision: vision, where: { name: name } });
+  return Users.update({ vision },
+    { return: true, where: { name } })
+    .then(() => console.info('vision updated'))
+    .catch((err) => console.warn(err));
 };
 
 

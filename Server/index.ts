@@ -64,8 +64,7 @@ app.get('/auth/google/callback',
     return addUser(displayName, value)
       .then(() => res.redirect('/'))
       .catch((err: string) => console.warn(err));
-  }
-);
+  });
 
 // check if a user is logged in
 app.get('/isLoggedin', (req: Request, res: Response) => {
@@ -85,16 +84,13 @@ app.get('/user', (req: Request, res: Response) => {
 });
 
 app.post('/profilePic', (req: Request, res: Response) => {
-
   Users.update(
     {picture: req.body.picture},
     {where: { name: req.cookies.crushers}}
   )
     .then((data: any) => console.info(data))
     .catch((err: string) => console.warn(err));
-
 });
-
 
 app.get('/statsData', (req: Request, res: Response) => {
   return getAllStats(req.cookies.crushers)
@@ -102,9 +98,7 @@ app.get('/statsData', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
-
 app.post('/statsData', (req: Request, res: Response) => {
-  //console.log('req cookies', req.cookies)
   const name = req.cookies.crushers;
   const {meat_dine, energy, water, recycling, mileage, total} = req.body;
   const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name});
@@ -121,12 +115,12 @@ app.post('/shower', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
-app.post('/vision', (req: Request, res: Response) => {
+app.put('/vision', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
   const { visionType } = req.body;
   updateVision(name, visionType)
     .then((data: string) => res.send(data))
-    .catch((err: string) => console.warn('flaggity flag-------', err));
+    .catch((err: string) => console.warn(err));
 });
 
 app.listen(port, () => console.info('Server is listening on http://127.0.0.1:' + port));
