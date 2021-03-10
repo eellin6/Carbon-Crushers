@@ -8,9 +8,9 @@ const path = require('path');
 
 
 const express = require('express');
-// const { Request, Response, NextFunction } = require('express');
+const { Request, Response, NextFunction } = require('express');
 const passport = require('passport');
-//const { PassportGoogleStrategy } = require('../passport.config.ts');
+const { PassportGoogleStrategy } = require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 

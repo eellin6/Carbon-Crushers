@@ -72,6 +72,7 @@ const Friends = db.define('Friends', {
       key: 'id'
     }
   },
+  username: Sequelize.STRING,
   friendsName: Sequelize.STRING,
   status: Sequelize.STRING
 });
