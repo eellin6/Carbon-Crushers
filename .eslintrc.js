@@ -21,8 +21,7 @@ module.exports = {
   },
   'overrides': [{ 'files': ['*.tsx', '*.ts', '*.js'] }],
   'rules': {
-    '@typescript-eslint/typedef': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'error',
+
     'eol-last': 'error',
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
