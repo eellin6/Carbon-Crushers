@@ -9,7 +9,7 @@ const Friends = (): React.ReactElement => {
     setTextVal(e.target.value);
 
   };
-  const submit = () => {
+  const submit = (): void => {
     console.info(textVal);
     setTextVal('');
 
