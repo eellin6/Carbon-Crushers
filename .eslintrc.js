@@ -14,6 +14,7 @@ module.exports = {
     'window': true,
     'module': true,
   },
+  'plugins': ['prefer-arrow'],
   'parserOptions': {
     'sourceType': 'module',
     'ecmaVersion': 9,
@@ -42,5 +43,13 @@ module.exports = {
     'comma-style': [2, 'last'],
     'quotes': [1, 'single'],
     'no-console': [2, { allow: ['info', 'warn'] }],
+    'prefer-arrow/prefer-arrow-functions': [
+      'warn',
+      {
+        'disallowPrototype': true,
+        'singleReturnOnly': false,
+        'classPropertiesAllowed': false
+      }
+    ]
   }
 };

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 type Anchor = 'left';
 
-export default function TemporaryDrawer() {
+const TemporaryDrawer = (): React.ReactElement => {
   const classes = useStyles();
   const [state, setState] = React.useState({ left: false });
   const [currentStatus, setCurrentStatus] = useState(true);
@@ -29,7 +29,7 @@ export default function TemporaryDrawer() {
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: KeyboardEvent | MouseEvent,
-  ) => {
+  ): void => {
     if (
       event.type === 'keydown' &&
       ((event as KeyboardEvent).key === 'Tab' ||
@@ -40,7 +40,7 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor: Anchor) => (
+  const list = (anchor: Anchor): React.ReactElement => (
     <div
       className={clsx(classes.list)}
       role="presentation"
@@ -59,7 +59,7 @@ export default function TemporaryDrawer() {
         <li><Link to='/stats'>Enter Stats</Link></li>
         <li><Link to='/graphs'>View Individual Stats</Link></li>
         <li><Link to='/shower'>Shower Timer</Link></li>
-        <li onClick={() => axios.delete('/logout')
+        <li onClick={(): Promise<void> => axios.delete('/logout')
           .then(({ data }) => {
             setLogoutStatus(data);
             setCurrentStatus(false);
@@ -90,4 +90,6 @@ export default function TemporaryDrawer() {
       </Fragment>
     </div>
   );
-}
+};
+
+export default TemporaryDrawer;
