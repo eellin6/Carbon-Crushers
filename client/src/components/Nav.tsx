@@ -50,7 +50,7 @@ const TemporaryDrawer = (): React.ReactElement => {
 
       <ul>
         <li><div className='menu-icon-close'>
-          <IconContext.Provider value={{ size: '3em', color: '#fff'}}>
+          <IconContext.Provider value={{size: '3em', color: '#fff'}}>
             <IoClose />
           </IconContext.Provider>
         </div></li>
@@ -79,7 +79,7 @@ const TemporaryDrawer = (): React.ReactElement => {
       <Fragment key={anchor}>
         <Button onClick={toggleDrawer(anchor, true)}>
           <div className='menu-icon'>
-            <IconContext.Provider value={{ size: '3em', color: '#525252'}}>
+            <IconContext.Provider value={{size: '3em', color: '#525252'}}>
               <IoMenu />
             </IconContext.Provider>
           </div>
