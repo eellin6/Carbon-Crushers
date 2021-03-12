@@ -22,6 +22,7 @@ module.exports = {
   },
   'overrides': [{ 'files': ['*.tsx', '*.ts', '*.js'] }],
   'rules': {
+
     'eol-last': 'error',
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],

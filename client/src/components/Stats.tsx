@@ -24,84 +24,84 @@ interface AppState {
   func?: () => void;
 }
 
-export default function Stats (props: AppState) {
+export default function Stats (props: AppState): React.ReactElement {
   const [miles, setMiles] = useState(1);
-  const handleChange = (event, newValue) => {
+  const handleChange = (event, newValue): void => {
     setMiles(newValue);
 
   };
   const [bottles, setBottles] = useState(1);
 
-  const bottleChange = (event, newValue) => {
+  const bottleChange = (event, newValue): void => {
     setBottles(newValue);
 
   };
 
   const [meatCount, setMeatCount] = useState(0);
   const [dineCount, setDineCount] = useState(0);
-  const handleMeatIncrement = () => {
+  const handleMeatIncrement = (): void => {
     setMeatCount(meatCount + 1);
   };
 
-  const handleMeatDecrement = () => {
+  const handleMeatDecrement = (): void => {
     setMeatCount(meatCount - 1);
   };
-  const handleDineIncrement = () => {
+  const handleDineIncrement = (): void => {
     setDineCount(dineCount + 1);
   };
 
-  const handleDineDecrement = () => {
+  const handleDineDecrement = (): void => {
     setDineCount(dineCount - 1);
   };
   const [dishCount, setDishCount] = useState(0);
   const [washCount, setWashCount] = useState(0);
-  const handleDishIncrement = () => {
+  const handleDishIncrement = (): void => {
     setDishCount(dishCount + 1);
   };
 
-  const handleDishDecrement = () => {
+  const handleDishDecrement = (): void => {
     setDishCount(dishCount - 1);
   };
-  const handleWashIncrement = () => {
+  const handleWashIncrement = (): void => {
     setWashCount(washCount + 1);
   };
 
-  const handleWashDecrement = () => {
+  const handleWashDecrement = (): void => {
     setWashCount(washCount - 1);
   };
   const [dishECount, setDishECount] = useState(0);
   const [washECount, setWashECount] = useState(0);
   const [acHeatCount, setAcHeatCount] = useState(0);
   const [screenCount, setScreenCount] = useState(0);
-  const handleDishEIncrement = () => {
+  const handleDishEIncrement = (): void => {
     setDishECount(dishECount + 1);
   };
 
-  const handleDishEDecrement = () => {
+  const handleDishEDecrement = (): void => {
     setDishECount(dishECount - 1);
   };
-  const handleScreenIncrement = () => {
+  const handleScreenIncrement = (): void => {
     setScreenCount(screenCount + 1);
   };
 
-  const handleScreenDecrement = () => {
+  const handleScreenDecrement = (): void => {
     setScreenCount(screenCount - 1);
   };
-  const handleACIncrement = () => {
+  const handleACIncrement = (): void => {
     setAcHeatCount(acHeatCount + 1);
   };
 
-  const handleACDecrement = () => {
+  const handleACDecrement = (): void => {
     setAcHeatCount(acHeatCount - 1);
   };
-  const handleWashEIncrement = () => {
+  const handleWashEIncrement = (): void => {
     setWashECount(washECount + 1);
   };
 
-  const handleWashEDecrement = () => {
+  const handleWashEDecrement = (): void => {
     setWashECount(washECount - 1);
   };
-  const mileageAlg = (mile) => {
+  const mileageAlg = (mile): number => {
     const num = 200 - mile;
     let total = 0;
     if (num < 0) {
@@ -112,7 +112,7 @@ export default function Stats (props: AppState) {
     }
     return total;
   };
-  const meat_dineAlg = (dine, meat) => {
+  const meat_dineAlg = (dine, meat): number => {
     let dineTotal = 0;
     let meatTotal = 0;
     const dineNum = 4 - dine;
@@ -123,7 +123,7 @@ export default function Stats (props: AppState) {
     return dineTotal + meatTotal;
 
   };
-  const waterAlg = (dishes, washing) => {
+  const waterAlg = (dishes, washing): number => {
     let dishTotal = 0;
     let washTotal = 0;
     const dishNum = 3 - dishes;
@@ -133,7 +133,7 @@ export default function Stats (props: AppState) {
 
     return dishTotal + washTotal;
   };
-  const energyAlg = (dishes, washing, acHeat, screenTime) => {
+  const energyAlg = (dishes, washing, acHeat, screenTime): number => {
     let dishTotal = 0;
     let washTotal = 0;
     let screenTotal = 0;
@@ -152,7 +152,7 @@ export default function Stats (props: AppState) {
     return dishTotal + washTotal + acTotal + screenTotal;
 
   };
-  const submit = () => {
+  const submit = (): void => {
 
     const mileTotal = mileageAlg(miles);
     const meatDineTotal = meat_dineAlg(dineCount, meatCount);
@@ -185,7 +185,7 @@ export default function Stats (props: AppState) {
     setWashCount(0);
     setWashECount(0);
   };
-  const checkDate = () => {
+  const checkDate = (): void => {
     const date = new Date();
 
     if (date.getDay() === 7 && date.getHours() === 24) {
