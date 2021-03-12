@@ -2,11 +2,11 @@ import * as React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import dataTest from '../sample_dataTest';
-import meatData from '../sample_meat';
+// import dataTest from '../sample_dataTest';
+// import meatData from '../sample_meat';
 // import recycling from '../sample_recycling';
 
-const homePage = () => {
+const homePage = (): React.ReactElement => {
   const [ name, setName ] = useState('');
   const [ recyclingStats, setRecyclingStats ] = useState(0);
   const [ waterStats, setWaterStats ] = useState(0);
@@ -14,7 +14,7 @@ const homePage = () => {
   const [ mileageStats, setMileageStats ] = useState(0);
   const [ energyStats, setEnergyStats ] = useState(0);
 
-  const statistics = () => {
+  const statistics = (): void => {
     axios.get('/statsData')
       .then(({ data }) => {
         const recent = data[data.length - 1];
