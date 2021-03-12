@@ -180,12 +180,14 @@ Showers.init({
 interface FriendAttributes {
   id_user: number | null
   friendsName: string | null,
+  userName: string | null,
   status: string | null
 }
 class Friends extends Model<FriendAttributes>
   implements FriendAttributes {
     public id_user!: number | null;
     public friendsName!: string | null;
+    public userName!: string | null;
     public status!: string | null;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -199,6 +201,7 @@ Friends.init({
       key: 'id'
     }
   },
+  userName: new DataTypes.STRING,
   friendsName: new DataTypes.STRING,
   status: new DataTypes.STRING
 },
