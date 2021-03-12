@@ -2,8 +2,15 @@
 /*eslint global-require: "error"*/
 /* eslint-disable @typescript-eslint/no-var-requires */
 const {Sequelize} = require('sequelize');
-const db = new Sequelize('crushers', 'root', '', {
-  host: 'localhost',
+const dotenv = require('dotenv').config();
+
+const host = process.env.host;
+const database = process.env.database;
+const password = process.env.password;
+const username = process.env.username;
+
+const db = new Sequelize(database, username, password, {
+  host: host,
   dialect: 'mysql',
   logging: false
 });
