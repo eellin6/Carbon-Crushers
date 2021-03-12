@@ -9,7 +9,7 @@ passport.use(new PassportGoogleStrategy({
   clientSecret: process.env.clientSecret,
   callbackURL: '/auth/google/callback'
 },
-function(_accessToken: string, _refreshToken: string, profile: any, done: any) {
+(_accessToken: string, _refreshToken: string, profile: any, done: any) => {
   done(null, profile);
 }
 ));
