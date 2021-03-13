@@ -22,7 +22,6 @@ const Graphs = () => {
       .catch((err) => console.warn(err));
   }, []);
 
-
   //Score Functions
   const RecycleScoreFunc = () => {
     let result = 0;
@@ -45,7 +44,6 @@ const Graphs = () => {
       avg = result / stats.length;
     });
     return Math.floor(avg);
-
   };
 
   const MeatScoreFunc = () => {
@@ -57,7 +55,6 @@ const Graphs = () => {
       avg = result / stats.length;
     });
     return Math.floor(avg);
-
   };
 
   const mileageFunc = () => {
@@ -69,7 +66,6 @@ const Graphs = () => {
       avg = result / stats.length;
     });
     return Math.floor(avg);
-
   };
 
   const energyFunc = () => {
@@ -81,15 +77,9 @@ const Graphs = () => {
       avg = result / stats.length;
     });
     return Math.floor(avg);
-
   };
 
-
-
-
   // Recycling Graph Data
-
-
   const dataRec = {
     datasets: [
       {
@@ -97,21 +87,14 @@ const Graphs = () => {
         label: 'Recycling - Number Of Bottles Saved',
         data: Object.values(recycling),
         fill: true,
-        backgroundColor: [
-          '#55BFBF',
-        ],
-        borderColor: [
-          '#55BFBF'
-        ],
+        backgroundColor: ['#55BFBF'],
+        borderColor: ['#55BFBF'],
       }
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
 
-
-
   // Water Graph Data
-
   const dataWater = {
     datasets: [
       {
@@ -119,21 +102,14 @@ const Graphs = () => {
         label: 'Water Consumption',
         data: Object.values(waterYearToDate),
         fill: true,
-        backgroundColor: [
-          '#3EA4E8',
-        ],
-        borderColor: [
-
-          '#3EA4E8'
-
-        ],
+        backgroundColor: ['#3EA4E8'],
+        borderColor: ['#3EA4E8'],
       }
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
 
   // Meat Dine Out Graph Data
-
   const dataMeat = {
     datasets: [
       {
@@ -141,20 +117,14 @@ const Graphs = () => {
         label: 'Meat Consumption and Dining Out',
         data: Object.values(meatData),
         fill: true,
-        backgroundColor: [
-          '#FA6685',
-        ],
-        borderColor: [
-          '#FA6685',
-        ],
+        backgroundColor: ['#FA6685'],
+        borderColor: ['#FA6685'],
       }
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
 
   // Mileage Graph Data
-
-
   const dataMileage = {
     datasets: [
       {
@@ -162,21 +132,14 @@ const Graphs = () => {
         label: 'Mileage Stats',
         data: Object.values(mileage),
         fill: true,
-        backgroundColor: [
-          '#FC9E4B',
-        ],
-        borderColor: [
-          '#FC9E4B'
-        ],
+        backgroundColor: ['#FC9E4B'],
+        borderColor: ['#FC9E4B'],
       }
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
 
   // Energy Graph Data
-
-
-
   const dataEnergy = {
     datasets: [
       {
@@ -184,24 +147,12 @@ const Graphs = () => {
         label: 'Energy Stats',
         data: Object.values(energy),
         fill: true,
-        backgroundColor: [
-          '#FDCB60'
-        ],
-        borderColor: [
-          '#FDCB60'
-        ],
+        backgroundColor: ['#FDCB60'],
+        borderColor: ['#FDCB60'],
       }
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
-
-
-
-
-
-
-
-
 
   return (
     <div className='page-wrap'>
