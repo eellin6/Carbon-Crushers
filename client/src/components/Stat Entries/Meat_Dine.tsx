@@ -6,7 +6,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-export default function Meat_Dine ({meat, dine, func}) {
+const Meat_Dine = ({meat, dine, func}): React.ReactElement => {
 
   const meatCount = meat;
   const dineCount = dine;
@@ -41,4 +41,6 @@ export default function Meat_Dine ({meat, dine, func}) {
 
     </div>
   );
-}
+};
+
+export default Meat_Dine;

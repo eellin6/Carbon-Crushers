@@ -16,7 +16,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision, Friends } = require('./db/database.ts');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -112,6 +112,21 @@ app.put('/vision', (req: Request, res: Response) => {
   updateVision(name, visionType)
     .then((data: string) => res.send(data))
     .catch((err: string) => console.warn(err));
+});
+app.post('/friends', (req: Request, res: Response) => {
+  findUser(req.body.name)
+    .then((data) => res.json(data))
+    .catch((err: string) => console.warn(err));
+});
+app.post('/addFriends', (req: Request, res: Response) => {
+  console.info(req.body);
+  const {friendsName} = req.body;
+  const userName = req.cookies.crushers;
+  const newFriend = new Friends({ userName, friendsName });
+  newFriend.save()
+    .then(() => console.info('Friend Saved'))
+    .catch(err => console.warn(err));
+
 });
 
 app.get('*', (req: Request, res: Response) => {
