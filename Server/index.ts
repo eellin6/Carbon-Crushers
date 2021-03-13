@@ -118,8 +118,24 @@ app.post('/friends', (req: Request, res: Response) => {
     .then((data) => res.json(data))
     .catch((err: string) => console.warn(err));
 });
+app.get('/friendsData', async (req: Request, res: Response) => {
+  const arr = [];
+  await Friends.findAll({ where: { userName: req.cookies.crushers } })
+    .then((data) => {
+      //console.info('friendsData', data[0].dataValues.friendsName);
+      data.forEach((friend) => {
+        Stats.findAll({where: {name: friend.dataValues.friendsName}})
+          .then((stats) => {
+            console.info('stats', stats[stats.length - 1]);
+            arr.push(stats[stats.length - 1]);
+
+          });
+      });
+    })
+    .catch((err) => console.warn(err));
+});
 app.post('/addFriends', (req: Request, res: Response) => {
-  console.info(req.body);
+
   const {friendsName} = req.body;
   const userName = req.cookies.crushers;
   const newFriend = new Friends({ userName, friendsName });

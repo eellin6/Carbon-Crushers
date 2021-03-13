@@ -8,15 +8,15 @@ const Leaderboard = (): React.ReactElement => {
     axios.get('/statsData')
       .then(({ data }) => {
         const recent = data[data.length - 1];
-        console.info(recent);
-        allStats.push('caity');
+        allStats.push(recent);
       })
       .catch((err) => console.warn('Stat Error', err));
   };
   const friendsStats = (): void => {
     axios.get('/friendsData')
-      .then(({ data }) => {
-        const recent = data[data.length - 1];
+      .then(( {data} ) => {
+        console.info(data);
+        allStats.push(data);
 
       })
       .catch((err) => console.warn('Stat Error', err));
@@ -28,13 +28,15 @@ const Leaderboard = (): React.ReactElement => {
         allStats.push(name);
 
 
+
         // console.log('HERE IS USER DATA ON HOMEPAGE', data);
       })
       .catch((err) => console.warn(err));
 
     statistics();
+    friendsStats();
   }, []);
-
+  console.info('all stats array', allStats);
   return (
     <div>
       <h1>Weekly Leaders</h1>
