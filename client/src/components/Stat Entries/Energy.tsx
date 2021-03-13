@@ -6,7 +6,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-export default function Energy ({ac, wash, dish, screen, func}) {
+const Energy = ({ac, wash, dish, screen, func}): React.ReactElement => {
   // const [dishECount, setDishECount] = useState(0);
   // const [washECount, setWashECount] = useState(0);
   // const [acHeatCount, setAcHeatCount] = useState(0);
@@ -69,4 +69,6 @@ export default function Energy ({ac, wash, dish, screen, func}) {
 
     </div>
   );
-}
+};
+
+export default Energy;

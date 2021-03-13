@@ -60,6 +60,7 @@ const TemporaryDrawer = (): React.ReactElement => {
         <li><Link to='/statsBreakdown'>View Stats Breakdown</Link></li>
         <li><Link to='/graphs'>View Individual Stats</Link></li>
         <li><Link to='/friends'>Add Friends</Link></li>
+        <li><Link to='/leaderboard'>Leaderboard</Link></li>
         <li><Link to='/shower'>Shower Timer</Link></li>
         <li onClick={(): Promise<void> => axios.delete('/logout')
           .then(({ data }) => {

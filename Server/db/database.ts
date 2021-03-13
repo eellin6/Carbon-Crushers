@@ -369,6 +369,7 @@ module.exports = {
   CurrentStats,
   MonthlyLeaderBoard,
   Updates,
+  Friends,
   addUser,
   findUser,
   getAllStats,

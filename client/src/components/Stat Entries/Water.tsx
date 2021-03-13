@@ -6,7 +6,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-export default function Water ({wash, dish, func}) {
+const Water = ({wash, dish, func}) : React.ReactElement => {
   const dishCount = dish;
   const washCount = wash;
   const displayDishCounter = dishCount >= 0;
@@ -35,4 +35,5 @@ export default function Water ({wash, dish, func}) {
       <h4>Dishwashers use and average of 6 gallons of water per cycle while washing machines use an average of 25 gallons. </h4>
     </div>
   );
-}
+};
+export default Water;

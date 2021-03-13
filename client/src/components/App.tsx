@@ -14,6 +14,7 @@ import Route from '../models/Route';
 import LoginData from '../models/LoginData';
 import StatsBreakdown from './StatsBreakdown';
 import Friends from './Friends';
+import Leaderboard from './Leaderboard';
 
 const App: React.FC = (): React.ReactElement => {
   const [currentStatus, setCurrentStatus] = useState(false);
@@ -63,13 +64,18 @@ const App: React.FC = (): React.ReactElement => {
     path: '/friends',
     element: <Friends/>
   };
+  const leaderboardRoute: Route = {
+    path: '/leaderboard',
+    element: <Leaderboard/>
+  };
+
 
   const logoutRoute: Route = {
     path: '/',
     element: <Profile />
   };
 
-  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, statsBreakdownRoute, friendsRoute, logoutRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, statsBreakdownRoute, friendsRoute, logoutRoute, leaderboardRoute]);
 
   return (
     <div>
