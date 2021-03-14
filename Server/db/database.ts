@@ -321,6 +321,27 @@ Updates.init({
   sequelize: db
 });
 
+interface TipAttributes {
+  stat: string | null,
+  tip: string | null
+}
+class Tips extends Model<TipAttributes>
+  implements TipAttributes {
+    public stat!: string | null;
+    public tip!: string | null;
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
+
+Tips.init({
+  stat: new DataTypes.STRING,
+  tip: new DataTypes.STRING,
+},
+{
+  tableName: 'Tips',
+  sequelize: db
+});
+
 // db.sync({ force: true })
 //   .then(() => {
 //     console.log('Database & tables created!');
