@@ -5,7 +5,6 @@ import { Request, Response } from 'express';
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-
 const express = require('express');
 const passport = require('passport');
 require('../passport.config.ts');
@@ -118,22 +117,36 @@ app.post('/friends', (req: Request, res: Response) => {
     .then((data) => res.json(data))
     .catch((err: string) => console.warn(err));
 });
-app.get('/friendsData', async (req: Request, res: Response) => {
-  const arr = [];
-  await Friends.findAll({ where: { userName: req.cookies.crushers } })
-    .then((data) => {
-      //console.info('friendsData', data[0].dataValues.friendsName);
-      data.forEach((friend) => {
-        Stats.findAll({where: {name: friend.dataValues.friendsName}})
-          .then((stats) => {
-            console.info('stats', stats[stats.length - 1]);
-            arr.push(stats[stats.length - 1]);
+// app.get('/friendsData', async (req: Request, res: Response) => {
+//   const arr = [];
+//   await Friends.findAll({ where: { userName: req.cookies.crushers } })
+//     .then((data) => {
+//       //console.info('friendsData', data[0].dataValues.friendsName);
+//       data.forEach((friend) => {
+//         Stats.findAll({where: {name: friend.dataValues.friendsName}})
+//           .then((stats) => {
+//             console.info('stats', stats[stats.length - 1]);
+//             arr.push(stats[stats.length - 1]);
+//           });
+//       });
+//     })
+//     .catch((err) => console.warn(err));
+// });
 
-          });
-      });
-    })
+app.get('/allFriends', (req: Request, res: Response) => {
+  // const arr = [];
+  return Friends.findAll({ where: { userName: req.cookies.crushers } })
+    .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
+
+app.get('/friendsData', async (req: Request, res: Response) => {
+  const { friend } = req.body;
+  Stats.findAll({ where: { friend } })
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
 app.post('/addFriends', (req: Request, res: Response) => {
 
   const {friendsName} = req.body;
