@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 const Leaderboard = (): React.ReactElement => {
   const [allStats, setAllStats] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   const statistics = (): void => {
     axios.get('/statsData')
@@ -19,8 +20,13 @@ const Leaderboard = (): React.ReactElement => {
           allStats.push(data[i]);
         }
       })
+      // .then((friends) => {
+      //   friends.map(friend => axios.get('/friendsData', {friend})
+      //   axios.get('/friendsData', {friends})
+      // })
       .catch((err) => console.warn('Stat Error', err));
   };
+
   useEffect(() => {
     statistics();
     friendsStats();

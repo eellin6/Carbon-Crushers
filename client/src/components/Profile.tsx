@@ -71,10 +71,7 @@ const Profile = (): React.ReactElement => {
                     <input type='radio' name='vision' value='none' /> None
                   </div>
                   <div className='radio-btn'>
-                    <input type='radio' name='vision' value='Red-Green' /> Red-Green
-                  </div>
-                  <div className='radio-btn'>
-                    <input type='radio' name='vision' value='Blue-Yellow' /> Blue-Yellow
+                    <input type='radio' name='vision' value='CVD' /> Color Vision Deficient
                   </div>
                 </div>
                 <button className='btn' type='button'
