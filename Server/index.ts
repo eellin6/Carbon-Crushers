@@ -118,19 +118,26 @@ app.post('/friends', (req: Request, res: Response) => {
     .then((data) => res.json(data))
     .catch((err: string) => console.warn(err));
 });
-app.get('/friendsData', async (req: Request, res: Response) => {
-  const arr = [];
-  await Friends.findAll({ where: { userName: req.cookies.crushers } })
-    .then((data) => {
-      //console.info('friendsData', data[0].dataValues.friendsName);
-      data.forEach((friend) => {
-        Stats.findAll({where: {name: friend.dataValues.friendsName}})
-          .then((stats) => {
-            console.info('stats', stats[stats.length - 1]);
-            arr.push(stats[stats.length - 1]);
+app.get('/friendsData', async (req: Request, res: Response, next: any) => {
 
-          });
-      });
+  Friends.findAll({ where: { userName: req.cookies.crushers } })
+    .then(async (data) => {
+
+
+      // console.info('friendsData', data);
+      Promise.all(data.map(friend => {
+        return Stats.findAll({where: {name: friend.dataValues.friendsName }});
+      })
+
+      )
+        .then(arrOfAllResolvedItems => {
+          //console.info('array of resolved', arrOfAllResolvedItems);
+          const arr = [];
+          arrOfAllResolvedItems.forEach((subArr: any) => { arr.push(subArr[subArr.length - 1]); });
+          console.info('THIS IS THE ANSWER', arr);
+
+          res.send(arr);
+        });
     })
     .catch((err) => console.warn(err));
 });

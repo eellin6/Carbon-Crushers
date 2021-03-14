@@ -15,32 +15,35 @@ const Leaderboard = (): React.ReactElement => {
   const friendsStats = (): void => {
     axios.get('/friendsData')
       .then(( {data} ) => {
-        console.info(data);
-        allStats.push(data);
-
+        for (let i = 0; i < data.length; i++) {
+          allStats.push(data[i]);
+        }
       })
       .catch((err) => console.warn('Stat Error', err));
   };
   useEffect(() => {
-    axios.get('/user')
-      .then(({ data }) => {
-        const { name } = data;
-        allStats.push(name);
-
-
-
-        // console.log('HERE IS USER DATA ON HOMEPAGE', data);
-      })
-      .catch((err) => console.warn(err));
-
     statistics();
     friendsStats();
   }, []);
-  console.info('all stats array', allStats);
+  console.info('SORTED', allStats);
+
   return (
     <div>
       <h1>Weekly Leaders</h1>
       <hr></hr>
+      {!allStats ? [] : (<div>
+        {allStats.map((element) => {
+          console.info('ELEMENT NAME', element.name);
+          return (
+            <div>
+              <div>{element.name}</div>
+              <div>{element.total}</div>
+            </div>);
+        })}
+
+      </div>)}
+
+
 
     </div>
   );
