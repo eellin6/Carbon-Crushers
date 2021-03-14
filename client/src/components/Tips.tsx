@@ -6,47 +6,36 @@ import TipsData from '../models/TipsData';
 import tipsData from '../../src/tips_data';
 
 const Tips = (): React.ReactElement => {
-  // const [ name, setName ] = useState('');
-  const [ stats, setStats ] = useState('');
+  // const [ stats, setStats ] = useState('');
   const [ weakestStat, setWeakestStat ] = useState('');
   const [ tip, setTip ] = useState('');
 
-  // useEffect (() => {
-  //   // get user stats
-  //   axios.get<AxiosResponse>('/statsData')
-  //     .then(({ data }: AxiosResponse) => {
-  //       const recent = data[data.length - 1];
-  //       setStats(recent);
-  //       console.info(stats);
-  //     })
-  //     // .then(() => {
-  //     //   console.info([stats]);
-  //     // })
-  //     .catch((err) => console.warn(err));
 
-  //   // find weakest stat
-  //   // setStat to weakest stat
+  interface Tips {
+    stat: string,
+    tip: string
+  }
 
-  // }, []);
-  // findWeakestStat();
-
-  const getTip = (): void => {
-    // findWeakestStat()
-    // .then((data) => {
-    //   console.log(data);
-    // })
-    // get all tips where stat is weakestStat
-
-    // select random tip
-
-    // setTip to new tip
+  const findWeakestStat = (): void => {
+    // get user stats
+    axios.get<AxiosResponse>('/weakestStat')
+      .then(({ data }: AxiosResponse) => {
+        setWeakestStat(data);
+        const tips: Tips[] = tipsData.filter(newTip => newTip.stat === data);
+        const { tip }: {tip: string} = tips[0];
+        setTip(tip);
+      })
+      .catch((err) => console.warn(err));
   };
+
+  useEffect (() => {
+    findWeakestStat();
+  }, []);
 
   return (
     <div className='page-wrap'>
-      {/* <h2>Looks like you could use some help with {stats} </h2> */}
-      <h2>Looks like you could use some help with </h2>
-      {/* <p>{tip}</p> */}
+      <h3>Looks like you could use some help with {weakestStat}</h3>
+      <p>{tip}</p>
     </div>
   );
 

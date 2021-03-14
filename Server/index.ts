@@ -141,6 +141,24 @@ app.get('/friendsData', async (req: Request, res: Response, next: any) => {
     .catch((err) => console.warn(err));
 });
 
+app.get('/weakestStat', (req: Request, res: Response) => {
+  const user: string = req.cookies.crushers;
+  getAllStats(user)
+    .then((data) => {
+      data = data[data.length - 1];
+      const stats = {
+        energy: data.energy,
+        dining: data.meat_dine,
+        mileage: data.mileage,
+        recycling: data.recycling,
+        water: data.water
+      };
+      const weakestStat = Object.entries(stats).sort((a, b) => b[1] - a[1])[0][0];
+      res.json(weakestStat);
+    })
+    .catch((err: string) => console.warn(err));
+});
+
 app.post('/addFriends', (req: Request, res: Response) => {
 
   const {friendsName} = req.body;
