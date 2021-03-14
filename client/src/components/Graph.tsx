@@ -1,23 +1,24 @@
 import * as React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Doughnut, Line, Polar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import recycling from '../sample_recycling';
 import waterYearToDate from '../sample_water';
 import meatData from '../sample_meat';
 import mileage from '../sample_mileage';
 import energy from '../sample_energy';
-
-
-
+import { draw } from 'patternomaly';
+import GraphData from '../models/GraphData';
 
 const Graphs = () => {
   const [ name, setName ] = useState('');
+  const [ colorVision, setColorVision ] = useState('none');
   useEffect(() => {
     axios.get('/user')
       .then(({ data }) => {
-        const { name } = data;
+        const { name, vision } = data;
         setName(name.split(' ')[0]);
+        setColorVision(vision);
       })
       .catch((err) => console.warn(err));
   }, []);
@@ -80,7 +81,7 @@ const Graphs = () => {
   };
 
   // Recycling Graph Data
-  const dataRec = {
+  const dataRec: GraphData = {
     datasets: [
       {
         text: 'Your Stats',
@@ -93,9 +94,12 @@ const Graphs = () => {
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
+  if (colorVision !== 'none') {
+    dataRec.datasets[0].backgroundColor = draw('plus', '#55BFBF');
+  }
 
   // Water Graph Data
-  const dataWater = {
+  const dataWater: GraphData = {
     datasets: [
       {
         text: 'Your Stats',
@@ -108,9 +112,12 @@ const Graphs = () => {
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
+  if (colorVision !== 'none') {
+    dataWater.datasets[0].backgroundColor = draw('ring', '#3EA4E8');
+  }
 
   // Meat Dine Out Graph Data
-  const dataMeat = {
+  const dataMeat: GraphData = {
     datasets: [
       {
         text: 'Your Stats',
@@ -125,7 +132,7 @@ const Graphs = () => {
   };
 
   // Mileage Graph Data
-  const dataMileage = {
+  const dataMileage: GraphData = {
     datasets: [
       {
         text: 'Your Stats',
@@ -138,9 +145,12 @@ const Graphs = () => {
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
+  if (colorVision !== 'none') {
+    dataMileage.datasets[0].backgroundColor = draw('line', '#FC9E4B');
+  }
 
   // Energy Graph Data
-  const dataEnergy = {
+  const dataEnergy: GraphData = {
     datasets: [
       {
         text: 'Your Stats',
@@ -153,6 +163,9 @@ const Graphs = () => {
     ],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8']
   };
+  if (colorVision !== 'none') {
+    dataEnergy.datasets[0].backgroundColor = draw('weave', '#FDCB60');
+  }
 
   return (
     <div className='page-wrap'>

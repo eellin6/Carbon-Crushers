@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { draw, generate } from 'patternomaly';
+import { draw } from 'patternomaly';
 // import dataTest from '../sample_dataTest';
 // import meatData from '../sample_meat';
 // import recycling from '../sample_recycling';
@@ -53,11 +53,11 @@ const homePage = (): React.ReactElement => {
       ];
     } else {
       return [
-        draw('cross', '#55BFBF'),
-        '#3EA4E8',
+        draw('plus', '#55BFBF'),
+        draw('ring', '#3EA4E8'),
         '#FA6685',
-        '#FC9E4B',
-        draw('plus', '#FDCB60')
+        draw('line', '#FC9E4B'),
+        draw('weave', '#FDCB60')
       ];
     }
   };
