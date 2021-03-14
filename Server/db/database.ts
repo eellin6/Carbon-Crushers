@@ -15,6 +15,12 @@ const db = new Sequelize(database, username, password, {
   logging: false
 });
 
+// const db = new Sequelize('crushers', 'root', '', {
+//   host: 'localhost',
+//   dialect: 'mysql',
+//   // logging: false
+// });
+
 
 db.authenticate()
   .then(() => console.info('CONNECTED TO DATABASE'))
