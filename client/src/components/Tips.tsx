@@ -6,10 +6,8 @@ import TipsData from '../models/TipsData';
 import tipsData from '../../src/tips_data';
 
 const Tips = (): React.ReactElement => {
-  // const [ stats, setStats ] = useState('');
   const [ weakestStat, setWeakestStat ] = useState('');
   const [ tip, setTip ] = useState('');
-
 
   interface Tips {
     stat: string,
@@ -17,12 +15,12 @@ const Tips = (): React.ReactElement => {
   }
 
   const findWeakestStat = (): void => {
-    // get user stats
     axios.get<AxiosResponse>('/weakestStat')
       .then(({ data }: AxiosResponse) => {
         setWeakestStat(data);
         const tips: Tips[] = tipsData.filter(newTip => newTip.stat === data);
-        const { tip }: {tip: string} = tips[0];
+        const randomIndex: number = Math.floor(Math.random() * tips.length);
+        const { tip }: {tip: string} = tips[randomIndex];
         setTip(tip);
       })
       .catch((err) => console.warn(err));
@@ -32,9 +30,17 @@ const Tips = (): React.ReactElement => {
     findWeakestStat();
   }, []);
 
+  const checkStat = (weakestStat): string => {
+    if (weakestStat === 'dining') {
+      return 'dining out less or eating less meat';
+    } else {
+      return weakestStat;
+    }
+  };
+
   return (
-    <div className='page-wrap'>
-      <h3>Looks like you could use some help with {weakestStat}</h3>
+    <div className='tips-wrap'>
+      <h3>Looks like you could use some help with {checkStat(weakestStat)}</h3>
       <p>{tip}</p>
     </div>
   );

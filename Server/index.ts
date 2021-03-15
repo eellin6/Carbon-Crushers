@@ -153,7 +153,7 @@ app.get('/weakestStat', (req: Request, res: Response) => {
         recycling: data.recycling,
         water: data.water
       };
-      const weakestStat = Object.entries(stats).sort((a, b) => b[1] - a[1])[0][0];
+      const weakestStat = Object.entries(stats).sort((a, b) => a[1] - b[1])[0][0];
       res.json(weakestStat);
     })
     .catch((err: string) => console.warn(err));

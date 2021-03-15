@@ -179,3 +179,18 @@ a:hover {
 	margin: 15%;
 	text-align: center;
 }
+
+.tips-wrap {
+	background-color: #55bfbf;
+	color: white;
+	border-radius: 5px;
+	padding: 0 5%;
+	margin-bottom: 5%;
+	/* text-align: center; */
+}
+
+.tips-wrap p {
+	text-align: center;
+	border-top: thin solid white;
+	padding-top: 5%;
+}

@@ -5,7 +5,24 @@ const tipsData = [
   },
   {
     stat: 'energy',
-    tip: 'The average temperature to set your thermostat is 74 in the Summer. Try turning it off for a little while and open a few windows.'
+    tip: 'We know it\'s tempting to crank down the temp, but take some stress off of your A/C and try to keep the thermostat below 78°'
+  },
+  {
+    stat: 'energy',
+    tip: 'Try turning it off for a little while and open a few windows.'
+  },
+  {
+    stat: 'energy',
+    tip: 'And this is yet another random energy tip'
+  }, {
+    stat: 'energy',
+    tip: 'And another'
+  }, {
+    stat: 'energy',
+    tip: 'And how about another???'
+  }, {
+    stat: 'energy',
+    tip: 'PLS WORK'
   },
   {
     stat: 'water',
