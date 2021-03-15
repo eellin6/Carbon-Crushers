@@ -13,6 +13,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Tips from './Tips';
 interface AppState {
   wash?: number;
   dish?: number;
@@ -201,6 +202,7 @@ export default function Stats (props: AppState): React.ReactElement {
   return (
     <div className='page-wrap'>
       <h1>Log your weekly stats</h1>
+      <Tips />
       <Accordion className='stats'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

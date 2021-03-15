@@ -47,7 +47,8 @@ h1 {
 	text-align: center;
 }
 
-h2 {
+h2,
+h3 {
 	text-align: center;
 	font-style: italic;
 }
@@ -66,6 +67,10 @@ h2 {
 	border-style: solid;
 	border-radius: 5px;
 	color: #525252;
+}
+
+.btn-margin {
+	margin-bottom: 10%;
 }
 
 .profileDiv {
@@ -179,14 +184,32 @@ a:hover {
 	text-align: center;
 }
 
+.tips-wrap {
+	background-color: #55bfbf;
+	color: white;
+	border-radius: 5px;
+	padding: 0 5%;
+	margin-bottom: 5%;
+}
+
+.tips-wrap p {
+	text-align: center;
+	border-top: thin solid white;
+	padding-top: 5%;
+}
+
+.tips-wrap a {
+	font-size: 1em;
+	display: inline;
+}
 .bottle-li:not(:last-child) {
-  padding: 10px;
-  border-bottom: solid 1px;
+	padding: 10px;
+	border-bottom: solid 1px;
 }
 
 .bottle-wrap {
 	max-width: 400px;
-  margin-bottom: 25px;
+	margin-bottom: 25px;
 }
 
 #bottle-img {
@@ -195,10 +218,10 @@ a:hover {
 }
 
 #hidden {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

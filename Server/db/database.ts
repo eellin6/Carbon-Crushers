@@ -13,6 +13,12 @@ const db = new Sequelize(database, username, password, {
   logging: false
 });
 
+// const db = new Sequelize('crushers', 'root', '', {
+//   host: 'localhost',
+//   dialect: 'mysql',
+//   // logging: false
+// });
+
 
 db.authenticate()
   .then(() => console.info('CONNECTED TO DATABASE'))
@@ -316,6 +322,27 @@ Updates.init({
 },
 {
   tableName: 'Updates',
+  sequelize: db
+});
+
+interface TipAttributes {
+  stat: string | null,
+  tip: string | null
+}
+class Tips extends Model<TipAttributes>
+  implements TipAttributes {
+    public stat!: string | null;
+    public tip!: string | null;
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
+
+Tips.init({
+  stat: new DataTypes.STRING,
+  tip: new DataTypes.STRING,
+},
+{
+  tableName: 'Tips',
   sequelize: db
 });
 
