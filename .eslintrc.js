@@ -51,6 +51,8 @@ module.exports = {
         'singleReturnOnly': false,
         'classPropertiesAllowed': false
       }
-    ]
+    ],
+    '@typescript-eslint/typedef': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'error'
   }
 };

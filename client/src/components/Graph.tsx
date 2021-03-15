@@ -9,14 +9,15 @@ import mileage from '../sample_mileage';
 import energy from '../sample_energy';
 import { draw } from 'patternomaly';
 import GraphData from '../models/GraphData';
+import UserData from '../models/UserData';
 
-const Graphs = () => {
+const Graphs = (): React.ReactElement => {
   const [ name, setName ] = useState('');
   const [ colorVision, setColorVision ] = useState('none');
   useEffect(() => {
-    axios.get('/user')
-      .then(({ data }) => {
-        const { name, vision } = data;
+    axios.get<UserData>('/user')
+      .then(({ data }): void => {
+        const { name, vision }: { name: string, vision: string } = data;
         setName(name.split(' ')[0]);
         setColorVision(vision);
       })
@@ -24,33 +25,43 @@ const Graphs = () => {
   }, []);
 
   //Score Functions
-  const RecycleScoreFunc = () => {
+  const RecycleScoreFunc = (): number => {
     let result = 0;
     let avg = 0;
-    const stats = Object.values(recycling);
-    stats.forEach((score) => {
-      result += score;
-      avg = result / stats.length;
-    });
-    return Math.floor(avg);
-
-  };
-
-  const WaterScoreFunc = () => {
-    let result = 0;
-    let avg = 0;
-    const stats = Object.values(waterYearToDate);
-    stats.forEach((score) => {
+    const stats: number[] = Object.values(recycling);
+    stats.forEach((score: number): void => {
       result += score;
       avg = result / stats.length;
     });
     return Math.floor(avg);
   };
 
-  const MeatScoreFunc = () => {
+  const WaterScoreFunc = (): number => {
     let result = 0;
     let avg = 0;
-    const stats = Object.values(meatData);
+    const stats: number[] = Object.values(waterYearToDate);
+    stats.forEach((score: number): void => {
+      result += score;
+      avg = result / stats.length;
+    });
+    return Math.floor(avg);
+  };
+
+  const MeatScoreFunc = (): number => {
+    let result = 0;
+    let avg = 0;
+    const stats: number[] = Object.values(meatData);
+    stats.forEach((score: number): void => {
+      result += score;
+      avg = result / stats.length;
+    });
+    return Math.floor(avg);
+  };
+
+  const mileageFunc = (): number => {
+    let result = 0;
+    let avg = 0;
+    const stats: number[] = Object.values(mileage);
     stats.forEach((score) => {
       result += score;
       avg = result / stats.length;
@@ -58,21 +69,10 @@ const Graphs = () => {
     return Math.floor(avg);
   };
 
-  const mileageFunc = () => {
+  const energyFunc = (): number => {
     let result = 0;
     let avg = 0;
-    const stats = Object.values(mileage);
-    stats.forEach((score) => {
-      result += score;
-      avg = result / stats.length;
-    });
-    return Math.floor(avg);
-  };
-
-  const energyFunc = () => {
-    let result = 0;
-    let avg = 0;
-    const stats = Object.values(energy);
+    const stats: number[] = Object.values(energy);
     stats.forEach((score) => {
       result += score;
       avg = result / stats.length;

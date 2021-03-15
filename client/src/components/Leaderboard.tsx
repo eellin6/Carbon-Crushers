@@ -40,7 +40,7 @@ const Leaderboard = (): React.ReactElement => {
       .catch((err) => console.warn(err));
   }, []);
 
-  const colorsOrPatterns = (vision: string) => {
+  const colorsOrPatterns = (vision: string): any => {
     if (vision === 'none') {
       return [
         '#55BFBF',
