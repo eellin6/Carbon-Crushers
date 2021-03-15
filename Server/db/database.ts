@@ -327,12 +327,14 @@ Updates.init({
 
 interface TipAttributes {
   stat: string | null,
-  tip: string | null
+  tip: string | null,
+  resource: string | null,
 }
 class Tips extends Model<TipAttributes>
   implements TipAttributes {
     public stat!: string | null;
     public tip!: string | null;
+    public resource!: string | null;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
@@ -340,6 +342,7 @@ class Tips extends Model<TipAttributes>
 Tips.init({
   stat: new DataTypes.STRING,
   tip: new DataTypes.STRING,
+  resource: new DataTypes.STRING,
 },
 {
   tableName: 'Tips',
