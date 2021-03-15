@@ -3,12 +3,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { Sequelize, Model, DataTypes } = require('sequelize');
 require('dotenv').config();
-
 const host: string = process.env.host;
 const database: string = process.env.database;
 const password: string = process.env.password;
 const username: string = process.env.username;
-
 const db = new Sequelize(database, username, password, {
   host: host,
   dialect: 'mysql',
@@ -185,7 +183,7 @@ interface FriendAttributes {
 }
 class Friends extends Model<FriendAttributes>
   implements FriendAttributes {
-    public id_user!: number | null;
+    public id_user!: number | null;3
     public friendsName!: string | null;
     public userName!: string | null;
     public status!: string | null;

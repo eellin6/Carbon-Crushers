@@ -38,7 +38,7 @@ const Friends = (): React.ReactElement => {
           [users].map((element, index) => <div key={index}>
             <img src={element.picture}></img>
             <div >{ element.name}</div>
-            <button className='btn' onClick={ () => {
+            <button className='btn' onClick={ (): any => {
               const data = {friendsName: element.name};
               axios.post('/addFriends', data)
                 .then((info) => { console.info(info); })

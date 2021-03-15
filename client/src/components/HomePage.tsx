@@ -42,7 +42,7 @@ const homePage = (): React.ReactElement => {
 
   const score = recyclingStats + waterStats + meatStats + mileageStats + energyStats;
 
-  const colorsOrPatterns = (vision: string) => {
+  const colorsOrPatterns = (vision: string): any => {
     if (vision === 'none') {
       return [
         '#55BFBF',
