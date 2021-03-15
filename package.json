@@ -8,8 +8,8 @@
     "start": "nodemon Server/index.ts",
     "dev": "webpack --watch",
     "build": "webpack",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js",
-    "lint:fix": "eslint --fix . --ext .ts --ext .tsx --ext .js"
+    "lint": "eslint . --ext .ts --ext .tsx",
+    "lint:fix": "eslint --fix . --ext .ts --ext .tsx"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@tensorflow-models/mobilenet": "^2.1.0",
+    "@tensorflow/tfjs": "^3.3.0",
     "@types/chart.js": "^2.9.31",
     "@types/chartjs": "0.0.31",
     "@types/gapi.auth2": "0.0.53",

@@ -10,6 +10,8 @@ const passport = require('passport');
 require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+
+
 const port = process.env.PORT || 8080;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
@@ -70,7 +72,7 @@ app.delete('/logout', (req: Request, res: Response) => {
 app.get('/user', (req: Request, res: Response) => {
   findUser(req.cookies.crushers)
     .then((data) => res.json(data))
-    .catch((err: string) => console.warn(err));
+    .catch((err: string) => console.warn('this here', err));
 });
 
 app.post('/profilePic', (req: Request, res: Response) => {
@@ -87,6 +89,12 @@ app.get('/statsData', (req: Request, res: Response) => {
     .then((data) => res.json(data))
     .catch((err: string) => console.warn(err));
 });
+
+// app.get('/bottles', (req: Request, res: Response) => {
+//   findUser(req.cookies.crushers)
+//     .then((data) => res.json(data))
+//     .catch((err: string) => console.warn('this here', err));
+// });
 
 app.post('/statsData', (req: Request, res: Response) => {
   const name = req.cookies.crushers;
