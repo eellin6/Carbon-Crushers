@@ -1,6 +1,7 @@
 interface TipsData {
     stat: string,
-    tip: string
+    tip: string,
+    resource: string | null
 }
 
 export default TipsData;

@@ -69,6 +69,10 @@ h3 {
 	color: #525252;
 }
 
+.btn-margin {
+	margin-bottom: 10%;
+}
+
 .profileDiv {
 	width: 100px;
 	height: 100px;
@@ -186,11 +190,15 @@ a:hover {
 	border-radius: 5px;
 	padding: 0 5%;
 	margin-bottom: 5%;
-	/* text-align: center; */
 }
 
 .tips-wrap p {
 	text-align: center;
 	border-top: thin solid white;
 	padding-top: 5%;
+}
+
+.tips-wrap a {
+	font-size: 1em;
+	display: inline;
 }

@@ -8,10 +8,12 @@ import tipsData from '../../src/tips_data';
 const Tips = (): React.ReactElement => {
   const [ weakestStat, setWeakestStat ] = useState('');
   const [ tip, setTip ] = useState('');
+  const [ resource, setResource ] = useState(null);
 
   interface Tips {
     stat: string,
-    tip: string
+    tip: string,
+    resource: string | null
   }
 
   const findWeakestStat = (): void => {
@@ -20,8 +22,8 @@ const Tips = (): React.ReactElement => {
         setWeakestStat(data);
         const tips: Tips[] = tipsData.filter(newTip => newTip.stat === data);
         const randomIndex: number = Math.floor(Math.random() * tips.length);
-        const { tip }: {tip: string} = tips[randomIndex];
-        setTip(tip);
+        setTip(tips[randomIndex].tip);
+        setResource(tips[randomIndex].resource);
       })
       .catch((err) => console.warn(err));
   };
@@ -38,10 +40,16 @@ const Tips = (): React.ReactElement => {
     }
   };
 
+  const hasResource = (resource): any => {
+    if (resource) {
+      return (<a href={resource}>here</a>);
+    }
+  };
+
   return (
     <div className='tips-wrap'>
       <h3>Looks like you could use some help with {checkStat(weakestStat)}</h3>
-      <p>{tip}</p>
+      <p><span className='tips'>{tip}</span><span className='tips'>{hasResource(resource)}</span></p>
     </div>
   );
 
