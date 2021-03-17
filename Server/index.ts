@@ -171,15 +171,39 @@ app.post('/addFriends', (req: Request, res: Response) => {
 
   const {friendsName} = req.body;
   const userName = req.cookies.crushers;
-  const newFriend = new Friends({ userName, friendsName });
 
   const friendRequest = new Updates({username: friendsName, requests: userName});
   friendRequest.save()
     .then(() => console.info('Request Sent'))
     .catch(err => console.warn(err));
+
+
+});
+app.post('/acceptFriends', (req: Request, res: Response) => {
+
+  const {friendsName} = req.body;
+  const userName = req.cookies.crushers;
+  const newFriend = new Friends({ userName, friendsName });
+
+
   newFriend.save()
     .then(() => console.info('Friend Saved'))
     .catch(err => console.warn(err));
+  Updates.destroy({where: {
+    username: userName,
+    requests: friendsName
+  }});
+
+});
+app.post('/declineFriends', (req: Request, res: Response) => {
+
+  const {friendsName} = req.body;
+  const userName = req.cookies.crushers;
+
+  Updates.destroy({where: {
+    username: userName,
+    requests: friendsName
+  }});
 
 });
 app.get('/friendRequests', (req: Request, res: Response) => {
