@@ -13,14 +13,19 @@ const Notifications = (): React.ReactElement => {
       .catch((err) => console.warn('Stat Error', err));
 
   };
+
+  useEffect(() => {
+    getRequests();
+  }, []);
+
   return (
     <div className='page-wrap'>
       {!friendRequests ? null : <div className='addFriends'>
 
         {
-          [friendRequests].map((element, index) => <div key={index}>
+          friendRequests.map((element, index) => <div key={index}>
 
-            <div >{ element.requests} wants to be your friend</div>
+            <div >{ element.requests } wants to be your friend</div>
 
           </div>)}
 
