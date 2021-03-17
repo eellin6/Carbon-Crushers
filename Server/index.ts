@@ -184,6 +184,13 @@ app.post('/acceptFriends', (req: Request, res: Response) => {
   const {friendsName} = req.body;
   const userName = req.cookies.crushers;
   const newFriend = new Friends({ userName, friendsName });
+  const friend2 = new Friends({
+    userName: friendsName,
+    friendsName: userName
+  });
+  friend2.save()
+    .then(() => console.info('Friend Saved'))
+    .catch(err => console.warn(err));
 
 
   newFriend.save()
@@ -192,6 +199,21 @@ app.post('/acceptFriends', (req: Request, res: Response) => {
   Updates.destroy({where: {
     username: userName,
     requests: friendsName
+  }});
+
+});
+app.post('/removeFriends', (req: Request, res: Response) => {
+
+  const {friendsName} = req.body;
+  const userName = req.cookies.crushers;
+
+  Friends.destroy({where: {
+    userName: userName,
+    friendsName: friendsName
+  }});
+  Friends.destroy({where: {
+    userName: friendsName,
+    friendsName: userName
   }});
 
 });
@@ -204,6 +226,7 @@ app.post('/declineFriends', (req: Request, res: Response) => {
     username: userName,
     requests: friendsName
   }});
+
 
 });
 app.get('/friendRequests', (req: Request, res: Response) => {
