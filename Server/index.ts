@@ -10,6 +10,7 @@ const passport = require('passport');
 require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const axios = require('axios');
 
 
 const port = process.env.PORT || 8080;
@@ -176,6 +177,30 @@ app.post('/addFriends', (req: Request, res: Response) => {
     .then(() => console.info('Friend Saved'))
     .catch(err => console.warn(err));
 
+});
+
+app.get('/weather', (req: Request, res: Response) => {
+  const { latitude, longitude } = req.body;
+  const url = `http://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${process.env.WEATHERBIT_TOKEN}`;
+
+  return axios.get(url)
+    .then(({ data }) => res.status(200).send(data))
+    .catch((err: string) => {
+      console.warn(err);
+      res.status(404);
+    });
+});
+
+app.post('/location', (req: Request, res: Response) => {
+  const { ip } = req.body;
+  const url = `http://api.ipstack.com/${ip}?access_key=${process.env.GEOLOCATION_TOKEN}`;
+
+  return axios.get(url)
+    .then(({ data }) => res.status(200).send(data))
+    .catch((err: string) => {
+      console.warn(err);
+      res.status(404);
+    });
 });
 
 app.get('*', (req: Request, res: Response) => {
