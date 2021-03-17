@@ -297,13 +297,13 @@ MonthlyLeaderBoard.init({
 
 interface UpdateAttributes {
   requests: string | null,
-  id_user: number | null
+  username: string | null
   badge: string | null
 }
 class Updates extends Model<UpdateAttributes>
   implements UpdateAttributes {
     public requests!: string | null;
-    public id_user!: number | null;
+    public username!: string | null;
     public badge!: string | null;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -311,13 +311,7 @@ class Updates extends Model<UpdateAttributes>
 
 Updates.init({
   requests: new DataTypes.STRING,
-  id_user: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  },
+  username: new DataTypes.STRING,
   badge: new DataTypes.STRING
 },
 {
