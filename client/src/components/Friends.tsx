@@ -45,7 +45,7 @@ const Friends = (): React.ReactElement => {
                 .catch((err) => { console.warn(err); });
             }
             }>Send Friend Request</button>
-             <button className='btn' onClick={ (): any => {
+            <button className='btn' onClick={ (): any => {
               const data = {friendsName: element.name};
               axios.post('/removeFriends', data)
                 .then((info) => { console.info(info); })
