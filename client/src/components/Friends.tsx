@@ -45,6 +45,13 @@ const Friends = (): React.ReactElement => {
                 .catch((err) => { console.warn(err); });
             }
             }>Send Friend Request</button>
+            <button className='btn' onClick={ (): any => {
+              const data = {friendsName: element.name};
+              axios.post('/removeFriends', data)
+                .then((info) => { console.info(info); })
+                .catch((err) => { console.warn(err); });
+            }
+            }>Remove Friend </button>
 
           </div>)}
 
