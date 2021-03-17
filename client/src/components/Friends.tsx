@@ -44,7 +44,7 @@ const Friends = (): React.ReactElement => {
                 .then((info) => { console.info(info); })
                 .catch((err) => { console.warn(err); });
             }
-            }>Add Friend</button>
+            }>Send Friend Request</button>
 
           </div>)}
 
