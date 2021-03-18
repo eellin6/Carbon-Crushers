@@ -21,10 +21,12 @@ const machine = {
   }
 };
 
-const Bottles = () => {
+const Bottles = ({func2}: any) => {
   const [results, setResults] = useState([]);
+  const [noBottle, setNoBottle] = useState('');
   const [imageURL, setImageURL] = useState(null);
   const [model, setModel] = useState(null);
+  const [answers, setAnswers] = useState('');
   const imageRef = useRef();
   const inputRef = useRef();
 
@@ -41,18 +43,43 @@ const Bottles = () => {
     next();
   };
 
+
   const identify = async () => {
     next();
-    const results = await model.classify(imageRef.current);
-    setResults(results);
-    next();
+    try {
+
+      const results = await model.classify(imageRef.current);
+      await setResults(results);
+
+      await resultCheck(results);
+      next();
+    } catch (error) {
+      console.info('ERROR', error);
+    }
+  };
+
+  const resultCheck = (results) => {
+    if (results[0].className === 'pop bottle, soda bottle') {
+      setAnswers('Soda Bottle');
+      func2();
+    } else if (results[0].className === 'wine bottle') {
+      setAnswers('Fancy Wine Bottle');
+      func2();
+    } else if (results[0].className === 'whiskey jug' || results[0].className === 'cocktail shaker') {
+      setAnswers('Liquor Bottle');
+      func2();
+
+    } else {
+      setNoBottle('this is not a bottle!');
+    }
   };
 
   const reset = async () => {
     setResults([]);
     next();
   };
-
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const upload = () => inputRef.current.click();
 
   const handleUpload = event => {
@@ -63,6 +90,8 @@ const Bottles = () => {
       next();
     }
   };
+
+
 
   const actionButton = {
     initial: { action: loadModel, text: 'Load Model' },
@@ -76,7 +105,7 @@ const Bottles = () => {
   const { showImage, showResults } = machine.states[appState];
 
   return (
-    <div className="page-wrap">
+    <div>
       <div>
         <h1>Bottle Type Finder</h1>
         <h3>Insert Photo of Bottle to be Recycled</h3>
@@ -94,11 +123,14 @@ const Bottles = () => {
       />
       {showResults && (
         <ul>
-          {results.map(({ className, probability }) => (
-            <li className="bottle-li" key={className}>{`${className}: %${(probability * 100).toFixed(
-              2
-            )}`}</li>
-          ))}
+          <li>
+            <div>
+              {`Well done! You are recycling a ${answers}!`}
+            </div>
+          </li>
+          <li>
+            {noBottle}
+          </li>
         </ul>
       )}
       <button className="btn" onClick={actionButton[appState].action || (() => {})}>

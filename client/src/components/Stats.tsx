@@ -15,11 +15,10 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Tips from './Tips';
 import Weather from './Weather';
-
+import Bottles from './Bottles';
 interface AppState {
   wash?: number;
   dish?: number;
-  ac?: number;
   screen?: number;
   meat?: number;
   dine?: number;
@@ -27,29 +26,40 @@ interface AppState {
   degrees?: number;
   handleThermostat?: () => void;
   func?: () => void;
+  func2?: () => void;
 }
 
 const Stats = (props: AppState): React.ReactElement => {
   const [miles, setMiles] = useState(1);
   const handleChange = (event, newValue): void => {
     setMiles(newValue);
+  };
 
+  const [idealSetting, setIdealSetting] = useState(68);
+  const getIdealTemp = (outsideTemp: number): void => {
+    if (outsideTemp > 78) {
+      setIdealSetting(78);
+    } else if (outsideTemp < 78 && outsideTemp > 70) {
+      setIdealSetting(74);
+    } else {
+      setIdealSetting(68);
+    }
   };
 
   const [degrees, setDegrees] = useState(60);
   const handleThermostat = (event, newValue): void => {
     setDegrees(newValue);
-
+    getIdealTemp(newValue);
   };
-  const [bottles, setBottles] = useState(1);
 
+  const [bottles, setBottles] = useState(1);
   const bottleChange = (event, newValue): void => {
     setBottles(newValue);
-
   };
 
   const [meatCount, setMeatCount] = useState(0);
   const [dineCount, setDineCount] = useState(0);
+
   const handleMeatIncrement = (): void => {
     setMeatCount(meatCount + 1);
   };
@@ -57,6 +67,7 @@ const Stats = (props: AppState): React.ReactElement => {
   const handleMeatDecrement = (): void => {
     setMeatCount(meatCount - 1);
   };
+
   const handleDineIncrement = (): void => {
     setDineCount(dineCount + 1);
   };
@@ -64,6 +75,7 @@ const Stats = (props: AppState): React.ReactElement => {
   const handleDineDecrement = (): void => {
     setDineCount(dineCount - 1);
   };
+
   const [dishCount, setDishCount] = useState(0);
   const [washCount, setWashCount] = useState(0);
   const handleDishIncrement = (): void => {
@@ -82,8 +94,13 @@ const Stats = (props: AppState): React.ReactElement => {
   };
   const [dishECount, setDishECount] = useState(0);
   const [washECount, setWashECount] = useState(0);
-  const [acHeatCount, setAcHeatCount] = useState(0);
   const [screenCount, setScreenCount] = useState(0);
+
+  const [tensor, setTensor] = useState(false);
+  const handleTensor = (): void => {
+    setTensor(true);
+  };
+
   const handleDishEIncrement = (): void => {
     setDishECount(dishECount + 1);
   };
@@ -98,13 +115,7 @@ const Stats = (props: AppState): React.ReactElement => {
   const handleScreenDecrement = (): void => {
     setScreenCount(screenCount - 1);
   };
-  const handleACIncrement = (): void => {
-    setAcHeatCount(acHeatCount + 1);
-  };
 
-  const handleACDecrement = (): void => {
-    setAcHeatCount(acHeatCount - 1);
-  };
   const handleWashEIncrement = (): void => {
     setWashECount(washECount + 1);
   };
@@ -112,6 +123,7 @@ const Stats = (props: AppState): React.ReactElement => {
   const handleWashEDecrement = (): void => {
     setWashECount(washECount - 1);
   };
+
   const mileageAlg = (mile): number => {
     const num = 200 - mile;
     let total = 0;
@@ -123,6 +135,7 @@ const Stats = (props: AppState): React.ReactElement => {
     }
     return total;
   };
+
   const meat_dineAlg = (dine, meat): number => {
     let dineTotal = 0;
     let meatTotal = 0;
@@ -132,8 +145,8 @@ const Stats = (props: AppState): React.ReactElement => {
     meatTotal = meatNum * 2;
 
     return dineTotal + meatTotal;
-
   };
+
   const waterAlg = (dishes, washing): number => {
     let dishTotal = 0;
     let washTotal = 0;
@@ -144,6 +157,24 @@ const Stats = (props: AppState): React.ReactElement => {
 
     return dishTotal + washTotal;
   };
+
+  const acHeatAlg = (thermostatSetting: number): number => {
+    let acHeatDifference = 0;
+    if (thermostatSetting === 60) {
+      acHeatDifference = 5;
+    } else if (idealSetting === 78) {
+      acHeatDifference += (thermostatSetting - idealSetting);
+    } else if (idealSetting === 68) {
+      acHeatDifference += (idealSetting - thermostatSetting);
+    } else if (idealSetting === 74) {
+      if (thermostatSetting >= 74) {
+        acHeatDifference = idealSetting - thermostatSetting;
+      } else {
+        acHeatDifference = thermostatSetting - idealSetting;
+      }
+    } return acHeatDifference;
+  };
+
   const energyAlg = (dishes, washing, acHeat, screenTime): number => {
     let dishTotal = 0;
     let washTotal = 0;
@@ -152,27 +183,35 @@ const Stats = (props: AppState): React.ReactElement => {
     const dishNum = 3 - dishes;
     const washNum = 4 - washing;
     const screenNum = 20 - screenTime;
-    const acNum = 10 - acHeat;
     dishTotal = dishNum * 5;
     washTotal = washNum * 5;
     screenTotal = screenNum * 1;
-    acTotal = acNum * 3;
+    acTotal = acHeat * 3;
 
-    //console.log('dish', dishTotal, 'wash', washTotal, 'screen', screenTotal, 'ac', acTotal);
-
+    console.info('acTotal alg * 3', acTotal);
     return dishTotal + washTotal + acTotal + screenTotal;
-
   };
+
   const submit = (): void => {
-    console.info('where is this?', degrees);
+    console.info('degrees submitted', degrees);
+    console.info('this is tensor', tensor);
 
     const mileTotal = mileageAlg(miles);
     const meatDineTotal = meat_dineAlg(dineCount, meatCount);
     const waterTotal = waterAlg(dishCount, washCount);
-    const energyTotal = energyAlg(dishECount, washECount, acHeatCount, screenCount);
-    const bottleTotal = bottles * 1.5;
+    const energyTotal = energyAlg(dishECount, washECount, acHeatAlg(degrees), screenCount);
+
+    let bottleTotal = 0;
+    if (tensor === true) {
+      bottleTotal = bottles * 1.5;
+    } else {
+      bottleTotal = bottles * 1;
+    }
+    console.info('bottleTotal', bottleTotal);
+
     const final = (mileTotal + meatDineTotal + waterTotal + bottleTotal + energyTotal);
     console.info('final', final);
+
     const data = {
       meat_dine: meatDineTotal,
       energy: energyTotal,
@@ -188,7 +227,6 @@ const Stats = (props: AppState): React.ReactElement => {
       .catch((err: string) => { console.warn(err); });
     setMiles(0);
     setBottles(0);
-    setAcHeatCount(0);
     setDineCount(0);
     setDishCount(0);
     setDishECount(0);
@@ -197,20 +235,21 @@ const Stats = (props: AppState): React.ReactElement => {
     setWashCount(0);
     setWashECount(0);
     setDegrees(60);
+    setIdealSetting(68);
+    setTensor(false);
   };
+
   const checkDate = (): void => {
     const date = new Date();
-
     if (date.getDay() === 7 && date.getHours() === 24) {
       submit();
     }
   };
 
-  const dateLoop = setInterval(function() {
+  const dateLoop = setInterval(() => {
     checkDate();
-
-
   }, 60000);
+
   return (
     <div className='page-wrap'>
       <h1>Log your weekly stats</h1>
@@ -219,73 +258,70 @@ const Stats = (props: AppState): React.ReactElement => {
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
+          id="panel1a-header">
           <Typography >Mileage</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Mileage miles={miles} func={handleChange} />
-
         </AccordionDetails>
       </Accordion>
+
       <Accordion className='stats'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
+          id="panel2a-header">
           <Typography >Recycling</Typography>
         </AccordionSummary>
         <AccordionDetails>
-
           <Recycling miles={bottles} func={bottleChange}/>
         </AccordionDetails>
+        <div className='recycling-wrap'>
+          <Bottles func2={handleTensor}/>
+        </div>
       </Accordion>
+
       <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
+          id="panel3a-header">
           <Typography >Energy</Typography>
         </AccordionSummary>
         <div className='weather-wrap'>
           <Weather />
         </div>
         <AccordionDetails>
-          <Energy ac={acHeatCount} screen={screenCount} wash={washECount} dish={dishECount} degrees={degrees} handleThermostat={handleThermostat} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement, handleACIncrement, handleACDecrement]}/>
+          <Energy screen={screenCount} wash={washECount} dish={dishECount} degrees={degrees} handleThermostat={handleThermostat} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement]}/>
         </AccordionDetails>
       </Accordion>
+
       <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
+          id="panel3a-header">
           <Typography >Water</Typography>
         </AccordionSummary>
         <AccordionDetails>
-
           <Water wash={washCount} dish={dishCount} func={[handleDishDecrement, handleDishIncrement, handleWashIncrement, handleWashDecrement]}/>
         </AccordionDetails>
       </Accordion>
+
       <Accordion className='stats' >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
+          id="panel3a-header">
           <Typography >Meat and Dining out</Typography>
         </AccordionSummary>
         <AccordionDetails>
-
           <Meat_Dine meat={meatCount} dine={dineCount} func={[handleMeatDecrement, handleMeatIncrement, handleDineIncrement, handleDineDecrement]}/>
         </AccordionDetails>
       </Accordion>
+
       <h1></h1>
-      < button className='btn' onClick={submit}>Submit</button>
-
-
+      <button className='btn' onClick={submit}>Submit</button>
     </div>
   );
 };
