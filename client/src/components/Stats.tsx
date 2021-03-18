@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Mileage from './Stat Entries/Mileage';
 import Recycling from './Stat Entries/Recycling';
-import Water from './Stat Entries/Water';
 import Energy from './Stat Entries/Energy';
 
 import Meat_Dine from './Stat Entries/Meat_Dine';
@@ -198,7 +197,7 @@ const Stats = (props: AppState): React.ReactElement => {
 
     const mileTotal = mileageAlg(miles);
     const meatDineTotal = meat_dineAlg(dineCount, meatCount);
-    const waterTotal = waterAlg(dishCount, washCount);
+    const waterTotal = waterAlg(dishECount, washECount);
     const energyTotal = energyAlg(dishECount, washECount, acHeatAlg(degrees), screenCount);
 
     let bottleTotal = 0;
@@ -286,7 +285,7 @@ const Stats = (props: AppState): React.ReactElement => {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
           id="panel3a-header">
-          <Typography >Energy</Typography>
+          <Typography >Energy and Water</Typography>
         </AccordionSummary>
         <div className='weather-wrap'>
           <Weather />
@@ -296,17 +295,7 @@ const Stats = (props: AppState): React.ReactElement => {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion className='stats' >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header">
-          <Typography >Water</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Water wash={washCount} dish={dishCount} func={[handleDishDecrement, handleDishIncrement, handleWashIncrement, handleWashDecrement]}/>
-        </AccordionDetails>
-      </Accordion>
+
 
       <Accordion className='stats' >
         <AccordionSummary
