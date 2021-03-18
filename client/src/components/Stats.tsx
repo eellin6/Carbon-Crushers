@@ -14,6 +14,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Tips from './Tips';
+import Bottles from './Bottles';
 interface AppState {
   wash?: number;
   dish?: number;
@@ -23,9 +24,10 @@ interface AppState {
   dine?: number;
   miles?: number;
   func?: () => void;
+  func2?: () => void;
 }
 
-export default function Stats (props: AppState): React.ReactElement {
+const Stats = (props: AppState): React.ReactElement => {
   const [miles, setMiles] = useState(1);
   const handleChange = (event, newValue): void => {
     setMiles(newValue);
@@ -40,6 +42,8 @@ export default function Stats (props: AppState): React.ReactElement {
 
   const [meatCount, setMeatCount] = useState(0);
   const [dineCount, setDineCount] = useState(0);
+
+
   const handleMeatIncrement = (): void => {
     setMeatCount(meatCount + 1);
   };
@@ -74,6 +78,12 @@ export default function Stats (props: AppState): React.ReactElement {
   const [washECount, setWashECount] = useState(0);
   const [acHeatCount, setAcHeatCount] = useState(0);
   const [screenCount, setScreenCount] = useState(0);
+  const [tensor, setTensor] = useState(false);
+
+  const handleTensor = (): void => {
+    setTensor(true);
+  };
+
   const handleDishEIncrement = (): void => {
     setDishECount(dishECount + 1);
   };
@@ -154,12 +164,25 @@ export default function Stats (props: AppState): React.ReactElement {
 
   };
   const submit = (): void => {
+    console.info('this is tensor', tensor);
+    // let tensorBottle = 1;
+    // if (tensor === true) {
+    //   tensor
+    // };
 
     const mileTotal = mileageAlg(miles);
     const meatDineTotal = meat_dineAlg(dineCount, meatCount);
     const waterTotal = waterAlg(dishCount, washCount);
     const energyTotal = energyAlg(dishECount, washECount, acHeatCount, screenCount);
-    const bottleTotal = bottles * 1.5;
+
+    let bottleTotal = 0;
+    if (tensor === true) {
+      bottleTotal = bottles * 1.5;
+    } else {
+      bottleTotal = bottles * 1;
+    }
+    console.info('bottleTotal', bottleTotal);
+
     const final = (mileTotal + meatDineTotal + waterTotal + bottleTotal + energyTotal);
     console.info('final', final);
     const data = {
@@ -185,6 +208,7 @@ export default function Stats (props: AppState): React.ReactElement {
     setScreenCount(0);
     setWashCount(0);
     setWashECount(0);
+    setTensor(false);
   };
   const checkDate = (): void => {
     const date = new Date();
@@ -194,7 +218,7 @@ export default function Stats (props: AppState): React.ReactElement {
     }
   };
 
-  const dateLoop = setInterval(function() {
+  const dateLoop = setInterval(() => {
     checkDate();
 
 
@@ -224,10 +248,12 @@ export default function Stats (props: AppState): React.ReactElement {
         >
           <Typography >Recycling</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-
+        <AccordionDetails className='recycling'>
           <Recycling miles={bottles} func={bottleChange}/>
         </AccordionDetails>
+        <div className='recycling-wrap'>
+          <Bottles func2={handleTensor}/>
+        </div>
       </Accordion>
       <Accordion className='stats' >
         <AccordionSummary
@@ -274,4 +300,7 @@ export default function Stats (props: AppState): React.ReactElement {
 
     </div>
   );
-}
+};
+
+export default Stats;
+
