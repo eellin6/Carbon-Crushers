@@ -10,6 +10,7 @@ const passport = require('passport');
 require('../passport.config.ts');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const axios = require('axios');
 
 
 const port = process.env.PORT || 8080;
@@ -18,6 +19,8 @@ const app = express();
 const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
 const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision, Friends, Updates } = require('./db/database.ts');
+
+const { WEATHERBIT_TOKEN, GEOLOCATION_TOKEN } = process.env;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -233,6 +236,24 @@ app.get('/friendRequests', (req: Request, res: Response) => {
   Updates.findAll({where: {username: req.cookies.crushers }})
     .then((data) => res.json(data))
     .catch((err: string) => console.warn(err));
+});
+
+app.get('/weather', (req: Request, res: Response) => {
+  const { latitude, longitude } = req.query;
+  const url = `http://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${WEATHERBIT_TOKEN}`;
+
+  return axios.get(url)
+    .then(({ data }) => res.status(200).send(data))
+    .catch(() => res.status(404));
+});
+
+app.post('/location', (req: Request, res: Response) => {
+  const { ip } = req.body;
+  const url = `http://api.ipstack.com/${ip}?access_key=${GEOLOCATION_TOKEN}`;
+
+  return axios.get(url)
+    .then(({ data }) => res.status(200).send(data))
+    .catch(() => res.status(404));
 });
 
 app.get('*', (req: Request, res: Response) => {
