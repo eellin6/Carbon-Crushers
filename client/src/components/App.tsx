@@ -15,7 +15,7 @@ import LoginData from '../models/LoginData';
 import StatsBreakdown from './StatsBreakdown';
 import Friends from './Friends';
 import Leaderboard from './Leaderboard';
-import Bottles from './Bottles.jsx';
+import Bottles from './Bottles';
 import Notifications from './Notifications';
 
 const App: React.FC = (): React.ReactElement => {
