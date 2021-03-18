@@ -24,13 +24,21 @@ interface AppState {
   meat?: number;
   dine?: number;
   miles?: number;
+  degrees?: number;
+  handleThermostat?: () => void;
   func?: () => void;
 }
 
-export default function Stats (props: AppState): React.ReactElement {
+const Stats = (props: AppState): React.ReactElement => {
   const [miles, setMiles] = useState(1);
   const handleChange = (event, newValue): void => {
     setMiles(newValue);
+
+  };
+
+  const [degrees, setDegrees] = useState(60);
+  const handleThermostat = (event, newValue): void => {
+    setDegrees(newValue);
 
   };
   const [bottles, setBottles] = useState(1);
@@ -156,6 +164,7 @@ export default function Stats (props: AppState): React.ReactElement {
 
   };
   const submit = (): void => {
+    console.info('where is this?', degrees);
 
     const mileTotal = mileageAlg(miles);
     const meatDineTotal = meat_dineAlg(dineCount, meatCount);
@@ -187,6 +196,7 @@ export default function Stats (props: AppState): React.ReactElement {
     setScreenCount(0);
     setWashCount(0);
     setWashECount(0);
+    setDegrees(60);
   };
   const checkDate = (): void => {
     const date = new Date();
@@ -243,7 +253,7 @@ export default function Stats (props: AppState): React.ReactElement {
           <Weather />
         </div>
         <AccordionDetails>
-          <Energy ac={acHeatCount} screen={screenCount} wash={washECount} dish={dishECount} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement, handleACIncrement, handleACDecrement]}/>
+          <Energy ac={acHeatCount} screen={screenCount} wash={washECount} dish={dishECount} degrees={degrees} handleThermostat={handleThermostat} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement, handleACIncrement, handleACDecrement]}/>
         </AccordionDetails>
       </Accordion>
       <Accordion className='stats' >
@@ -278,4 +288,6 @@ export default function Stats (props: AppState): React.ReactElement {
 
     </div>
   );
-}
+};
+
+export default Stats;
