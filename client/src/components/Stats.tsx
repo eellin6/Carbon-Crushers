@@ -14,6 +14,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Tips from './Tips';
+import Weather from './Weather';
+
 interface AppState {
   wash?: number;
   dish?: number;
@@ -237,8 +239,10 @@ export default function Stats (props: AppState): React.ReactElement {
         >
           <Typography >Energy</Typography>
         </AccordionSummary>
+        <div className='weather-wrap'>
+          <Weather />
+        </div>
         <AccordionDetails>
-
           <Energy ac={acHeatCount} screen={screenCount} wash={washECount} dish={dishECount} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement, handleACIncrement, handleACDecrement]}/>
         </AccordionDetails>
       </Accordion>

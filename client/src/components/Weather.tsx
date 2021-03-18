@@ -1,15 +1,35 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const Weather = (): React.ReactElement => {
   const [ temperature, setTemperature ] = useState(0);
-  const [ , setIdealTemp ] = useState(0);
+  const [ idealTemp, setIdealTemp ] = useState(0);
+  const [ , setLatitude ] = useState(0);
+  const [ , setLongitude ] = useState(0);
+
+  const getIdealTemp = (outsideTemp: number): void => {
+    outsideTemp > 78 ? setIdealTemp(78) : setIdealTemp(68);
+  };
+
+  const getWeather = (latitude: number, longitude: number): void => {
+    axios.get<AxiosRequestConfig>('/weather', {params: {latitude, longitude}})
+      .then(({ data: { data } }: AxiosResponse) => {
+        const { temp }: { temp: number } = data[0];
+        setTemperature(celsiusToFahrenheit(temp));
+        getIdealTemp(temperature);
+      })
+      .catch((err) => console.warn(err));
+  };
 
   const getLocation = (): Promise<void> => {
-    return axios.get('https://api.ipify.org')
-      .then(({ data }) => axios.post('/location', { ip: data }))
-      .then(({ data: { latitude, longitude } }) => {
+    return axios.get<AxiosRequestConfig>('https://api.ipify.org')
+      .then(({ data }: AxiosResponse) => {
+        return axios.post<AxiosRequestConfig>('/location', { ip: data });
+      })
+      .then(({ data: { latitude, longitude } }: AxiosResponse) => {
+        setLatitude(latitude);
+        setLongitude(longitude);
         getWeather(latitude, longitude);
       })
       .catch((err) => console.warn(err));
@@ -19,28 +39,15 @@ const Weather = (): React.ReactElement => {
     return celsius * (9 / 5) + 32;
   };
 
-  const getIdealTemp = (outsideTemp): void => {
-    outsideTemp > 78 ? setIdealTemp(78) : setIdealTemp(68);
-  };
-
-  const getWeather = (lat: number, long: number): void => {
-    axios.get<AxiosResponse>('/weather')
-      .then(({ data }: AxiosResponse) => {
-        setTemperature(celsiusToFahrenheit(data));
-        getIdealTemp(temperature);
-      })
-      .catch((err) => console.warn(err));
-  };
-
   useEffect (() => {
     getLocation();
   }, []);
 
 
   return (
-    <div className='weather-wrap'>
+    <div>
       <h3>It's {temperature}°F</h3>
-      <p>The ideal temperature for your thermostat today is 74°</p>
+      <p>The ideal temperature for your thermostat today is {idealTemp}°F</p>
     </div>
   );
 

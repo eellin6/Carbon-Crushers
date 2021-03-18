@@ -225,3 +225,17 @@ a:hover {
 	position: absolute;
 	z-index: -1;
 }
+
+.weather-wrap {
+	width: 86%;
+	position: relative;
+	padding: 2%;
+	border-radius: 5px;
+	background-color: rgb(242, 242, 242);
+	margin: 0 5%;
+}
+
+.weather-wrap p {
+	text-align: center;
+	padding: 0 5%;
+}

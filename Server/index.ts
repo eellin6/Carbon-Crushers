@@ -20,6 +20,8 @@ const cloudinary = require('cloudinary');
 const database = require('./db/database.ts');
 const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision, Friends, Updates } = require('./db/database.ts');
 
+const { WEATHERBIT_TOKEN, GEOLOCATION_TOKEN } = process.env;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(dist));
@@ -236,11 +238,11 @@ app.get('/friendRequests', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
-app.get('/weather', (req: Request, res: Response) => {
-  const { latitude, longitude } = req.body;
-  const url = `http://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${process.env.WEATHERBIT_TOKEN}`;
+app.get('/weather', async (req: Request, res: Response) => {
+  const { latitude, longitude } = req.query;
+  const url = `http://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${WEATHERBIT_TOKEN}`;
 
-  return axios.get(url)
+  await axios.get(url)
     .then(({ data }) => res.status(200).send(data))
     .catch((err: string) => {
       console.warn(err);
@@ -248,11 +250,11 @@ app.get('/weather', (req: Request, res: Response) => {
     });
 });
 
-app.post('/location', (req: Request, res: Response) => {
+app.post('/location', async (req: Request, res: Response) => {
   const { ip } = req.body;
-  const url = `http://api.ipstack.com/${ip}?access_key=${process.env.GEOLOCATION_TOKEN}`;
+  const url = `http://api.ipstack.com/${ip}?access_key=${GEOLOCATION_TOKEN}`;
 
-  return axios.get(url)
+  await axios.get(url)
     .then(({ data }) => res.status(200).send(data))
     .catch((err: string) => {
       console.warn(err);
