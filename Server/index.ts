@@ -238,28 +238,22 @@ app.get('/friendRequests', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
-app.get('/weather', async (req: Request, res: Response) => {
+app.get('/weather', (req: Request, res: Response) => {
   const { latitude, longitude } = req.query;
   const url = `http://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${WEATHERBIT_TOKEN}`;
 
-  await axios.get(url)
+  return axios.get(url)
     .then(({ data }) => res.status(200).send(data))
-    .catch((err: string) => {
-      console.warn(err);
-      res.status(404);
-    });
+    .catch(() => res.status(404));
 });
 
-app.post('/location', async (req: Request, res: Response) => {
+app.post('/location', (req: Request, res: Response) => {
   const { ip } = req.body;
   const url = `http://api.ipstack.com/${ip}?access_key=${GEOLOCATION_TOKEN}`;
 
-  await axios.get(url)
+  return axios.get(url)
     .then(({ data }) => res.status(200).send(data))
-    .catch((err: string) => {
-      console.warn(err);
-      res.status(404);
-    });
+    .catch(() => res.status(404));
 });
 
 app.get('*', (req: Request, res: Response) => {

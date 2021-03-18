@@ -4,12 +4,22 @@ import axios, { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const Weather = (): React.ReactElement => {
   const [ temperature, setTemperature ] = useState(0);
-  const [ idealTemp, setIdealTemp ] = useState(0);
+  const [ idealTemp, setIdealTemp ] = useState('');
   const [ , setLatitude ] = useState(0);
   const [ , setLongitude ] = useState(0);
 
   const getIdealTemp = (outsideTemp: number): void => {
-    outsideTemp > 78 ? setIdealTemp(78) : setIdealTemp(68);
+    const hot = 'We know it\'s hot out there but try to keep your thermostat close to 78°F. If you need to adjust it for comfort, decrease by one degree at a time to find your sweet spot.';
+    const warm = 'Open some windows! Give your A/C a break and let some fresh air in.';
+    const cold = 'Brr...ring on the blankets! The ideal temperature for your thermostat today is 68°. If you\'re still too chilly, increase it one degree at a time until you find your cozy climate';
+
+    if (outsideTemp > 78) {
+      setIdealTemp(hot);
+    } else if (outsideTemp < 78 && outsideTemp > 70) {
+      setIdealTemp(warm);
+    } else {
+      setIdealTemp(cold);
+    }
   };
 
   const getWeather = (latitude: number, longitude: number): void => {
@@ -36,7 +46,7 @@ const Weather = (): React.ReactElement => {
   };
 
   const celsiusToFahrenheit = (celsius): number => {
-    return celsius * (9 / 5) + 32;
+    return Math.round(celsius * (9 / 5) + 32);
   };
 
   useEffect (() => {
@@ -47,7 +57,7 @@ const Weather = (): React.ReactElement => {
   return (
     <div>
       <h3>It's {temperature}°F</h3>
-      <p>The ideal temperature for your thermostat today is {idealTemp}°F</p>
+      <p>{idealTemp}</p>
     </div>
   );
 
