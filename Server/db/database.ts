@@ -13,13 +13,6 @@ const db = new Sequelize(database, username, password, {
   logging: false
 });
 
-// const db = new Sequelize('crushers', 'root', '', {
-//   host: 'localhost',
-//   dialect: 'mysql',
-//   // logging: false
-// });
-
-
 db.authenticate()
   .then(() => console.info('CONNECTED TO DATABASE'))
   .catch((err = 'err') => console.warn('DB ERROR', err));
@@ -374,6 +367,12 @@ const addShower = async (name: string, time: number ): Promise<ShowerAttributes>
   return newShower.save();
 };
 
+const getAllShowers = (name: string ): ShowerAttributes => {
+  if (name) {
+    return Showers.findAll({ where: { name: name } });
+  }
+};
+
 const updateVision = (name: string, vision: string): UserAttributes => {
   return Users.update({ vision },
     { return: true, where: { name } })
@@ -396,5 +395,6 @@ module.exports = {
   findUser,
   getAllStats,
   addShower,
-  updateVision
+  updateVision,
+  getAllShowers
 };

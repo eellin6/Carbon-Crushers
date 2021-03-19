@@ -2,7 +2,6 @@ import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Slider } from '@material-ui/core';
-import EnergyData from '../../models/EnergyData';
 
 const Energy = ({wash, dish, screen, func, degrees, handleThermostat}): React.ReactElement => {
   const dishECount = dish;
