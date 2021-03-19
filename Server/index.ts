@@ -17,8 +17,8 @@ const port = process.env.PORT || 8080;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
-const database = require('./db/database.ts');
-const { addUser, findUser, Users, Stats, getAllStats, addShower, updateVision, Friends, Updates } = require('./db/database.ts');
+require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats, addShower, getAllShowers, updateVision, Friends, Updates } = require('./db/database.ts');
 
 const { WEATHERBIT_TOKEN, GEOLOCATION_TOKEN } = process.env;
 
@@ -28,7 +28,7 @@ app.use('/', express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-// line 30 - 68 all used for google login
+
 app.use(session({
   secret: process.env.clientSecret,
   saveUninitialized: false,
@@ -93,15 +93,9 @@ app.get('/statsData', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
-// app.get('/bottles', (req: Request, res: Response) => {
-//   findUser(req.cookies.crushers)
-//     .then((data) => res.json(data))
-//     .catch((err: string) => console.warn('this here', err));
-// });
-
 app.post('/statsData', (req: Request, res: Response) => {
   const name = req.cookies.crushers;
-  const {meat_dine, energy, water, recycling, mileage, total} = req.body;
+  const { meat_dine, energy, water, recycling, mileage, total } = req.body;
   const newStats = new Stats({meat_dine, energy, water, recycling, mileage, total, name});
   newStats.save()
     .then((stuff) => console.info('stats saved', stuff))
@@ -116,6 +110,17 @@ app.post('/shower', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
+app.get('/shower', (req: Request, res: Response) => {
+  const name: string = req.cookies.crushers;
+  getAllShowers(name)
+    .then((data) => {
+      const showerData = data.reduce((totalTime, curShower) => totalTime.time += curShower.time);
+      const userShowerAvg: number = showerData / data.length;
+      res.status(200).json(userShowerAvg);
+    })
+    .catch((err: string) => console.warn(err));
+});
+
 app.put('/vision', (req: Request, res: Response) => {
   const name: string = req.cookies.crushers;
   const { visionType } = req.body;
@@ -123,29 +128,22 @@ app.put('/vision', (req: Request, res: Response) => {
     .then((data: string) => res.send(data))
     .catch((err: string) => console.warn(err));
 });
+
 app.post('/friends', (req: Request, res: Response) => {
   findUser(req.body.name)
     .then((data) => res.json(data))
     .catch((err: string) => console.warn(err));
 });
-app.get('/friendsData', async (req: Request, res: Response, next: any) => {
 
+app.get('/friendsData', async (req: Request, res: Response) => {
   Friends.findAll({ where: { userName: req.cookies.crushers } })
     .then(async (data) => {
-
-
-      // console.info('friendsData', data);
       Promise.all(data.map(friend => {
         return Stats.findAll({where: {name: friend.dataValues.friendsName }});
-      })
-
-      )
+      }))
         .then(arrOfAllResolvedItems => {
-          //console.info('array of resolved', arrOfAllResolvedItems);
           const arr = [];
           arrOfAllResolvedItems.forEach((subArr: any) => { arr.push(subArr[subArr.length - 1]); });
-          console.info('THIS IS THE ANSWER', arr);
-
           res.send(arr);
         });
     })

@@ -1,7 +1,7 @@
 /*eslint global-require: "error"*/
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Mileage from './Stat Entries/Mileage';
 import Recycling from './Stat Entries/Recycling';
 import Energy from './Stat Entries/Energy';
@@ -77,20 +77,7 @@ const Stats = (props: AppState): React.ReactElement => {
 
   const [dishCount, setDishCount] = useState(0);
   const [washCount, setWashCount] = useState(0);
-  const handleDishIncrement = (): void => {
-    setDishCount(dishCount + 1);
-  };
 
-  const handleDishDecrement = (): void => {
-    setDishCount(dishCount - 1);
-  };
-  const handleWashIncrement = (): void => {
-    setWashCount(washCount + 1);
-  };
-
-  const handleWashDecrement = (): void => {
-    setWashCount(washCount - 1);
-  };
   const [dishECount, setDishECount] = useState(0);
   const [washECount, setWashECount] = useState(0);
   const [screenCount, setScreenCount] = useState(0);
@@ -146,7 +133,7 @@ const Stats = (props: AppState): React.ReactElement => {
     return dineTotal + meatTotal;
   };
 
-  const waterAlg = (dishes, washing): number => {
+  const waterAlg = (dishes, washing, showers): number => {
     let dishTotal = 0;
     let washTotal = 0;
     const dishNum = 3 - dishes;
@@ -154,8 +141,24 @@ const Stats = (props: AppState): React.ReactElement => {
     dishTotal = dishNum * 5;
     washTotal = washNum * 5;
 
-    return dishTotal + washTotal;
+    return dishTotal + washTotal + showers;
   };
+
+  const [showerAvg, setShowerAvg] = useState(0);
+  const showerAlg = (): void => {
+    axios.get('/shower')
+      .then(({ data }): void => {
+        const worldAvgShower = 480; // average shower in seconds
+        const showerDifference = worldAvgShower - data;
+        const showerPoints = Math.floor(showerDifference / 30) * 2;
+        setShowerAvg(showerPoints);
+      })
+      .catch((err: string) => console.warn(err));
+  };
+
+  useEffect (() => {
+    showerAlg();
+  }, []);
 
   const acHeatAlg = (thermostatSetting: number): number => {
     let acHeatDifference = 0;
@@ -192,12 +195,14 @@ const Stats = (props: AppState): React.ReactElement => {
   };
 
   const submit = (): void => {
+
     console.info('degrees submitted', degrees);
+    console.info('shower seconds', showerAvg);
     console.info('this is tensor', tensor);
 
     const mileTotal = mileageAlg(miles);
     const meatDineTotal = meat_dineAlg(dineCount, meatCount);
-    const waterTotal = waterAlg(dishECount, washECount);
+    const waterTotal = waterAlg(dishECount, washECount, showerAvg);
     const energyTotal = energyAlg(dishECount, washECount, acHeatAlg(degrees), screenCount);
 
     let bottleTotal = 0;
@@ -219,6 +224,7 @@ const Stats = (props: AppState): React.ReactElement => {
       mileage: mileTotal,
       total: final,
     };
+
     axios.post('/statsData', data)
       .then((stuff) => {
         console.info(stuff);
@@ -294,8 +300,6 @@ const Stats = (props: AppState): React.ReactElement => {
           <Energy screen={screenCount} wash={washECount} dish={dishECount} degrees={degrees} handleThermostat={handleThermostat} func={[handleDishEIncrement, handleDishEDecrement, handleWashEIncrement, handleWashEDecrement, handleScreenIncrement, handleScreenDecrement]}/>
         </AccordionDetails>
       </Accordion>
-
-
 
       <Accordion className='stats' >
         <AccordionSummary
