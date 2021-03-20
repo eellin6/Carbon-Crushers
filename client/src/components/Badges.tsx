@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css';
 const Badges = (): React.ReactElement => {
   const [statBadges, setStatBadges] = useState([]);
+
 
 
   useEffect(() => {
@@ -14,45 +16,50 @@ const Badges = (): React.ReactElement => {
     axios.get('/statsData')
       .then(({ data }) => {
         const mostRecent = data[data.length - 1];
-        if (mostRecent.meat_dine > 18) {
+        if (mostRecent.meat_dine > 14) {
           axios.post('/badges',
             {params:
               { badge: 'Veggie Victor',
                 img: 'https://i.ibb.co/syFp2sB/badges-veggie-victor.png'}})
-            .then(() => console.info('meat', data))
+            .then()
             .catch((err) => console.warn(err));
+
         }
         if (mostRecent.energy > 25) {
           axios.post('/badges',
             {params:
               { badge: 'Power Puncher',
                 img: 'https://i.ibb.co/gV9qFwy/badges-power-puncher.png'}})
-            .then(() => console.info('energy badge earned'))
+            .then()
             .catch((err) => console.warn(err));
+
         }
         if (mostRecent.water > 25) {
           axios.post('/badges',
             {params:
               { badge: 'Water Wizard',
                 img: 'https://i.ibb.co/R7hztRy/badges-water-wizard.png'}})
-            .then(() => console.info('water badge earned'))
+            .then()
             .catch((err) => console.warn(err));
+
         }
         if (mostRecent.recycling > 40) {
           axios.post('/badges',
             {params:
               { badge: 'Rockin Recycler',
                 img: 'https://i.ibb.co/C2by1fr/badges-rockin-recycler.png'}})
-            .then(() => console.info('recycling badge earned'))
+            .then()
             .catch((err) => console.warn(err));
+
         }
         if (mostRecent.mileage > 35) {
           axios.post('/badges',
             {params:
               { badge: 'Road Warrior',
                 img: 'https://i.ibb.co/z8LKZHZ/badges-road-warrior.png'}})
-            .then(() => console.info('mileage badge earned'))
+            .then()
             .catch((err) => console.warn(err));
+
         }
       })
       .then(() => {
@@ -82,6 +89,7 @@ const Badges = (): React.ReactElement => {
             })
             }
           </div>
+
       }
     </div>
   );
