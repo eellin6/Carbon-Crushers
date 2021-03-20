@@ -5,6 +5,8 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 	min-height: 100vh;
+	max-width: 100vw;
+	overflow-x: hidden;
 }
 
 #app {
@@ -146,6 +148,10 @@ a:hover {
 	cursor: pointer;
 }
 
+.doughnut-chart-container {
+	width: 94vw;
+}
+
 .stats {
 	border-color: #55bfbf;
 }
@@ -159,7 +165,6 @@ a:hover {
 }
 
 .timer-wrap {
-	/* font-size: 6rem; */
 	max-width: 400px;
 }
 
@@ -247,5 +252,14 @@ a:hover {
 }
 
 .badge-homepage {
-	max-width: 25vw;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 2em;
+}
+
+.badge-img {
+	max-width: 20vw;
+	align-items: center;
+	margin-bottom: 2em;
 }

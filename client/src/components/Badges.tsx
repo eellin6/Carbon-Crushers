@@ -77,13 +77,13 @@ const Badges = (): React.ReactElement => {
       {
         !statBadges
           ? <div>no badges to show</div>
-          : <div>
+          : <div className='badge-homepage'>
             <h2>Your Achievements</h2>
             { statBadges.map(statBadge => {
               const { badge, badge_url }: {badge: string, badge_url: string} = statBadge;
               return ( <div>
                 <h4>{badge}</h4>
-                <img className='badge-homepage' src={`${badge_url}`} />
+                <img className='badge-img' src={`${badge_url}`} />
               </div>
               );
             })
