@@ -61,7 +61,7 @@ h3 {
 
 .btn {
 	margin: 0 auto;
-	margin-top: 50px;
+	margin-top: 10px;
 	padding: 3px 15px;
 	display: flex;
 	background-color: #fdcb60;
@@ -73,6 +73,24 @@ h3 {
 
 .btn-margin {
 	margin-bottom: 10%;
+}
+
+.btn-margin-top {
+	margin-top: 25px;
+}
+
+.center {
+	display: block;
+	margin: 0 auto;
+}
+
+.addFriends {
+	margin-top: 10%;
+	text-align: center;
+}
+
+.friend-name {
+	margin-top: 3%;
 }
 
 .profileDiv {
