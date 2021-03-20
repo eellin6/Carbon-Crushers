@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { draw } from 'patternomaly';
+import Badges from './Badges';
 // import dataTest from '../sample_dataTest';
 // import meatData from '../sample_meat';
 // import recycling from '../sample_recycling';
@@ -83,6 +84,9 @@ const homePage = (): React.ReactElement => {
       <div className="doughnut-chart-container">
         <div className='score'>Weekly Score: {score}</div>
         <Doughnut data={data} />
+      </div>
+      <div>
+        <Badges />
       </div>
     </div>
   );

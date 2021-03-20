@@ -18,7 +18,7 @@ const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
 const cloudinary = require('cloudinary');
 require('./db/database.ts');
-const { addUser, findUser, Users, Stats, getAllStats, addShower, getAllShowers, updateVision, Friends, Updates } = require('./db/database.ts');
+const { addUser, findUser, Users, Stats, getAllStats, addShower, getAllShowers, updateVision, Friends, Updates, Badges } = require('./db/database.ts');
 
 const { WEATHERBIT_TOKEN, GEOLOCATION_TOKEN } = process.env;
 
@@ -252,6 +252,32 @@ app.post('/location', (req: Request, res: Response) => {
   return axios.get(url)
     .then(({ data }) => res.status(200).send(data))
     .catch(() => res.status(404));
+});
+
+app.post('/badges', (req: Request, res: Response) => {
+  const user = req.cookies.crushers;
+  const { badge, img } = req.body.params;
+  console.info(badge, img);
+  return Badges.findOrCreate({
+    badge_url: img,
+    badge: badge,
+    where: {userName: user, badge: badge, badge_url: img}
+  })
+    .then(() => res.status(200))
+    .catch(() => res.status(404));
+});
+
+app.get('/badges', (req: Request, res: Response) => {
+  const user = req.cookies.crushers;
+  Badges.findAll({where: { userName: user }})
+    .then((data) => {
+      console.info('this?', data);
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(404);
+    });
 });
 
 app.get('*', (req: Request, res: Response) => {
