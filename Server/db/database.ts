@@ -182,7 +182,7 @@ interface FriendAttributes {
 }
 class Friends extends Model<FriendAttributes>
   implements FriendAttributes {
-    public id_user!: number | null;3
+    public id_user!: number | null;
     public friendsName!: string | null;
     public userName!: string | null;
     public status!: string | null;
@@ -208,15 +208,17 @@ Friends.init({
 });
 
 interface BadgeAttributes {
-  id_user: number | null
-  badgeName: string | null,
-  badgeStatus: string | null
+  id_user: number | null,
+  userName: string | null,
+  badge: string | null,
+  badge_url: string | null,
 }
 class Badges extends Model<BadgeAttributes>
   implements BadgeAttributes {
     public id_user!: number | null;
-    public badgeName!: string | null;
-    public badgeStatus!: string | null;
+    public userName!: string | null;
+    public badge!: string | null;
+    public badge_url!: string | null;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
@@ -228,9 +230,9 @@ Badges.init({
       key: 'id'
     }
   },
-  badgeName: new DataTypes.STRING,
-  imgUrl: new DataTypes.STRING,
-  badgeStatus: new DataTypes.STRING
+  userName: DataTypes.STRING,
+  badge: DataTypes.STRING,
+  badge_url: DataTypes.STRING,
 },
 {
   tableName: 'Badges',
@@ -338,8 +340,8 @@ Tips.init({
 
 // db.sync({ force: true })
 //   .then(() => {
-//     console.log('Database & tables created!');
-//   }).catch((err: string) => { console.log(err); });
+//     console.info('Database & tables created!');
+//   }).catch((err: string) => { console.info(err); });
 
 const addUser = (name: string, picture: string): UserAttributes => {
   return Users.findOrCreate({ name, picture, where: { name, picture } });
