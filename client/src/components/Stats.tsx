@@ -5,7 +5,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Mileage from './Stat Entries/Mileage';
 import Recycling from './Stat Entries/Recycling';
 import Energy from './Stat Entries/Energy';
-
+import { ToastContainer, toast } from 'react-toastify';
+import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css';
 import Meat_Dine from './Stat Entries/Meat_Dine';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -33,7 +34,21 @@ const Stats = (props: AppState): React.ReactElement => {
   const handleChange = (event, newValue): void => {
     setMiles(newValue);
   };
-
+  const bottleToast = (): void => {
+    toast.success('You earned the Rockin Recycler Badge!');
+  };
+  const waterToast = (): void => {
+    toast.success('You earned the Water Wizard Badge!');
+  };
+  const meatToast = (): void => {
+    toast.success('You earned the Veggie Victor Badge!');
+  };
+  const energyToast = (): void => {
+    toast.success('You earned the Power Puncher Badge!');
+  };
+  const mileToast = (): void => {
+    toast.success('You earned the Road Warrior Badge!');
+  };
   const [idealSetting, setIdealSetting] = useState(68);
   const getIdealTemp = (outsideTemp: number): void => {
     if (outsideTemp > 78) {
@@ -215,6 +230,22 @@ const Stats = (props: AppState): React.ReactElement => {
 
     const final = (mileTotal + meatDineTotal + waterTotal + bottleTotal + energyTotal);
     console.info('final', final);
+    if (meatDineTotal > 14) {
+      meatToast();
+    }
+    if (mileTotal > 35) {
+      mileToast();
+    }
+    if (waterTotal > 25) {
+      waterToast();
+    }
+    if (bottleTotal > 40) {
+      bottleToast();
+    }
+    if (energyTotal > 25) {
+      energyToast();
+    }
+
 
     const data = {
       meat_dine: meatDineTotal,
@@ -315,6 +346,7 @@ const Stats = (props: AppState): React.ReactElement => {
 
       <h1></h1>
       <button className='btn' onClick={submit}>Submit</button>
+      <ToastContainer />
     </div>
   );
 };
