@@ -48,8 +48,16 @@ const Tips = (): React.ReactElement => {
 
   return (
     <div className='tips-wrap'>
-      <h3>Looks like you could use some help with {checkStat(weakestStat)}</h3>
-      <p><span className='tips'>{tip}</span><span className='tips'>{hasResource(resource)}</span></p>
+      {
+        !weakestStat
+          ? <div>
+            <p className='tips'>This is where you'll find tips on how to improve your carbon footprint after you've entered some stats, because small steps add up!</p>
+          </div>
+          : <div>
+            <h3>Looks like you could use some help with {checkStat(weakestStat)}</h3>
+            <p><span className='tips'>{tip}</span><span className='tips'>{hasResource(resource)}</span></p>
+          </div>
+      }
     </div>
   );
 

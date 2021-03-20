@@ -4,9 +4,6 @@ import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { draw } from 'patternomaly';
 import Badges from './Badges';
-// import dataTest from '../sample_dataTest';
-// import meatData from '../sample_meat';
-// import recycling from '../sample_recycling';
 
 const homePage = (): React.ReactElement => {
   const [ name, setName ] = useState('');
@@ -74,16 +71,23 @@ const homePage = (): React.ReactElement => {
         borderColor: ['#FFF'],
       }
     ],
-    labels: ['Recycling', 'Water Consumption', 'Meat & Dining Out', 'Mileage', 'Energy']
+    labels: ['Recycling', 'Water Consumption', 'Meat & Dining Out', 'Mileage', 'Energy'],
+    options: {
+      maintainAspectRatio: false
+    }
   };
 
   return (
     <div className='page-wrap'>
       <h1>Welcome, {name}</h1>
       <h2><i>Here's your Stats</i></h2>
-      <div className="doughnut-chart-container">
+      <div>
         <div className='score'>Weekly Score: {score}</div>
-        <Doughnut data={data} />
+        <div className="doughnut-chart-container">
+          <div className='doughnut-middle'>
+            <Doughnut data={data} />
+          </div>
+        </div>
       </div>
       <div>
         <Badges />
