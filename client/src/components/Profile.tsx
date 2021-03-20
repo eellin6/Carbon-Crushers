@@ -61,7 +61,7 @@ const Profile = (): React.ReactElement => {
 
       {
         !showOrHideSettings
-          ? <button className='btn btn-margin' onClick={openColorSettings}>Update Color Settings</button>
+          ? <button className='btn btn-margin' onClick={openColorSettings}>Change Color Settings</button>
           : (
             <div className='visionCheck'>
               <form action='/vision' method='PUT'>
@@ -75,7 +75,7 @@ const Profile = (): React.ReactElement => {
                   </div>
                 </div>
                 <button className='btn btn-margin' type='button'
-                  onClick={handleSubmit}>Update Color Settings</button>
+                  onClick={handleSubmit}>Save New Color Settings</button>
               </form>
             </div>
           )

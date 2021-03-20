@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 const Badges = (): React.ReactElement => {
   const [statBadges, setStatBadges] = useState([]);
-
-
 
   useEffect(() => {
     statsChecker();
@@ -32,7 +28,6 @@ const Badges = (): React.ReactElement => {
                 img: 'https://i.ibb.co/gV9qFwy/badges-power-puncher.png'}})
             .then()
             .catch((err) => console.warn(err));
-
         }
         if (mostRecent.water > 25) {
           axios.post('/badges',
@@ -64,10 +59,8 @@ const Badges = (): React.ReactElement => {
       })
       .then(() => {
         axios.get('/badges')
-          .then(({ data }) => {
-            setStatBadges(data);
-            // setStatBadges(data);
-          });
+          .then(({ data }) => setStatBadges(data))
+          .catch((err) => console.warn(err));
       });
 
   };
@@ -79,9 +72,9 @@ const Badges = (): React.ReactElement => {
           ? <div>no badges to show</div>
           : <div className='badge-homepage'>
             <h2>Your Achievements</h2>
-            { statBadges.map(statBadge => {
+            { statBadges.map((statBadge, index) => {
               const { badge, badge_url }: {badge: string, badge_url: string} = statBadge;
-              return ( <div>
+              return ( <div key={index}>
                 <h4>{badge}</h4>
                 <img className='badge-img' src={`${badge_url}`} />
               </div>

@@ -236,6 +236,12 @@ app.get('/friendRequests', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
+app.get('/friendRequestsReceived', (req: Request, res: Response) => {
+  Updates.findAll({where: {requests: req.cookies.crushers }})
+    .then((data) => res.json(data))
+    .catch((err: string) => console.warn(err));
+});
+
 app.get('/weather', (req: Request, res: Response) => {
   const { latitude, longitude } = req.query;
   const url = `http://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${WEATHERBIT_TOKEN}`;

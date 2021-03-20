@@ -15,12 +15,10 @@ import LoginData from '../models/LoginData';
 import StatsBreakdown from './StatsBreakdown';
 import Friends from './Friends';
 import Leaderboard from './Leaderboard';
-import Bottles from './Bottles';
 import Notifications from './Notifications';
 
 const App: React.FC = (): React.ReactElement => {
   const [currentStatus, setCurrentStatus] = useState(false);
-  // const [logoutStatus, setLogoutStatus] = useState();
 
   // check if user is logged in
   const getLoginStatus = (): void => {
@@ -58,22 +56,20 @@ const App: React.FC = (): React.ReactElement => {
     path: '/shower',
     element: <Shower />
   };
+
   const statsBreakdownRoute: Route = {
     path: '/statsBreakdown',
     element: <StatsBreakdown/>
   };
+
   const friendsRoute: Route = {
     path: '/friends',
     element: <Friends/>
   };
+
   const leaderboardRoute: Route = {
     path: '/leaderboard',
     element: <Leaderboard/>
-  };
-
-  const bottlesRoute: Route = {
-    path: '/bottles',
-    element: <Bottles/>
   };
 
   const notificationsRoute: Route = {
@@ -86,7 +82,7 @@ const App: React.FC = (): React.ReactElement => {
     element: <Profile />
   };
 
-  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, statsBreakdownRoute, friendsRoute, bottlesRoute, logoutRoute, notificationsRoute, leaderboardRoute]);
+  const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, statsBreakdownRoute, friendsRoute, logoutRoute, notificationsRoute, leaderboardRoute]);
 
   return (
     <div>

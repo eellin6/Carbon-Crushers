@@ -18,7 +18,6 @@ const Friends = (): React.ReactElement => {
     };
     axios.post('/friends', data)
       .then((info)=> {
-        console.info(info.data);
         setUsers(info.data);
       })
       .catch((err) => { console.warn(err); });
