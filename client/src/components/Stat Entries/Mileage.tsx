@@ -23,7 +23,7 @@ const Mileage = ({miles, func}): React.ReactElement => {
         onChange={handleChange}
         valueLabelDisplay="auto"
       /></div>
-      <h4>10,484 pounds of C02 is produced per vehicle per year. The average American drives 216 miles per week, can you beat this? </h4>
+      <h4>10,484 pounds of CO<sub>2</sub> is produced per vehicle per year. The average American drives 216 miles per week, can you beat this? </h4>
     </div>
   );
 };

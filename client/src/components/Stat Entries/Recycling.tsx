@@ -24,8 +24,7 @@ const Recycling = ({miles, func}): React.ReactElement => {
         onChange={bottleChange}
         valueLabelDisplay="auto"
       /></div>
-      <h4> 330 lbs. of CO2
- offset per 1 ton of glass recycled. </h4>
+      <h4> 330 lbs. of CO<sub>2</sub> offset per 1 ton of glass recycled. </h4>
 
     </div>
   );

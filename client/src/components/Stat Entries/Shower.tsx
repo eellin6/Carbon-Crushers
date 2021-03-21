@@ -72,7 +72,7 @@ const Shower = (): React.ReactElement => {
           <button className='btn timer-btn' onClick={handleReset} disabled={!isActive}>Reset</button>
         </div>
       </div>
-      <button className='btn' onClick={handleSubmit}>Submit</button>
+      <button className='btn shower-submit-btn' onClick={handleSubmit}>Submit</button>
 
       <div>
         <div className='submit-status'>

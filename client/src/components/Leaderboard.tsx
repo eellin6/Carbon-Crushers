@@ -22,7 +22,6 @@ const Leaderboard = (): React.ReactElement => {
               temp.push(data[i]);
             }
             temp.sort((a, b) => b.total - a.total);
-            console.info(temp);
             setAllStats(temp);
           })
           .catch((err) => console.warn('Stat Error', err));
@@ -60,15 +59,13 @@ const Leaderboard = (): React.ReactElement => {
     }
   };
 
-
-
   return (
     <div className='page-wrap'>
       <h1>Weekly Leaders</h1>
       <hr></hr>
       {!allStats ? null : <div className='LeaderBoard'>
         {
-          allStats.map((element, index) => <div key={index}>
+          allStats.map((element, index) => <div className='leaderboard' key={index}>
             <h2 >{ element.total} { element.name}</h2>
             <Doughnut data={{
               datasets: [

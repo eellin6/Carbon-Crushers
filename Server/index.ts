@@ -135,6 +135,13 @@ app.post('/friends', (req: Request, res: Response) => {
     .catch((err: string) => console.warn(err));
 });
 
+app.get('/friendsList', (req: Request, res: Response) => {
+  const userName = req.cookies.crushers;
+  Friends.findAll({ where: { userName } })
+    .then((data) => res.json(data))
+    .catch((err: string) => console.warn(err));
+});
+
 app.get('/friendsData', async (req: Request, res: Response) => {
   Friends.findAll({ where: { userName: req.cookies.crushers } })
     .then(async (data) => {
