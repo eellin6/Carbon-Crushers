@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Notifications = (): React.ReactElement => {
-  const [friendRequests, setfriendRequests] = useState(null);
+  const [friendRequests, setfriendRequests] = useState([]);
   const getRequests = (): void => {
     axios.get('/friendRequests')
       .then(({data}) => setfriendRequests(data))
@@ -17,30 +17,35 @@ const Notifications = (): React.ReactElement => {
   return (
     <div className='page-wrap'>
       <h1>Friend Requests</h1>
-      {!friendRequests ? null : <div className='addFriends'>
-        {
-          friendRequests.map((element, index) => <div key={index}>
-            <div >{ element.requests } wants to be your friend</div>
-            <button className='btn' onClick={ (): any => {
-              const data = {friendsName: element.requests};
-              axios.post('/acceptFriends', data)
-                .then((info) => console.info(info))
-                .catch((err) => console.warn(err));
-              location.reload();
+      {
+        !friendRequests.length
+          ? <p>All caught up!</p>
+          : <div className='notify-container'>
+            {
+              friendRequests.map((element, index) => <div className='notify-list-item' key={index}>
+                <div className='notify-list-item-name'>{element.requests} wants to be your friend</div>
+                <div className='notify-btn-wrap'>
+                  <button className='btn notify-list-item-btn' onClick={ (): any => {
+                    const data = {friendsName: element.requests};
+                    axios.post('/acceptFriends', data)
+                      .then((info) => console.info(info))
+                      .catch((err) => console.warn(err));
+                    location.reload();
+                  }
+                  }>Accept Friend</button>
+                  <button className='btn notify-list-item-btn' onClick={ (): any => {
+                    const data = {friendsName: element.requests};
+                    axios.post('/declineFriends', data)
+                      .then((info) => console.info(info))
+                      .catch((err) => console.warn(err));
+                    location.reload();
+                  }
+                  }>Decline</button>
+                </div>
+              </div>
+              )
             }
-            }>Accept Friend</button>
-            <button className='btn' onClick={ (): any => {
-              const data = {friendsName: element.requests};
-              axios.post('/declineFriends', data)
-                .then((info) => console.info(info))
-                .catch((err) => console.warn(err));
-              location.reload();
-            }
-            }>Decline</button>
-          </div>
-          )
-        }
-      </div> }
+          </div> }
     </div>
   );
 };

@@ -60,7 +60,7 @@ const Friends = (): React.ReactElement => {
 
         {
           [users].map((element, index) => <div key={index}>
-            <img className='center' src={element.picture}></img>
+            <img className='profilePic' src={element.picture}></img>
             <div className='friend-name'>{element.name}</div>
             <button className='btn btn-margin-top' onClick={ (): any => {
               const data = {friendsName: element.name};
