@@ -245,7 +245,9 @@ const Stats = (props: AppState): React.ReactElement => {
     if (energyTotal > 25) {
       energyToast();
     }
-
+    setTimeout(() => {
+      location.reload();
+    }, 4500);
 
     const data = {
       meat_dine: meatDineTotal,
