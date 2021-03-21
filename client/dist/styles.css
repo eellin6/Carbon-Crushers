@@ -31,6 +31,10 @@ body {
 	align-items: center;
 }
 
+.accordion-wrap {
+	max-width: 500px;
+}
+
 #logo-welcome {
 	margin: 0 auto;
 	max-width: 80vw;
