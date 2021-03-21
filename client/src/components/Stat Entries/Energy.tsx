@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Slider } from '@material-ui/core';
-import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Energy = ({wash, dish, screen, func, degrees, handleThermostat}): React.ReactElement => {
   const dishECount = dish;
@@ -20,31 +20,19 @@ const Energy = ({wash, dish, screen, func, degrees, handleThermostat}): React.Re
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      'width': '100%',
-      // display: 'flex',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
+      color: '#55bfbf'
     }
   }));
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#ffc955',
-      },
-    }
-  });
 
   const classes = useStyles();
 
   return (
     <div>
-      <div className={classes.root}>
+      <div >
         <h2>On average, what did you set your thermostat to this week?</h2>
         <p>If you didn't use your A/C or heater, leave the slider all the way to the left. Great job! You earned 5 bonus points.</p>
         <div>
-          <Slider className="slider"
+          <Slider className={classes.root}
             min={ 60 }
             max={ 85 }
             step={ 1 }
@@ -57,10 +45,10 @@ const Energy = ({wash, dish, screen, func, degrees, handleThermostat}): React.Re
         <h3>{dishECount}</h3>
         <div className='stats-btns-container'>
           <div className='stats-btns'>
-            <ButtonGroup size="small" aria-label="small button group">
-              {displayDishCounter && <Button onClick={handleDishEDecrement}>-</Button>}
-              <Button disabled></Button>
-              <Button onClick={handleDishEIncrement}>+</Button>
+            <ButtonGroup className={classes.root} size="small" aria-label="small primary button group">
+              {displayDishCounter && <Button className={classes.root} onClick={handleDishEDecrement}>-</Button>}
+              <Button className={classes.root} disabled></Button>
+              <Button className={classes.root} onClick={handleDishEIncrement}>+</Button>
             </ButtonGroup>
           </div>
         </div>
@@ -68,10 +56,10 @@ const Energy = ({wash, dish, screen, func, degrees, handleThermostat}): React.Re
         <h3>{washECount}</h3>
         <div className='stats-btns-container'>
           <div className='stats-btns'>
-            <ButtonGroup size="small" aria-label="small outlined button group">
-              {displayDineCounter && <Button onClick={handleWashEDecrement}>-</Button>}
-              <Button disabled></Button>
-              <Button onClick={handleWashEIncrement}>+</Button>
+            <ButtonGroup className={classes.root} size="small" aria-label="small outlined button group">
+              {displayDineCounter && <Button className={classes.root} onClick={handleWashEDecrement}>-</Button>}
+              <Button className={classes.root} disabled></Button>
+              <Button className={classes.root} onClick={handleWashEIncrement}>+</Button>
             </ButtonGroup>
           </div>
         </div>
@@ -79,10 +67,10 @@ const Energy = ({wash, dish, screen, func, degrees, handleThermostat}): React.Re
         <h3>{screenCount}</h3>
         <div className='stats-btns-container'>
           <div className='stats-btns'>
-            <ButtonGroup size="small" aria-label="small outlined button group">
-              {displayScreenCounter && <Button onClick={handleScreenDecrement}>-</Button>}
-              <Button disabled></Button>
-              <Button onClick={handleScreenIncrement}>+</Button>
+            <ButtonGroup className={classes.root} size="small" aria-label="small outlined button group">
+              {displayScreenCounter && <Button className={classes.root} onClick={handleScreenDecrement}>-</Button>}
+              <Button className={classes.root} disabled></Button>
+              <Button className={classes.root} onClick={handleScreenIncrement}>+</Button>
             </ButtonGroup>
           </div>
         </div>

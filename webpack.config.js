@@ -15,9 +15,10 @@ module.exports = {
     rules: [
       {
         test: /\.(jsx|ts|tsx)$/,
+        enforce: 'pre',
         exclude: /node_modules/,
         use: {
-          loader: 'ts-loader'
+          loader: ['ts-loader', 'source-map-loader']
         },
       },
       {
@@ -35,5 +36,6 @@ module.exports = {
       },
     ],
   },
+  ignoreWarnings: [/Failed to parse source map/],
 
 };
