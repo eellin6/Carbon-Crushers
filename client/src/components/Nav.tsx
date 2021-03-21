@@ -67,6 +67,7 @@ const TemporaryDrawer = (): React.ReactElement => {
           .then(({ data }) => {
             setLogoutStatus(data);
             setCurrentStatus(false);
+            location.reload();
           })
           .catch((err) => console.warn(err))}>
           <Link to='/'>Log out</Link>
