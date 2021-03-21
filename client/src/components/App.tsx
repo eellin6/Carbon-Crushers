@@ -53,7 +53,7 @@ const App: React.FC = (): React.ReactElement => {
   };
 
   const showerRoute: Route = {
-    path: '/shower',
+    path: '/showers',
     element: <Shower />
   };
 

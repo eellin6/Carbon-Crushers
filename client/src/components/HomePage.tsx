@@ -68,7 +68,7 @@ const homePage = (): React.ReactElement => {
         data: [recyclingStats, waterStats, meatStats, mileageStats, energyStats],
         fill: true,
         backgroundColor: colorsOrPatterns(colorVision),
-        borderColor: ['#FFF'],
+        borderColor: ['#FFF']
       }
     ],
     labels: ['Recycling', 'Water Consumption', 'Meat & Dining Out', 'Mileage', 'Energy'],
@@ -85,7 +85,7 @@ const homePage = (): React.ReactElement => {
         <div className='score'>Weekly Score: {score}</div>
         <div className="doughnut-chart-container">
           <div className='doughnut-middle'>
-            <Doughnut data={data} />
+            <Doughnut data={data}/>
           </div>
         </div>
       </div>

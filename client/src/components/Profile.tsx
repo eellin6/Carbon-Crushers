@@ -90,16 +90,17 @@ const Profile = (): React.ReactElement => {
           resourceType={ 'image' } // optionally set with 'auto', 'image', 'video' or 'raw' -> default = 'auto'
           cloudName={ 'carbon-crushers' } // your cloudinary account cloud name.
           // Located on https://cloudinary.com/console/
-          uploadPreset={ 'w5e5bjen' } // check that an upload preset exists and check mode is signed or unisgned
-          buttonText={ 'Upload Profile Pic' } // default 'Upload Files'
+          uploadPreset={ 'w5e5bjen' } // check that an upload preset exists and check mode is signed or unsigned
+          buttonText={ 'Upload Profile Pic' }
           style={{
             color: '#525252',
             border: 'none',
-            width: '120px',
+            width: 'auto',
+            padding: '6px 15px',
             backgroundColor: '#FDCB60',
-            borderRadius: '4px',
-            height: '25px',
+            borderRadius: '5px',
             alignItems: 'center',
+            boxShadow: '1px 1px 8px #e1e1e1, -1px -1px 8px #fff'
           }} // inline styling only or style id='cloudinary_upload_button'
           folder={'samples'} // set cloudinary folder name to send file
           cropping={false} // set ability to crop images -> default = true
@@ -111,7 +112,7 @@ const Profile = (): React.ReactElement => {
           // set to false for production -> default = true
           customPublicId={'sample'} // set a specific custom public_id.
           // To use the file name as the public_id use 'use_filename={true}' parameter
-          eager={'w_400,h_300,c_pad|w_260,h_200,c_crop'} // add eager transformations -> deafult = null
+          eager={'w_400,h_300,c_pad|w_260,h_200,c_crop'} // add eager transformations -> default = null
           use_filename={false} // tell Cloudinary to use the original name of the uploaded
           // file as its public ID -> default = true,
         />

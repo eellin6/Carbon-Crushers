@@ -47,8 +47,8 @@ const Meat_Dine = ({meat, dine, func}): React.ReactElement => {
           </ButtonGroup>
         </div>
       </div>
-      <h4>14.8 pounds of C02 is produced per pound of meat. The average American eats 3.7 pounds of meat per week, can you beat this? </h4>
-      <h4>1697 lbs C02 per household per year is generated from dining out. </h4>
+      <h4>14.8 pounds of CO<sub>2</sub> is produced per pound of meat. The average American eats 3.7 pounds of meat per week, can you beat this? </h4>
+      <h4>1697 lbs CO<sub>2</sub> per household per year is generated from dining out. </h4>
 
 
 
