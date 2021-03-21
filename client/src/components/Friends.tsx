@@ -68,6 +68,9 @@ const Friends = (): React.ReactElement => {
                 .then((data) => data)
                 .catch((err) => console.warn(err));
               friendToast();
+              setTimeout(() => {
+                location.reload();
+              }, 3500);
               getAllFriends();
             }
             }>Send Friend Request</button>
@@ -92,6 +95,9 @@ const Friends = (): React.ReactElement => {
                       .then((data) => console.info(data))
                       .catch((err) => console.warn(err));
                     removeFriendToast();
+                    setTimeout(() => {
+                      location.reload();
+                    }, 3500);
                   }
                   }>Remove</button>
                 </div>

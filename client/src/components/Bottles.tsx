@@ -50,7 +50,6 @@ const Bottles = ({func2}: any) => {
 
       const results = await model.classify(imageRef.current);
       await setResults(results);
-
       await resultCheck(results);
       next();
     } catch (error) {
@@ -59,18 +58,23 @@ const Bottles = ({func2}: any) => {
   };
 
   const resultCheck = (results) => {
+    console.info(results);
+
     if (results[0].className === 'pop bottle, soda bottle') {
       setAnswers('Soda Bottle');
       func2();
     } else if (results[0].className === 'wine bottle') {
-      setAnswers('Fancy Wine Bottle');
+      setAnswers('fancy Wine Bottle');
       func2();
     } else if (results[0].className === 'whiskey jug' || results[0].className === 'cocktail shaker') {
       setAnswers('Liquor Bottle');
       func2();
+    } else if (results[0].className === 'beer bottle') {
+      setAnswers('Beer Bottle');
+      func2();
 
     } else {
-      setNoBottle('this is not a bottle!');
+      setNoBottle('I know a bottle when I see one... And this ain\'t no bottle!');
     }
   };
 
@@ -94,9 +98,9 @@ const Bottles = ({func2}: any) => {
 
 
   const actionButton = {
-    initial: { action: loadModel, text: 'Load Model' },
+    initial: { action: loadModel, text: 'Initiate Photo Upload' },
     loadingModel: { text: 'Loading Model...' },
-    modelReady: { action: upload, text: 'Upload Image' },
+    modelReady: { action: upload, text: 'Get Image' },
     imageReady: { action: identify, text: 'Identify Bottle Type' },
     identifying: { text: 'Identifying...' },
     complete: { action: reset, text: 'Reset' }
@@ -107,8 +111,8 @@ const Bottles = ({func2}: any) => {
   return (
     <div>
       <div>
-        <h1>Bottle Type Finder</h1>
-        <h3>Insert Photo of Bottle to be Recycled</h3>
+        <h1>Want Extra Points?</h1>
+        <h3>Prove it! Insert Photo of Bottle to be Recycled for 50% Increased Per Bottle </h3>
       </div>
       <div className="bottle-wrap">
         {showImage && <img id="bottle-img" src={imageURL} alt="upload-preview" ref={imageRef} />}
@@ -124,12 +128,10 @@ const Bottles = ({func2}: any) => {
       {showResults && (
         <ul>
           <li>
-            <div>
-              {`Well done! You are recycling a ${answers}!`}
+            <div> {
+              noBottle ? noBottle : `Well done! You are recycling a ${answers}!`
+            }
             </div>
-          </li>
-          <li>
-            {noBottle}
           </li>
         </ul>
       )}

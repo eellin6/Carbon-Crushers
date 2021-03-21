@@ -26,6 +26,7 @@ const Notifications = (): React.ReactElement => {
               axios.post('/acceptFriends', data)
                 .then((info) => console.info(info))
                 .catch((err) => console.warn(err));
+              location.reload();
             }
             }>Accept Friend</button>
             <button className='btn' onClick={ (): any => {
@@ -33,6 +34,7 @@ const Notifications = (): React.ReactElement => {
               axios.post('/declineFriends', data)
                 .then((info) => console.info(info))
                 .catch((err) => console.warn(err));
+              location.reload();
             }
             }>Decline</button>
           </div>
