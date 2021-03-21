@@ -106,6 +106,9 @@ const Profile = (): React.ReactElement => {
           cropping={false} // set ability to crop images -> default = true
           onSuccess={(result: UploadApiResponse): void => {
             updatePic(result.info.url);
+            setTimeout(() => {
+              location.reload();
+            }, 1000);
           }} // add success callback -> returns result
           onFailure={(err: UploadApiErrorResponse): void => console.warn('failure!!!', err)} // add failure callback -> returns 'response.error' + 'response.result'
           logging={false} // logs will be provided for success and failure messages,
