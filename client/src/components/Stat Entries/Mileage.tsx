@@ -1,12 +1,22 @@
 import * as React from 'react';
 import { Slider } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Mileage = ({miles, func}): React.ReactElement => {
   const handleChange = func;
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      color: '#55bfbf'
+    }
+  }));
+
+  const classes = useStyles();
+
   return (
     <div>
       <h2>How many miles did you drive this week?</h2>
-      <div> <Slider className="slider"
+      <div> <Slider className={classes.root}
         max={ 500 }
         step={ 25 }
         value={miles}

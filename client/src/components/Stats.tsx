@@ -287,7 +287,7 @@ const Stats = (props: AppState): React.ReactElement => {
   }, 60000);
 
   return (
-    <div className='page-wrap'>
+    <div className='page-wrap accordion-wrap'>
       <h1>Log your weekly stats</h1>
       <Tips />
       <Accordion className='stats'>

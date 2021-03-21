@@ -31,6 +31,10 @@ body {
 	align-items: center;
 }
 
+.accordion-wrap {
+	max-width: 500px;
+}
+
 #logo-welcome {
 	margin: 0 auto;
 	max-width: 80vw;
@@ -174,6 +178,15 @@ a:hover {
 	border-color: #55bfbf;
 }
 
+.stats-btns {
+	display: flex;
+	justify-content: center;
+}
+
+.stats-btns-container {
+	width: 100%;
+}
+
 #widget {
 	align-items: center;
 	margin: 0 auto;
@@ -280,4 +293,10 @@ a:hover {
 	max-width: 20vw;
 	align-items: center;
 	margin-bottom: 2em;
+}
+
+.badge-img-breakdown {
+	max-width: 45%;
+	margin-bottom: 0;
+	margin-top: 5%;
 }
