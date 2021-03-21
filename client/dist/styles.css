@@ -178,6 +178,19 @@ a:hover {
 	border-color: #55bfbf;
 }
 
+.stats-btns {
+	display: flex;
+	justify-content: center;
+}
+
+.stats-btns-container {
+	width: 95%;
+}
+
+.stats-btns-meat-container {
+	width: 100%;
+}
+
 #widget {
 	align-items: center;
 	margin: 0 auto;
