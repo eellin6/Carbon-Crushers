@@ -187,30 +187,12 @@ app.post('/addFriends', (req: Request, res: Response) => {
   })
     .then(() => console.info('Request Sent'))
     .catch(err => console.warn(err));
-
-  // const friendRequest = new Updates({username: friendsName, requests: userName});
-  // friendRequest.save()
-  //   .then(() => console.info('Request Sent'))
-  //   .catch(err => console.warn(err));
-
-
 });
+
 app.post('/acceptFriends', (req: Request, res: Response) => {
 
   const {friendsName} = req.body;
   const userName = req.cookies.crushers;
-
-
-  // const newFriend = new Friends({ userName, friendsName });
-  // const friend2 = new Friends({
-  //   userName: friendsName,
-  //   friendsName: userName
-  // });
-  // friend2.save()
-  //   .then(() => console.info('Friend Saved'))
-  //   .catch(err => console.warn(err));
-
-
 
   Friends.findOrCreate({
     userName: friendsName,
@@ -229,9 +211,6 @@ app.post('/acceptFriends', (req: Request, res: Response) => {
     .then(() => console.info('Request Sent'))
     .catch(err => console.warn(err));
 
-  // newFriend.save()
-  //   .then(() => console.info('Friend Saved'))
-  //   .catch(err => console.warn(err));
   Updates.destroy({where: {
     username: userName,
     requests: friendsName
