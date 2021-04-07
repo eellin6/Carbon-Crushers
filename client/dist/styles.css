@@ -30,7 +30,7 @@ body {
 	padding: 0 5% 20% 5%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	margin: 0 auto;
 }
 
 .accordion-wrap {
@@ -106,20 +106,32 @@ h3 {
 
 .friends-container {
 	width: 90%;
-	margin-top: 50px;
 	padding: 2% 10% 10% 10%;
 	border-radius: 8px;
 	background-color: #f2f2f2;
 	box-shadow: 20px 20px 60px #e8e8e8, -20px -20px 60px #fff;
+	max-width: 500px;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.form-container {
+	margin-bottom: 50px;
 }
 
 .notify-container {
-	margin-top: 25px;
 	width: 90%;
 	padding: 10%;
 	border-radius: 8px;
 	background-color: #f2f2f2;
 	box-shadow: 20px 20px 60px #e8e8e8, -20px -20px 60px #fff;
+	max-width: 500px;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+#friend-header {
+	margin-bottom: 50px;
 }
 
 .friend-list-item {
@@ -145,6 +157,7 @@ h3 {
 	margin: 0 auto;
 	padding-top: 2px;
 	text-align: center;
+	justify-content: center;
 }
 
 .friend-list-item-btn,
@@ -240,6 +253,18 @@ a:hover {
 
 .doughnut-chart-container {
 	width: 94vw;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.chart-container {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.chartjs-render-monitor {
+	width: 94vw;
+	max-width: 700px;
 }
 
 .stats {
@@ -294,6 +319,9 @@ a:hover {
 	border-radius: 5px;
 	padding: 0 5%;
 	margin-bottom: 5%;
+	width: 100%;
+	max-width: 500px;
+	box-sizing: border-box;
 }
 
 .tips-wrap p {

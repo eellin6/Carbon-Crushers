@@ -59,7 +59,7 @@ const TemporaryDrawer = (): React.ReactElement => {
         <li><Link to='/stats'>Enter Stats</Link></li>
         <li><Link to='/statsBreakdown'>View Stats Breakdown</Link></li>
         <li><Link to='/graphs'>View Individual Stats</Link></li>
-        <li><Link to='/friends'>Add Friends</Link></li>
+        <li><Link to='/friends'>Friends</Link></li>
         <li><Link to='/leaderboard'>Leaderboard</Link></li>
         <li><Link to='/showers'>Shower Timer</Link></li>
         <li><Link to='/notifications'>Notifications</Link></li>

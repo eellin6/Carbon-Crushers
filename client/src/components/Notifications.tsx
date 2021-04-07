@@ -16,7 +16,7 @@ const Notifications = (): React.ReactElement => {
 
   return (
     <div className='page-wrap'>
-      <h1>Friend Requests</h1>
+      <h1 id='friend-header'>Friend Requests</h1>
       {
         !friendRequests.length
           ? <p>All caught up!</p>

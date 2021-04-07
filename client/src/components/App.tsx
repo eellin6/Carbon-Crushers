@@ -82,15 +82,23 @@ const App: React.FC = (): React.ReactElement => {
     element: <Profile />
   };
 
+  const checkLoggedIn = (): React.ReactElement => {
+    if (currentStatus) {
+      return (
+        <div id='wrapper'>
+          <Footer />
+        </div>
+      );
+    }
+  };
+
   const routing = useRoutes([homeRoute, profileRoute, statsRoute, graphsRoute, showerRoute, statsBreakdownRoute, friendsRoute, logoutRoute, notificationsRoute, leaderboardRoute]);
 
   return (
     <div>
       <Nav />
-      <div id='wrapper'>
-        { routing }
-        <Footer />
-      </div>
+      { routing }
+      { checkLoggedIn() }
     </div>
   );
 };

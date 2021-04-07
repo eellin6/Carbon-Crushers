@@ -52,7 +52,7 @@ const Friends = (): React.ReactElement => {
     <div className='page-wrap'>
       <h1>Find your friends!</h1>
       <h2>Search by their name</h2>
-      <form>
+      <form className='form-container'>
         <input className='center' value={textVal} onChange={handleChange} onKeyDown={handleKeyPress} type='text' placeholder='enter name'></input>
         <button className='btn' onClick={submit} type='button'>Search</button>
       </form>
