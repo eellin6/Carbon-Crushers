@@ -19,7 +19,7 @@ const Notifications = (): React.ReactElement => {
       <h1 id='friend-header'>Friend Requests</h1>
       {
         !friendRequests.length
-          ? <p>All caught up!</p>
+          ? <p className='center'>All caught up!</p>
           : <div className='notify-container'>
             {
               friendRequests.map((element, index) => <div className='notify-list-item' key={index}>

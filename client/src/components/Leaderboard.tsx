@@ -67,21 +67,20 @@ const Leaderboard = (): React.ReactElement => {
         {
           allStats.map((element, index) => <div className='leaderboard' key={index}>
             <h2 >{ element.total} { element.name}</h2>
-            <Doughnut data={{
-              datasets: [
-                {
-                  label: 'First dataset',
-                  data: [element.recycling, element.water, element.meat_dine, element.mileage, element.energy],
-                  fill: true,
-                  backgroundColor: colorsOrPatterns(vision),
-                  borderColor: ['#FFF'],
-                }
-              ],
-              labels: ['Recycling', 'Water Consumption', 'Meat & Dining Out', 'Mileage', 'Energy']
-            }} />
-
-
-
+            <div className='doughnut-chart-container'>
+              <Doughnut data={{
+                datasets: [
+                  {
+                    label: 'First dataset',
+                    data: [element.recycling, element.water, element.meat_dine, element.mileage, element.energy],
+                    fill: true,
+                    backgroundColor: colorsOrPatterns(vision),
+                    borderColor: ['#FFF'],
+                  }
+                ],
+                labels: ['Recycling', 'Water Consumption', 'Meat & Dining Out', 'Mileage', 'Energy']
+              }} />
+            </div>
           </div>)}
 
       </div> }

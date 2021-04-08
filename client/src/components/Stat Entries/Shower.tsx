@@ -57,19 +57,21 @@ const Shower = (): React.ReactElement => {
   return (
     <div className='page-wrap'>
       <h1>Shower Timer</h1>
-      <div className='timer'>{formatTime(timer)}</div>
-      <div className='timer-wrap'>
-        <div className='buttons'>
-          {
-            !isActive && !isPaused
-              ? <button className='btn timer-btn' onClick={handleStart}>Start</button>
-              : (
-                isPaused
-                  ? <button className='btn timer-btn' onClick={handlePause}>Pause</button>
-                  : <button className='btn timer-btn' onClick={handleResume}>Resume</button>
-              )
-          }
-          <button className='btn timer-btn' onClick={handleReset} disabled={!isActive}>Reset</button>
+      <div className='shower-wrap'>
+        <div className='timer'>{formatTime(timer)}</div>
+        <div className='timer-wrap'>
+          <div className='buttons'>
+            {
+              !isActive && !isPaused
+                ? <button className='btn timer-btn' onClick={handleStart}>Start</button>
+                : (
+                  isPaused
+                    ? <button className='btn timer-btn' onClick={handlePause}>Pause</button>
+                    : <button className='btn timer-btn' onClick={handleResume}>Resume</button>
+                )
+            }
+            <button className='btn timer-btn' onClick={handleReset} disabled={!isActive}>Reset</button>
+          </div>
         </div>
       </div>
       <button className='btn shower-submit-btn' onClick={handleSubmit}>Submit</button>
