@@ -99,9 +99,9 @@ h3 {
 	margin: 0 auto;
 }
 
-.addFriends {
-	margin-top: 10%;
+.add-friends {
 	text-align: center;
+	margin: 0 auto;
 }
 
 .friend-name {
@@ -284,6 +284,7 @@ a:hover {
 	width: 100%;
 }
 
+
 #widget {
 	align-items: center;
 	margin: 0 auto;
@@ -398,11 +399,24 @@ a:hover {
 }
 
 .badge-img-breakdown {
-	max-width: 45%;
-	margin-bottom: 0;
-	margin-top: 5%;
+	width: 45%;
+	max-width: 100px;
+	/* margin-bottom: 0;
+	margin-top: 5%; */
+	margin: 0 auto;
+}
+
+.breakdown-container {
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 .leaderboard {
 	margin-bottom: 4em;
 }
+
+.vision-check {
+	margin: 0 auto;
+	max-width: 500px;
+}
+

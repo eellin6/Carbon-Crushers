@@ -62,7 +62,7 @@ const Friends = (): React.ReactElement => {
           [users].map((element, index) => <div key={index}>
             <img className='profilePic' src={element.picture}></img>
             <div className='friend-name'>{element.name}</div>
-            <button className='btn btn-margin-top' onClick={ (): any => {
+            <button className='btn btn-margin-top btn-margin' onClick={ (): any => {
               const data = {friendsName: element.name};
               axios.post('/addFriends', data)
                 .then((data) => data)
@@ -82,7 +82,7 @@ const Friends = (): React.ReactElement => {
         <h2>Your Friends List</h2>
         {
           !friendList.length
-            ? <div className='addFriends'>
+            ? <div className='add-friends'>
               <p>Add friends to compete</p>
             </div>
             : <div>

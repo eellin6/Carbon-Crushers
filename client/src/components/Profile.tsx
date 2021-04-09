@@ -63,9 +63,9 @@ const Profile = (): React.ReactElement => {
         !showOrHideSettings
           ? <button className='btn btn-margin' onClick={openColorSettings}>Change Color Settings</button>
           : (
-            <div className='visionCheck'>
+            <div className='vision-check'>
               <form action='/vision' method='PUT'>
-                <div className='vision-status-container' onChange={handleChange}>
+                <div className='center' onChange={handleChange}>
                   <label><h4>Color vision deficiency:</h4></label>
                   <div className='radio-btn'>
                     <input type='radio' name='vision' value='none' /> None
